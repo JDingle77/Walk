@@ -4,5 +4,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.demo, name="demo"),
+    path('route/<int:route_id>/', views.handle_route, name="handle_route"),
+    path('create_route/',
+         views.create_route, name="create_route"),
 ]
