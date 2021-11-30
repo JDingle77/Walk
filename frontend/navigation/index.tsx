@@ -19,12 +19,13 @@ import HomeScreen from '../screens/home';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import { paperTheme, paperDarkTheme } from '../../core/theme'
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      theme={colorScheme === 'dark' ? paperDarkTheme : paperTheme}>
       <RootNavigator />
     </NavigationContainer>
   );

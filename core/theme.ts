@@ -13,7 +13,7 @@ import {
     colors: {
       ...DefaultPaperTheme.colors,
       primary: '#E4DCCC',
-      accent: '#01CBFF',
+      accent: '#5a433e',
     },
   } as ReactNativePaper.Theme;
   

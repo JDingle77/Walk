@@ -12,40 +12,40 @@ const Login = ({ navigation }: RootTabScreenProps<"Login">) => {
   const [password, setPassword] = useState({ value: "", error: "" });
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        label="Your email"
-        enablesReturnKeyAutomatically
-        value={email.value}
-        onChangeText={(text) => setEmail({ value: text, error: "" })}
-        error={!!email.error}
-        errorText={email.error}
-        autoCapitalize="none"
-        autoComplete="email"
-        textContentType="emailAddress"
-      />
-      <TextInput
-        label="Your password"
-        enablesReturnKeyAutomatically
-        value={password.value}
-        onChangeText={(text) => setPassword({ value: text, error: "" })}
-        error={!!password.error}
-        errorText={password.error}
-        autoCapitalize="none"
-        autoComplete="none"
-        textContentType="password"
-      />
-      <Button
-        color={"black"}
-        onPress={() =>
-          email.value != "" && password.value != ""
-            ? navigation.navigate("Home")
-            : Alert.alert("Please fill out both fields.")
-        }
-      >
-        Sign In
-      </Button>
-    </View>
+      <View style={styles.container}>
+        <TextInput
+          label="Your email"
+          enablesReturnKeyAutomatically
+          value={email.value}
+          onChangeText={(text) => setEmail({ value: text, error: "" })}
+          error={!!email.error}
+          errorText={email.error}
+          autoCapitalize="none"
+          autoComplete="email"
+          textContentType="emailAddress"
+        />
+        <TextInput
+          label="Your password"
+          enablesReturnKeyAutomatically
+          value={password.value}
+          onChangeText={(text) => setPassword({ value: text, error: "" })}
+          error={!!password.error}
+          errorText={password.error}
+          autoCapitalize="none"
+          autoComplete="none"
+          textContentType="password"
+        />
+        <Button
+          color={"black"}
+          onPress={() =>
+            email.value != "" && password.value != ""
+              ? navigation.navigate("Home")
+              : Alert.alert("Please fill out both fields.")
+          }
+        >
+          Sign In
+        </Button>
+      </View>
   );
 };
 
