@@ -108,3 +108,23 @@ def icon(request, icon_name, route_id):
             serializer = serializer_name(icon)
             data.append(serializer.data)
         return Response(data)
+
+
+@api_view(['GET'])
+def get_all_icons(request, route_id):
+    route = get_object_or_404(Route, id=route_id)
+
+    icon_names = ['pee', 'poop', 'drink', 'interaction']
+    i = 0
+    data = []
+
+    for icon in icon_names:
+        model = possible_icons[icon_names[i]][0]
+        model_serializer = possible_icons[icon_names[i]][1]
+        icons = model.objects.filter(route=route_id)
+        for icon in icons:
+            serializer = model_serializer(icon)
+            data.append(serializer.data)
+        i += 1
+
+    return Response(data)
