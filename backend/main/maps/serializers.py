@@ -18,7 +18,7 @@ class UpdateRouteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Route
-        fields = ['id', 'route_name', 'start_longitude', 'start_latitude']
+        fields = ['route_name', 'start_longitude', 'start_latitude']
 
 
 class PeeIconSerializer(serializers.ModelSerializer):

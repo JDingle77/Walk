@@ -13,23 +13,23 @@ possible_icons = {'pee': [Pee, PeeIconSerializer], 'poop': [Poop, PoopIconSerial
 @api_view(['GET', 'PUT', 'DELETE'])
 def handle_route(request, route_id):
     try:
-        routes = Route.objects.get(id=route_id)
+        route = Route.objects.get(id=route_id)
     except Route.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == "GET":
-        serializer = RouteSerializer(routes)
+        serializer = RouteSerializer(route)
         return Response(serializer.data)
 
     if request.method == "PUT":
-        serializer = UpdateRouteSerializer(routes, data=request.data)
+        serializer = UpdateRouteSerializer(route, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     if request.method == "DELETE":
-        operation = routes.delete()
+        operation = route.delete()
         data = {"isSuccessful": False}
         if operation:
             data["isSuccessful"] = True
