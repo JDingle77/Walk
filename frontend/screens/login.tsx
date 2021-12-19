@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Alert, SafeAreaView, StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 import TextInput from "../components/TextInput";
-import { View } from "../components/Themed";
+import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
 
 const Login = ({ navigation }: RootTabScreenProps<"Login">) => {
@@ -13,6 +13,9 @@ const Login = ({ navigation }: RootTabScreenProps<"Login">) => {
 
   return (
       <View style={styles.container}>
+        <View style={{ width: '80%'}}>
+          <Text style={styles.title}>Sign in to your account</Text>
+        </View>
         <TextInput
           label="Your email"
           enablesReturnKeyAutomatically
@@ -23,6 +26,7 @@ const Login = ({ navigation }: RootTabScreenProps<"Login">) => {
           autoCapitalize="none"
           autoComplete="email"
           textContentType="emailAddress"
+          // style={styles.separator}
         />
         <TextInput
           label="Your password"
@@ -57,13 +61,14 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   title: {
-    fontSize: 20,
+    fontSize: 35,
     fontWeight: "bold",
+    textAlign: "left",
+    fontFamily: "braveold",
+    marginBottom: 30
   },
   separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
+    width: '80%'
   },
 });
 

@@ -64,6 +64,7 @@ function BottomTabNavigator() {
       initialRouteName="Login"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
+        headerShown: false
       }}>
       <BottomTab.Screen
         name="Login"
@@ -85,7 +86,6 @@ function BottomTabNavigator() {
         name="Home"
         component={HomeScreen}
         options={{
-          title: 'Home',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
