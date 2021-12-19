@@ -16,12 +16,6 @@ def main():
             "forget to activate a virtual environment?"
         ) from exc
 
-    # install the necessary packages
-    try:
-        os.system('pip install -r requirements.txt')
-    except:
-        raise FileNotFoundError("requirements.txt not found")
-
     execute_from_command_line(sys.argv)
 
 
