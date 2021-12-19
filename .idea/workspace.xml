@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ccf7fb09-97d0-45fb-a6ba-7d7142537ff6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="21fKRupYq7epsoSQCDlowtcbM6p" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ccf7fb09-97d0-45fb-a6ba-7d7142537ff6" name="Default Changelist" comment="" />
+      <created>1638326696522</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1638326696522</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2163" y="-145" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1638327499402">
+      <screen x="1440" y="-203" width="1920" height="1001" />
+    </state>
+    <state x="2163" y="-145" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.877/1440.-203.1920.1001@1440.-203.1920.1001" timestamp="1638327499402" />
+    <state x="2392" y="2" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1638327422242">
+      <screen x="1440" y="-203" width="1920" height="1001" />
+    </state>
+    <state x="2392" y="2" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.877/1440.-203.1920.1001@1440.-203.1920.1001" timestamp="1638327422242" />
+    <state x="2248" y="-103" width="901" height="593" key="AVDManager" timestamp="1638335351300">
+      <screen x="1440" y="-203" width="1920" height="1001" />
+    </state>
+    <state x="2248" y="-103" width="901" height="593" key="AVDManager/0.23.1440.877/1440.-203.1920.1001@1440.-203.1920.1001" timestamp="1638335351300" />
+  </component>
+</project>
