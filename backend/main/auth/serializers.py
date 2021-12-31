@@ -40,5 +40,8 @@ class RegisterSerializer(PostUserSerializer):
         try:  # check if user already exists
             user = User.objects.get(email=validated_data['email'])
         except:
-            user = User.objects.create_user(**validated_data)
+            if (self.context.get("is_admin")):
+                user = User.objects.create_superuser(**validated_data)
+            else:
+                user = User.objects.create_user(**validated_data)
         return user

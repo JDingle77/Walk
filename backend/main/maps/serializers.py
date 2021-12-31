@@ -6,7 +6,9 @@ import uuid
 class RouteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Route
-        fields = ['route_name', 'start_latitude', 'start_longitude', 'id']
+        fields = ['route_name', 'start_latitude',
+                  'start_longitude', 'id', 'user']
+        read_only = ['user']
 
 
 class UpdateRouteSerializer(serializers.ModelSerializer):
