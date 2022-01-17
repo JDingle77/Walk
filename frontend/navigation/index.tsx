@@ -17,10 +17,10 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import LoginScreen from '../screens/login';
 import HomeScreen from '../screens/home';
 // import TabTwoScreen from '../screens/TabTwoScreen';
-import MapScreen from '../screens/WalkPage';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import { paperTheme, paperDarkTheme } from '../../core/theme'
+import WalkPageNavigator from './WalkPageStack'
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -75,10 +75,10 @@ function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="Map"
-        component={MapScreen}
+        name="WalkPageNavigator"
+        component={WalkPageNavigator}
         options={{
-          title: 'Map',
+          title: 'Walk',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
