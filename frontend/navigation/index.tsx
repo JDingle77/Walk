@@ -16,7 +16,7 @@ import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import LoginScreen from '../screens/login';
 import HomeScreen from '../screens/home';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import CreateScreen from '../screens/CreateScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import { paperTheme, paperDarkTheme } from '../../core/theme'
@@ -74,10 +74,10 @@ function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="Create"
+        component={CreateScreen}
         options={{
-          title: 'Tab Two',
+          title: 'Create your account',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />

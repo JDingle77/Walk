@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Dimensions,
 } from "react-native";
+import { Button } from "react-native-paper";
 import { Svg, Path } from "react-native-svg";
 import TextInput from "../components/TextInput";
 import AppLoading from "expo-app-loading";
@@ -16,6 +17,26 @@ export default function App() {
   let [fontsLoaded] = useFonts({
     Montserrat: Montserrat_400Regular,
   });
+
+  function createProfile() {
+    fetch("http://localhost:8000/auth/register/", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        is_admin: true,
+        email: "jainmehul0518@gmail.com",
+        password: "password",
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => console.error(err));
+  }
 
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -70,34 +91,26 @@ export default function App() {
             </Text>
           </View>
           <View style={stylesheet._Group_124}>
-            <View style={stylesheet._Rectangle_39}></View>
-              <Text
-                style={[
-                  stylesheet._Sign_Up,
-                  {
-                    position: "relative",
-                    left: 0,
-                    top: 15,
-                    height: 30,
-                    transform: [{ translateX: 0 }, { translateY: 0 }],
-                  },
-                ]}
-              >
-                Sign Up
-              </Text>
+            <Button
+              style={stylesheet._Rectangle_39}
+              mode="contained"
+              onPress={() => createProfile()}
+              labelStyle={stylesheet.signUp}
+              uppercase={false}
+            >
+              Sign Up
+            </Button>
           </View>
           <View
             style={[
-              stylesheet._Already_have_an_account__Log_In,
+              stylesheet.logIn,
               { display: "flex", flexDirection: "row", alignItems: "center" },
             ]}
           >
             <Text
               style={[
-                stylesheet._Already_have_an_account__Log_In,
+                stylesheet.logIn,
                 {
-                  position: "relative",
-                  left: 0,
                   top: 0,
                   height: "auto",
                   transform: [{ translateX: 0 }, { translateY: 0 }],
@@ -595,23 +608,15 @@ const stylesheet = StyleSheet.create({
     transform: [{ translateX: 0 }, { translateY: 0 }, { rotate: "0deg" }],
     backgroundColor: "rgba(233, 185, 94, 1)",
   },
-  _Sign_Up: {
-    // position: "absolute",
-    // height: 30,
-    left: 110,
-    // right: "auto",
-    // transform: [{ translateX: 0 }, { translateY: 21 }, { rotate: "0deg" }],
+  signUp: {
+    left: 0,
+    top: 5,
     fontFamily: "Montserrat",
-    fontWeight: "400",
-    // textDecorationLine: "none",
-    // lineHeight: 16,
+    fontWeight: "bold",
     fontSize: 20,
-    // color: "rgba(0, 0, 0, 1)",
     textAlign: "center",
-    // textAlignVertical: "center",
-    // letterSpacing: 0.1,
   },
-  _Already_have_an_account__Log_In: {
+  logIn: {
     position: "absolute",
     width: "auto",
     height: "auto",
