@@ -29,7 +29,8 @@ class RegistrationViewSet(ModelViewSet, TokenObtainPairView):
     http_method_names = ['post']
 
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
+        serializer = self.get_serializer(data=request.data, context={
+                                         'is_admin': request.data['is_admin']})
 
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
@@ -37,7 +38,7 @@ class RegistrationViewSet(ModelViewSet, TokenObtainPairView):
 
         return Response({
             "refresh": str(refresh),
-            "token": str(refresh.access_token),
+            "access": str(refresh.access_token),
         }, status=status.HTTP_201_CREATED)
 
 

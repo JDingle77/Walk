@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   title: {
-    fontSize: 35,
+    fontSize: 40,
     fontWeight: "bold",
     textAlign: "left",
     fontFamily: "braveold",

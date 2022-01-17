@@ -7,8 +7,11 @@ from .models import User
 from .serializers import GetUserSerializer, PostUserSerializer, UpdateUserSerializer
 
 
-@api_view(['GET', 'PUT'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def handle_user(request, user_id):
+    if not request.user.is_superuser:
+        return Response(status=status.HTTP_403_FORBIDDEN)
+
     try:
         user = User.objects.get(id=user_id)
     except User.DoesNotExist:
@@ -35,6 +38,9 @@ def handle_user(request, user_id):
 
 @api_view(['GET', 'POST'])
 def user(request):
+    if not request.user.is_superuser:
+        return Response(status=status.HTTP_403_FORBIDDEN)
+
     if request.method == "POST":
         serializer = PostUserSerializer(data=request.data)
         if serializer.is_valid():

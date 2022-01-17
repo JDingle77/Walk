@@ -20,9 +20,9 @@ const linking: LinkingOptions<RootStackParamList> = {
               LoginScreen: 'login',
             },
           },
-          TabTwo: {
+          Create: {
             screens: {
-              TabTwoScreen: 'two',
+              CreateScreen: 'create',
             },
           },
           Home: {

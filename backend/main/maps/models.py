@@ -1,12 +1,15 @@
 from django.db import models
 import uuid
 
+from user.models import User
+
 
 class Route(models.Model):
     route_name = models.CharField(max_length=50)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     start_latitude = models.DecimalField(max_digits=9, decimal_places=6)
     start_longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
         return self.route_name
