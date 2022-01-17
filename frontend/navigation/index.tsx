@@ -75,6 +75,14 @@ function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
+        name="TabTwo"
+        component={WalkPageNavigator}
+        options={{
+          title: 'Tab 2',
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
         name="WalkPageNavigator"
         component={WalkPageNavigator}
         options={{
