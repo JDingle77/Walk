@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -14,6 +14,10 @@ import AppLoading from "expo-app-loading";
 import { useFonts, Montserrat_400Regular } from "@expo-google-fonts/dev";
 
 export default function App() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+
   let [fontsLoaded] = useFonts({
     Montserrat: Montserrat_400Regular,
   });
@@ -22,13 +26,13 @@ export default function App() {
     fetch("http://localhost:8000/auth/register/", {
       method: "POST",
       headers: {
-        "Accept": "application/json",
+        Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         is_admin: true,
-        email: "jainmehul0518@gmail.com",
-        password: "password",
+        email: email,
+        password: password,
       }),
     })
       .then((response) => response.json())
@@ -37,7 +41,7 @@ export default function App() {
       })
       .catch((err) => console.error(err));
   }
-
+  //password "red" box when not the same
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
@@ -54,20 +58,35 @@ export default function App() {
             autoCapitalize="none"
             autoComplete="email"
             textContentType="emailAddress"
+            enablesReturnKeyAutomatically
+            value={email}
+            onChangeText={(text) => {
+              setEmail(text);
+            }}
           />
           <TextInput
             style={stylesheet._Text_Field_2}
             label="Your password"
             autoCapitalize="none"
-            autoComplete="email"
-            textContentType="emailAddress"
+            autoComplete="none"
+            textContentType="password"
+            enablesReturnKeyAutomatically
+            value={password}
+            onChangeText={(text) => {
+              setPassword(text);
+            }}
           />
           <TextInput
             style={stylesheet._Text_Field_3}
             label="Confirm password"
             autoCapitalize="none"
-            autoComplete="email"
-            textContentType="emailAddress"
+            autoComplete="none"
+            textContentType="password"
+            enablesReturnKeyAutomatically
+            value={confirm}
+            onChangeText={(text) => {
+              setConfirm(text);
+            }}
           />
           <View
             style={[
@@ -97,6 +116,14 @@ export default function App() {
               onPress={() => createProfile()}
               labelStyle={stylesheet.signUp}
               uppercase={false}
+              disabled={
+                email !== "" &&
+                password !== "" &&
+                confirm !== "" &&
+                password === confirm
+                  ? false
+                  : true
+              }
             >
               Sign Up
             </Button>
