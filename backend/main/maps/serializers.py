@@ -1,14 +1,32 @@
 from rest_framework import serializers
-from .models import Route, Pee, Poop, Drink, Interaction
+from .models import Route, Pee, Poop, Drink, Interaction, Coordinate
 import uuid
 
 
+class CoordinateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Coordinate
+        fields = ['id', 'latitude', 'longitude']
+
+# used for creating, getting, and deleting route
+
+
 class RouteSerializer(serializers.ModelSerializer):
+    coordinates = CoordinateSerializer(many=True)
+
+    def create(self, validated_data):
+        coordinates = validated_data.pop("coordinates")
+        route = Route.objects.create(**validated_data)
+        for coordinate_data in coordinates:
+            Coordinate.objects.create(**coordinate_data, route=route)
+        return route
+
     class Meta:
         model = Route
-        fields = ['route_name', 'start_latitude',
-                  'start_longitude', 'id', 'user']
+        fields = ['route_name', 'id', 'user', 'coordinates']
         read_only = ['user']
+
+# use to update route
 
 
 class UpdateRouteSerializer(serializers.ModelSerializer):
@@ -20,7 +38,7 @@ class UpdateRouteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Route
-        fields = ['route_name', 'start_longitude', 'start_latitude']
+        fields = ['route_name']
 
 
 class PeeIconSerializer(serializers.ModelSerializer):
