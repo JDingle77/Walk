@@ -23,18 +23,15 @@ class RouteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Route
-        fields = ['route_name', 'id', 'user', 'coordinates']
-        read_only = ['user']
+        fields = ['route_name', 'id', 'user',
+                  'coordinates', 'start_time', 'end_time']
+        read_only = ['user', 'start_time', 'end_time']
 
 # use to update route
 
 
 class UpdateRouteSerializer(serializers.ModelSerializer):
     route_name = serializers.CharField(required=False)
-    start_latitude = serializers.DecimalField(
-        required=False, max_digits=50, decimal_places=49)
-    start_longitude = serializers.DecimalField(
-        required=False, max_digits=50, decimal_places=49)
 
     class Meta:
         model = Route
