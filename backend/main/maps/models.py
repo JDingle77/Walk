@@ -30,7 +30,8 @@ class Coordinate(models.Model):
 
 
 class Pee(models.Model):
-    route = models.ForeignKey(Route, on_delete=models.CASCADE)
+    route = models.ForeignKey(
+        Route, related_name="peeIcon",  on_delete=models.CASCADE)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     pee_latitude = models.DecimalField(max_digits=9, decimal_places=6)
     pee_longitude = models.DecimalField(max_digits=9, decimal_places=6)
@@ -40,7 +41,8 @@ class Pee(models.Model):
 
 
 class Poop(models.Model):
-    route = models.ForeignKey(Route, on_delete=models.CASCADE)
+    route = models.ForeignKey(
+        Route, related_name="poopIcon", on_delete=models.CASCADE)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     poop_latitude = models.DecimalField(max_digits=9, decimal_places=6)
     poop_longitude = models.DecimalField(
@@ -51,7 +53,8 @@ class Poop(models.Model):
 
 
 class Drink(models.Model):
-    route = models.ForeignKey(Route, on_delete=models.CASCADE)
+    route = models.ForeignKey(
+        Route, related_name="drinkIcon", on_delete=models.CASCADE)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     drink_latitude = models.DecimalField(max_digits=9, decimal_places=6)
     drink_longitude = models.DecimalField(
@@ -62,7 +65,8 @@ class Drink(models.Model):
 
 
 class Interaction(models.Model):
-    route = models.ForeignKey(Route, on_delete=models.CASCADE)
+    route = models.ForeignKey(
+        Route, related_name="interactionIcon", on_delete=models.CASCADE)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     interaction_latitude = models.DecimalField(max_digits=9, decimal_places=6)
     interaction_longitude = models.DecimalField(
