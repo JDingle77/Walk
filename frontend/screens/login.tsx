@@ -4,9 +4,16 @@ import { Alert, SafeAreaView, StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 import TextInput from "../components/TextInput";
 import { Text, View } from "../components/Themed";
-import { RootTabScreenProps } from "../types";
+import { RootStackParamList } from "../types";
+import { StackNavigationProp } from '@react-navigation/stack';
 
-const Login = ({ navigation }: RootTabScreenProps<"Login">) => {
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Login'>;
+
+type Props = {
+  navigation: HomeScreenNavigationProp;
+}
+
+const Login = ({ navigation }: Props) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
@@ -25,8 +32,8 @@ const Login = ({ navigation }: RootTabScreenProps<"Login">) => {
       }),
     })
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
+      .then((response) => {
+        console.log(response);
       })
       .catch((err) => console.error(err));
   }
