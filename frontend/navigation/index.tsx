@@ -3,110 +3,87 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
+import { FontAwesome } from "@expo/vector-icons";
+import { createStackNavigator } from "@react-navigation/stack";
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from "@react-navigation/native";
+import * as React from "react";
+import { ColorSchemeName, Pressable } from "react-native";
 
-import Colors from '../constants/Colors';
-import useColorScheme from '../hooks/useColorScheme';
-import ModalScreen from '../screens/ModalScreen';
-import NotFoundScreen from '../screens/NotFoundScreen';
-import LoginScreen from '../screens/login';
-import HomeScreen from '../screens/home';
-import CreateScreen from '../screens/CreateScreen';
-import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
-import LinkingConfiguration from './LinkingConfiguration';
-import { paperTheme, paperDarkTheme } from '../../core/theme'
-import WalkPageNavigator from './WalkPageStack'
+import Colors from "../constants/Colors";
+import useColorScheme from "../hooks/useColorScheme";
+import ModalScreen from "../screens/ModalScreen";
+import NotFoundScreen from "../screens/NotFoundScreen";
+import LoginScreen from "../screens/login";
+import HomeScreen from "../screens/home";
+import CreateScreen from "../screens/CreateScreen";
+import { RootStackParamList } from "../types";
+import LinkingConfiguration from "./LinkingConfiguration";
+import { paperTheme, paperDarkTheme } from "../../core/theme";
+import WalkPageNavigator from "./WalkPageStack";
 
-export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
+export default function Navigation({
+  colorScheme,
+}: {
+  colorScheme: ColorSchemeName;
+}) {
+  const Stack = createStackNavigator<RootStackParamList>();
+
   return (
     <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? paperDarkTheme : paperTheme}>
-      <RootNavigator />
+      // linking={LinkingConfiguration}
+      theme={colorScheme === "dark" ? paperDarkTheme : paperTheme}
+    >
+      <Stack.Navigator
+        initialRouteName="Create"
+        screenOptions={{
+          headerStyle: { backgroundColor: paperTheme.colors.primary },
+        }}
+      >
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{
+            headerBackTitleStyle: { color: "white" },
+            headerBackTitle: "Back",
+            headerTintColor: "white",
+            headerTitle: "Login",
+          }}
+        />
+        <Stack.Screen
+          name="Create"
+          component={CreateScreen}
+          options={{
+            headerBackTitleStyle: { color: "white" },
+            headerBackTitle: "Back",
+            headerTintColor: "white",
+            headerTitle: "Create",
+          }}
+        />
+        <Stack.Screen
+          name="WalkPageNavigator"
+          component={WalkPageNavigator}
+          options={{
+            headerBackTitleStyle: { color: "white" },
+            headerBackTitle: "Back",
+            headerTintColor: "white",
+            headerTitle: "WalkPage",
+          }}
+        />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            headerBackTitleStyle: { color: "white" },
+            headerBackTitle: "Back",
+            headerTintColor: "white",
+            headerTitle: "Home",
+          }}
+        />
+      </Stack.Navigator>
     </NavigationContainer>
   );
-}
-
-/**
- * A root stack navigator is often used for displaying modals on top of all other content.
- * https://reactnavigation.org/docs/modal
- */
-const Stack = createNativeStackNavigator<RootStackParamList>();
-
-function RootNavigator() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group>
-    </Stack.Navigator>
-  );
-}
-
-/**
- * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
- * https://reactnavigation.org/docs/bottom-tab-navigator
- */
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
-
-function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
-
-  return (
-    <BottomTab.Navigator
-      initialRouteName="Login"
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
-        headerShown: false
-      }}>
-      <BottomTab.Screen
-        name="Login"
-        component={LoginScreen}
-        options={{
-          title: 'Sign in to your account',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="Create"
-        component={CreateScreen}
-        options={{
-          title: 'Create your account',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="WalkPageNavigator"
-        component={WalkPageNavigator}
-        options={{
-          title: 'Walk',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-    </BottomTab.Navigator>
-  );
-}
-
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
 }

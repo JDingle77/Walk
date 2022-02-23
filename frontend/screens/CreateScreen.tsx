@@ -11,15 +11,28 @@ import { Button } from "react-native-paper";
 import { Svg, Path } from "react-native-svg";
 import TextInput from "../components/TextInput";
 import AppLoading from "expo-app-loading";
-import { useFonts, Montserrat_400Regular } from "@expo-google-fonts/dev";
+import {
+  useFonts,
+  Montserrat_400Regular,
+  Montserrat_700Bold,
+} from "@expo-google-fonts/dev";
+import { RootStackParamList } from "../types";
+import { StackNavigationProp } from '@react-navigation/stack';
 
-export default function App() {
+type LoginScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Create'>;
+
+type Props = {
+  navigation: LoginScreenNavigationProp;
+}
+
+const Create = ({ navigation }: Props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
 
   let [fontsLoaded] = useFonts({
     Montserrat: Montserrat_400Regular,
+    MontserratBold: Montserrat_700Bold,
   });
 
   function createProfile() {
@@ -36,8 +49,8 @@ export default function App() {
       }),
     })
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
+      .then((response) => {
+        console.log(response);
       })
       .catch((err) => console.error(err));
   }
@@ -131,21 +144,26 @@ export default function App() {
           <View
             style={[
               stylesheet.logIn,
-              { display: "flex", flexDirection: "row", alignItems: "center" },
+              {
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+              },
             ]}
           >
-            <Text
-              style={[
-                stylesheet.logIn,
-                {
-                  top: 0,
-                  height: "auto",
-                  transform: [{ translateX: 0 }, { translateY: 0 }],
-                },
-              ]}
-            >
-              Already have an account? Log In
+            <Text style={[{ fontFamily: "Montserrat", fontWeight: "400" }]}>
+              Already have an account?
             </Text>
+            <Button
+              labelStyle={[{ fontFamily: "MontserratBold", fontWeight: "900" }]}
+              mode="text"
+              onPress={() => navigation.navigate("Login")}
+              uppercase={false}
+              color="black"
+            >
+              Log In
+            </Button>
           </View>
           <View
             style={[
@@ -193,7 +211,7 @@ export default function App() {
       </ScrollView>
     );
   }
-}
+};
 
 const stylesheet = StyleSheet.create({
   _iPhone_11_Pro___X___2: {
@@ -638,26 +656,14 @@ const stylesheet = StyleSheet.create({
   signUp: {
     left: 0,
     top: 5,
-    fontFamily: "Montserrat",
+    fontFamily: "MontserratBold",
     fontWeight: "bold",
     fontSize: 20,
     textAlign: "center",
   },
   logIn: {
-    position: "absolute",
-    width: "auto",
-    height: "auto",
-    left: 36,
-    right: "auto",
-    transform: [{ translateX: 0 }, { translateY: 745 }, { rotate: "0deg" }],
-    fontFamily: "Montserrat",
-    fontWeight: "400",
-    textDecorationLine: "none",
-    lineHeight: 14,
-    color: "rgb(1,1,1)",
-    textAlign: "center",
-    textAlignVertical: "center",
-    letterSpacing: 0.1,
+    // left: 36,
+    top: 600,
   },
   _Or_register_with: {
     position: "absolute",
@@ -792,3 +798,5 @@ const imageUrl_facebook_app_symbol_1 =
   "https://sizze-figma-plugin-images-upload.s3.us-east-2.amazonaws.com/1be7591b0844bc8f203a34b768fb86f3";
 const imageUrl_Apple_logo_black_3 =
   "https://sizze-figma-plugin-images-upload.s3.us-east-2.amazonaws.com/5644c57036f36ab6004217c806442a9e";
+
+export default Create;

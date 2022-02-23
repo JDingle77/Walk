@@ -17,7 +17,12 @@
     "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
+<<<<<<< HEAD
     "expo": "^43.0.5",
+=======
+    "@react-navigation/stack": "^6.1.1",
+    "expo": "~43.0.0",
+>>>>>>> df0bccad912e3dd45d75a3864d10f1cee8705d5b
     "expo-app-loading": "~1.2.1",
     "expo-asset": "~8.4.3",
     "expo-constants": "~12.1.2",
@@ -30,6 +35,7 @@
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
     "react-native-elements": "^3.4.2",
+    "react-native-gesture-handler": "~1.10.2",
     "react-native-maps": "0.28.1",
     "react-native-paper": "^4.10.1",
     "react-native-safe-area-context": "3.3.2",
