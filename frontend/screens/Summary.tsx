@@ -1,14 +1,14 @@
 import React from 'react'
 import { StyleSheet, Text, Image } from 'react-native';
 import { View } from '../components/Themed';
-import { Button } from "react-native-paper";
+import { Button, DataTable } from "react-native-paper";
 
 export default function SummaryPage() {
   return (
-    <View style={styles.container} >
-      <View style={{ width: '100%' }}>
+    <View style={styles.datacontainer} >
+      <View style={{ width: '90%', backgroundColor: 'blue' }}>
         <Text style={styles.title} >
-          Summary Page
+          Summary
         </Text>
         <Image 
           style={styles.image}
@@ -18,6 +18,18 @@ export default function SummaryPage() {
       </View>
       <View style={styles.container}> 
         <Text style={styles.h1}>Nov 4 2021 - Casual Stroll</Text>
+        {/* <View style={styles.container}> */}
+          <DataTable>
+            <DataTable.Row>
+              <DataTable.Cell>
+                <Text style={styles.p}>Distance: </Text>
+              </DataTable.Cell>
+              <DataTable.Cell>
+                <Text style={styles.p}>0.20 mi</Text>
+              </DataTable.Cell>
+            </DataTable.Row>
+          </DataTable>
+        {/* </View> */}
       </View>
       <Button color={"black"} > 
         Continue
@@ -31,6 +43,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  datacontainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "red",
   },
   title: {
     fontSize: 40,
@@ -49,6 +67,15 @@ const styles = StyleSheet.create({
   },
   h1: {
     fontSize: 30,
-    color: '#000000',
+    fontFamily: 'Montserrat',
+    fontWeight: '400', //not doing anything
+    color: "rgba(90, 67, 62, 1)",
+    letterSpacing: 0.1,
   },
+  p: {
+    fontSize: 14,
+    fontFamily: 'Montserrat',
+    color: "rgba(90, 67, 62, 1)",
+    letterSpacing: 0.1,
+  }
 });
