@@ -19,6 +19,7 @@ import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import LoginScreen from "../screens/login";
 import HomeScreen from "../screens/home";
+import Summary from "../screens/Summary";
 import CreateScreen from "../screens/CreateScreen";
 import { RootStackParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -61,6 +62,16 @@ export default function Navigation({
             headerBackTitle: "Back",
             headerTintColor: "white",
             headerTitle: "Create",
+          }}
+        />
+        <Stack.Screen
+          name="Summary"
+          component={Summary}
+          options={{
+            headerBackTitleStyle: { color: "white" },
+            headerBackTitle: "Back",
+            headerTintColor: "white",
+            headerTitle: "Summary",
           }}
         />
         <Stack.Screen
