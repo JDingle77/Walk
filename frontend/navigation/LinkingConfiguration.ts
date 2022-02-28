@@ -23,6 +23,11 @@ const linking: LinkingOptions<RootStackParamList> = {
           CreateScreen: "create",
         },
       },
+      DogProfile: {
+        screens: {
+          DogProfile: "DogProfile",
+        },
+      },
       Home: {
         screens: {
           HomeScreen: "home",

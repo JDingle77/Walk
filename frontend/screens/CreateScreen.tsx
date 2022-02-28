@@ -131,9 +131,9 @@ const Create = ({ navigation }: Props) => {
               uppercase={false}
               disabled={
                 email !== "" &&
-                password !== "" &&
-                confirm !== "" &&
-                password === confirm
+                  password !== "" &&
+                  confirm !== "" &&
+                  password === confirm
                   ? false
                   : true
               }
@@ -163,6 +163,14 @@ const Create = ({ navigation }: Props) => {
               color="black"
             >
               Log In
+            </Button>
+            <Button
+              labelStyle={[{ fontFamily: "MontserratBold", fontWeight: "900" }]}
+              mode="text"
+              onPress={() => navigation.navigate("DogProfile")}
+              uppercase={false}
+              color="black">
+              Dog Profile
             </Button>
           </View>
           <View
