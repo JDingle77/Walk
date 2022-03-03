@@ -6,7 +6,7 @@ import { Button, DataTable } from "react-native-paper";
 export default function SummaryPage() {
   return (
     <View style={styles.datacontainer} >
-      <View style={{ width: '90%', backgroundColor: 'blue' }}>
+      {/* <View style={{ width: '90%', backgroundColor: 'blue' }}>
         <Text style={styles.title} >
           Summary
         </Text>
@@ -15,11 +15,11 @@ export default function SummaryPage() {
           source={require('../assets/images/summary-image.png')} 
           resizeMode="contain"
         />
-      </View>
+      </View> */}
       <View style={styles.container}> 
-        <Text style={styles.h1}>Nov 4 2021 - Casual Stroll</Text>
+        <Text style={{ backgroundColor: 'green'}}>Nov 4 2021 - Casual Stroll</Text>
         {/* <View style={styles.container}> */}
-          <DataTable>
+          <DataTable style={{flex: 1, backgroundColor: 'orange', width: '100%'}}>
             <DataTable.Row>
               <DataTable.Cell>
                 <Text style={styles.p}>Distance: </Text>
@@ -41,11 +41,13 @@ export default function SummaryPage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
     alignItems: "center",
     justifyContent: "center",
   },
   datacontainer: {
     flex: 1,
+    flexDirection: 'column',
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "red",
