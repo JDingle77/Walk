@@ -1,12 +1,45 @@
 import React from 'react'
-import { StyleSheet, Text, Image, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, Image, SafeAreaView, FlatList } from 'react-native';
 import { View } from '../components/Themed';
-import { Button, DataTable } from "react-native-paper";
+import { Button } from "react-native-paper";
 
 export default function SummaryPage() {
+  const recipes = [ //test data; get data later
+    {
+        id: 0,
+        title: 'Distance',
+        cook_time: '0.20 mi',
+    },
+    {
+        id: 1,
+        title: 'Time',
+        cook_time: '00:04:32',
+    },
+    {
+        id: 2,
+        title: 'Avg Speed (mph)',
+        cook_time: '2.65',
+    },
+    {
+        id: 3,
+        title: 'Pee Stops',
+        cook_time: '5',
+    },
+    {
+        id: 4,
+        title: 'Poop Drops',
+        cook_time: '3',
+    },
+    {
+        id: 5,
+        title: 'Water Breaks',
+        cook_time: '2',
+    }
+  ];
+
   return (
     <SafeAreaView style={styles.container} >
-      <View style={{height: '10%', width: '90%'}}>
+      <View style={{height: '10%', width: '90%', borderWidth: 3, borderColor: 'green'}}>
         <Text style={styles.title} >
           Summary
         </Text>
@@ -21,56 +54,23 @@ export default function SummaryPage() {
       <View style={styles.header}>
         <Text style={styles.h1}>Nov 4 2021 - Casual Stroll</Text>
       </View>
-      <DataTable style={styles.table}>
-        <DataTable.Row style={styles.row}>
-          <DataTable.Cell style={styles.cell}>
-            <Text style={styles.p}>Distance: </Text>
-          </DataTable.Cell>
-          <DataTable.Cell style={styles.cell}>
-            <Text style={styles.p}>0.20 mi</Text>
-          </DataTable.Cell>
-        </DataTable.Row>
-        <DataTable.Row style={styles.row}>
-          <DataTable.Cell style={styles.cell}>
-            <Text style={styles.p}>Time: </Text>
-          </DataTable.Cell>
-          <DataTable.Cell style={styles.cell}>
-            <Text style={styles.p}>00:04:32</Text>
-          </DataTable.Cell>
-        </DataTable.Row>
-        <DataTable.Row style={styles.row}>
-          <DataTable.Cell style={styles.cell}>
-            <Text style={styles.p}>Avg Speed (mph): </Text>
-          </DataTable.Cell>
-          <DataTable.Cell style={styles.cell}>
-            <Text style={styles.p}>2.65</Text>
-          </DataTable.Cell>
-        </DataTable.Row>
-        <DataTable.Row style={styles.row}>
-          <DataTable.Cell style={styles.cell}>
-            <Text style={styles.p}>Pee Stops: </Text>
-          </DataTable.Cell>
-          <DataTable.Cell>
-            <Text style={styles.p}>5</Text>
-          </DataTable.Cell>
-        </DataTable.Row>
-        <DataTable.Row style={styles.row}>
-          <DataTable.Cell>
-            <Text style={styles.p}>Poop Drops: </Text>
-          </DataTable.Cell>
-          <DataTable.Cell>
-            <Text style={styles.p}>3</Text>
-          </DataTable.Cell>
-        </DataTable.Row>
-        <DataTable.Row style={styles.row}>
-          <DataTable.Cell>
-            <Text style={styles.p}>Water Breaks: </Text>
-          </DataTable.Cell>
-          <DataTable.Cell>
-            <Text style={styles.p}>2</Text>
-          </DataTable.Cell>
-        </DataTable.Row>
-      </DataTable>
+
+      <FlatList
+        style={{width:'100%', borderWidth: 3, borderColor: 'red'}}
+        data={recipes}
+        renderItem={(obj) => {
+            return (
+                <View style={{flex: 1, flexDirection: 'row', borderWidth: 1, borderColor: 'orange'}}>
+                  <View style={styles.cellLeft}>
+                    <Text style={styles.p}>{obj.item.title}</Text>
+                  </View>
+                  <View style={styles.cellRight}>
+                    <Text style={[styles.p,  {textAlign: 'right'}]}>{obj.item.cook_time}</Text>
+                  </View>
+                </View>
+            );
+        }}
+        />
       <Button style={styles.button} labelStyle={styles.buttonLabel}> 
         Continue
       </Button>
@@ -85,6 +85,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: 'rgb(243,239,226)',
+    borderWidth: 3,
+    borderColor: 'blue',
   },
   title: {
     flex: 1,
@@ -116,11 +118,15 @@ const styles = StyleSheet.create({
     flexDirection:'column', 
     width: '100%',
   },
-  row: {
-    borderBottomWidth: 0,
+  cellLeft: {
+    width: '50%', 
+    borderWidth: 1, 
+    // borderColor: 'purple', //testing
   },
-  cell: {
-
+  cellRight: {
+    width: '50%', 
+    // borderWidth: 1, 
+    // borderColor: 'pink', //testing
   },
   h1: {
     fontSize: 24,
