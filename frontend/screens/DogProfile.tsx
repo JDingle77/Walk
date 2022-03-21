@@ -114,13 +114,13 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold",
         textAlign: "left",
-        fontFamily: "montserrat",
+        fontFamily: "Montserrat",
     },
     separator: {
         marginBottom: 40,
     },
     textInput: {
-        fontFamily: "montserrat",
+        fontFamily: "Montserrat",
         width: 0.9 * Dimensions.get('window').width,
         borderRadius: 5,
         borderWidth: 0.5,
