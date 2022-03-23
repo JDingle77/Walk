@@ -20,6 +20,7 @@ import NotFoundScreen from "../screens/NotFoundScreen";
 import LoginScreen from "../screens/login";
 import HomeScreen from "../screens/home";
 import DogProfile from "../screens/DogProfile";
+import Summary from "../screens/Summary";
 import CreateScreen from "../screens/CreateScreen";
 import { RootStackParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -67,11 +68,14 @@ export default function Navigation({
         <Stack.Screen
           name="DogProfile"
           component={DogProfile}
+          name="Summary"
+          component={Summary}
           options={{
             headerBackTitleStyle: { color: "white" },
             headerBackTitle: "Back",
             headerTintColor: "white",
             headerTitle: "DogProfile",
+            headerTitle: "Summary",
           }}
         />
         <Stack.Screen

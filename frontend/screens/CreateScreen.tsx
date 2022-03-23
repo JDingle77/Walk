@@ -171,6 +171,10 @@ const Create = ({ navigation }: Props) => {
               uppercase={false}
               color="black">
               Dog Profile
+              onPress={() => navigation.navigate("Summary")}
+              uppercase={false}
+              color="black">
+              Summary
             </Button>
           </View>
           <View
