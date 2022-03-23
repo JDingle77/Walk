@@ -68,13 +68,20 @@ export default function Navigation({
         <Stack.Screen
           name="DogProfile"
           component={DogProfile}
+          options={{
+            headerBackTitleStyle: { color: "white" },
+            headerBackTitle: "Back",
+            headerTintColor: "white",
+            headerTitle: "DogProfile",
+          }}
+        />
+        <Stack.Screen
           name="Summary"
           component={Summary}
           options={{
             headerBackTitleStyle: { color: "white" },
             headerBackTitle: "Back",
             headerTintColor: "white",
-            headerTitle: "DogProfile",
             headerTitle: "Summary",
           }}
         />
