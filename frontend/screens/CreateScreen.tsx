@@ -167,15 +167,11 @@ const Create = ({ navigation }: Props) => {
             <Button
               labelStyle={[{ fontFamily: "MontserratBold", fontWeight: "900" }]}
               mode="text"
-              onPress={() => navigation.navigate("DogProfile")}
-              uppercase={false}
-              color="black">
-              Dog Profile
               onPress={() => navigation.navigate("Summary")}
               uppercase={false}
               color="black">
               Summary
-            </Button>
+              </Button>
           </View>
           <View
             style={[
