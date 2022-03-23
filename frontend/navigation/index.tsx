@@ -26,6 +26,7 @@ import { RootStackParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { paperTheme, paperDarkTheme } from "../../core/theme";
 import WalkPageNavigator from "./WalkPageStack";
+import { Appbar, Button } from "react-native-paper";
 
 export default function Navigation({
   colorScheme,
@@ -48,21 +49,24 @@ export default function Navigation({
         <Stack.Screen
           name="Login"
           component={LoginScreen}
-          options={{
-            headerBackTitleStyle: { color: "white" },
-            headerBackTitle: "Back",
-            headerTintColor: "white",
-            headerTitle: "Login",
-          }}
+          options={({ navigation }) => ({
+            headerTransparent: true,
+            headerTitle: "",
+            headerLeft: () => (
+              <Button
+                labelStyle={{ color: "black" }}
+                onPress={() => navigation.navigate("Create")}
+              >
+                Back
+              </Button>
+            ),
+          })}
         />
         <Stack.Screen
           name="Create"
           component={CreateScreen}
           options={{
-            headerBackTitleStyle: { color: "white" },
-            headerBackTitle: "Back",
-            headerTintColor: "white",
-            headerTitle: "Create",
+            headerShown: false,
           }}
         />
         <Stack.Screen

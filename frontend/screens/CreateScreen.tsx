@@ -17,13 +17,16 @@ import {
   Montserrat_700Bold,
 } from "@expo-google-fonts/dev";
 import { RootStackParamList } from "../types";
-import { StackNavigationProp } from '@react-navigation/stack';
+import { StackNavigationProp } from "@react-navigation/stack";
 
-type LoginScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Create'>;
+type LoginScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "Create"
+>;
 
 type Props = {
   navigation: LoginScreenNavigationProp;
-}
+};
 
 const Create = ({ navigation }: Props) => {
   const [email, setEmail] = useState("");
@@ -131,9 +134,9 @@ const Create = ({ navigation }: Props) => {
               uppercase={false}
               disabled={
                 email !== "" &&
-                  password !== "" &&
-                  confirm !== "" &&
-                  password === confirm
+                password !== "" &&
+                confirm !== "" &&
+                password === confirm
                   ? false
                   : true
               }
