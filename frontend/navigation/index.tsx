@@ -26,11 +26,8 @@ import { RootStackParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { paperTheme, paperDarkTheme } from "../../core/theme";
 import WalkPageNavigator from "./WalkPageStack";
-<<<<<<< HEAD
 import GetInfoScreen from "../screens/GetInfoScreen"
-=======
 import { Appbar, Button } from "react-native-paper";
->>>>>>> f050d0b9cb1a5741265e59a5b4109503d5f52f09
 
 export default function Navigation({
   colorScheme,
