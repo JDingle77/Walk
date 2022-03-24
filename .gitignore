@@ -13,8 +13,5 @@ web-build/
 # macOS
 .DS_Store
 backend/main/db.sqlite3
-<<<<<<< HEAD
-**/__pycache__
-=======
 node_modules/@expo-google-fonts/dev/index.js
->>>>>>> df0bccad912e3dd45d75a3864d10f1cee8705d5b
+**/__pycache__

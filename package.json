@@ -17,12 +17,8 @@
     "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
-<<<<<<< HEAD
-    "expo": "^43.0.5",
-=======
     "@react-navigation/stack": "^6.1.1",
     "expo": "~43.0.0",
->>>>>>> df0bccad912e3dd45d75a3864d10f1cee8705d5b
     "expo-app-loading": "~1.2.1",
     "expo-asset": "~8.4.3",
     "expo-constants": "~12.1.2",

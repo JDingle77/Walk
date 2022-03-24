@@ -24,6 +24,7 @@ import { RootStackParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { paperTheme, paperDarkTheme } from "../../core/theme";
 import WalkPageNavigator from "./WalkPageStack";
+import GetInfoScreen from "../screens/GetInfoScreen"
 
 export default function Navigation({
   colorScheme,
@@ -38,7 +39,7 @@ export default function Navigation({
       theme={colorScheme === "dark" ? paperDarkTheme : paperTheme}
     >
       <Stack.Navigator
-        initialRouteName="Create"
+        initialRouteName="GetInfo"
         screenOptions={{
           headerStyle: { backgroundColor: paperTheme.colors.primary },
         }}
@@ -81,6 +82,16 @@ export default function Navigation({
             headerBackTitle: "Back",
             headerTintColor: "white",
             headerTitle: "Home",
+          }}
+        />
+        <Stack.Screen
+          name="GetInfo"
+          component={GetInfoScreen}
+          options={{
+            headerBackTitleStyle: { color: "white" },
+            headerBackTitle: "Back",
+            headerTintColor: "white",
+            headerTitle: "GetInfo",
           }}
         />
       </Stack.Navigator>

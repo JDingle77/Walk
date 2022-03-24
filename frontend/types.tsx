@@ -3,6 +3,7 @@ export type RootStackParamList = {
   Create: undefined;
   Home: undefined;
   WalkPageNavigator: undefined;
+  GetInfo: undefined;
 };
 
 

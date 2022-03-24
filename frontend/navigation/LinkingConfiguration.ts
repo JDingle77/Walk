@@ -33,6 +33,11 @@ const linking: LinkingOptions<RootStackParamList> = {
           WalkScreen: "walkpagenavigator",
         },
       },
+      GetInfo: {
+        screens: {
+          WalkScreen: "getinfo",
+        },
+      },
     },
   },
 };
