@@ -19,12 +19,18 @@ import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import LoginScreen from "../screens/login";
 import HomeScreen from "../screens/home";
+import DogProfile from "../screens/DogProfile";
+import Summary from "../screens/Summary";
 import CreateScreen from "../screens/CreateScreen";
 import { RootStackParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { paperTheme, paperDarkTheme } from "../../core/theme";
 import WalkPageNavigator from "./WalkPageStack";
+<<<<<<< HEAD
 import GetInfoScreen from "../screens/GetInfoScreen"
+=======
+import { Appbar, Button } from "react-native-paper";
+>>>>>>> f050d0b9cb1a5741265e59a5b4109503d5f52f09
 
 export default function Navigation({
   colorScheme,
@@ -47,21 +53,44 @@ export default function Navigation({
         <Stack.Screen
           name="Login"
           component={LoginScreen}
-          options={{
-            headerBackTitleStyle: { color: "white" },
-            headerBackTitle: "Back",
-            headerTintColor: "white",
-            headerTitle: "Login",
-          }}
+          options={({ navigation }) => ({
+            headerTransparent: true,
+            headerTitle: "",
+            headerLeft: () => (
+              <Button
+                labelStyle={{ color: "black" }}
+                onPress={() => navigation.navigate("Create")}
+              >
+                Back
+              </Button>
+            ),
+          })}
         />
         <Stack.Screen
           name="Create"
           component={CreateScreen}
           options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="DogProfile"
+          component={DogProfile}
+          options={{
             headerBackTitleStyle: { color: "white" },
             headerBackTitle: "Back",
             headerTintColor: "white",
-            headerTitle: "Create",
+            headerTitle: "DogProfile",
+          }}
+        />
+        <Stack.Screen
+          name="Summary"
+          component={Summary}
+          options={{
+            headerBackTitleStyle: { color: "white" },
+            headerBackTitle: "Back",
+            headerTintColor: "white",
+            headerTitle: "Summary",
           }}
         />
         <Stack.Screen

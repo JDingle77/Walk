@@ -23,6 +23,11 @@ const linking: LinkingOptions<RootStackParamList> = {
           CreateScreen: "create",
         },
       },
+      DogProfile: {
+        screens: {
+          DogProfile: "DogProfile",
+        },
+      },
       Home: {
         screens: {
           HomeScreen: "home",
@@ -36,6 +41,11 @@ const linking: LinkingOptions<RootStackParamList> = {
       GetInfo: {
         screens: {
           WalkScreen: "getinfo",
+        }
+      },
+      Summary: {
+        screens: {
+          SummaryScreen: "Summary",
         },
       },
     },

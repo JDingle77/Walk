@@ -16,7 +16,8 @@ export default function useCachedResources() {
         await Font.loadAsync({
           ...FontAwesome.font,
           'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
-          'braveold': require('../assets/fonts/Braveold-Medium.otf')
+          'braveold': require('../assets/fonts/Braveold-Medium.otf'),
+          'montserrat': require('../assets/fonts/Montserrat-SemiBold.ttf')
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service
