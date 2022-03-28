@@ -144,6 +144,17 @@ const Create = ({ navigation }: Props) => {
             >
               Log In
             </Button>
+            {/* REMOVE IN PROD */}
+            <Button
+              labelStyle={[{ fontFamily: "MontserratBold", fontWeight: "900" }]}
+              mode="text"
+              onPress={() => navigation.navigate("Summary")}
+              uppercase={false}
+              color="black"
+            >
+              Summary
+            </Button>
+            {/* UP TO HERE */}
           </View>
           <View style={[stylesheet.orRegisterWith]}>
             <Text

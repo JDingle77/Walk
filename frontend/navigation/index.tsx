@@ -82,12 +82,18 @@ export default function Navigation({
         <Stack.Screen
           name="Summary"
           component={Summary}
-          options={{
-            headerBackTitleStyle: { color: "white" },
-            headerBackTitle: "Back",
-            headerTintColor: "white",
-            headerTitle: "Summary",
-          }}
+          options={({ navigation }) => ({
+            headerTransparent: true,
+            headerTitle: "",
+            headerLeft: () => (
+              <Button
+                labelStyle={{ color: "black" }}
+                onPress={() => navigation.navigate("Create")}
+              >
+                Back
+              </Button>
+            ),
+          })}
         />
         <Stack.Screen
           name="WalkPageNavigator"
@@ -113,3 +119,4 @@ export default function Navigation({
     </NavigationContainer>
   );
 }
+
