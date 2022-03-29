@@ -165,11 +165,17 @@ def get_summary(request):
     route = routes.reverse()[0]
 
     #TODO: calculate total distance for the first time
-    total_distance = route['total_distance']
-    total_time = str(route['end_time'] - route['start_time'])
-    #TODO: type matching and unit conversions
-    avg_speed = total_distance / total_time
+    total_distance = getattr(route, 'total_distance')
+    end_time = getattr(route, 'end_time')
+    start_time = getattr(route, 'start_time')
+    total_time = end_time - start_time #datetime.timedelta; remember to typecast when serializing!
 
-    pee_stops = len(routes['peeIcon'])
-    poop_stops = len(routes['poopIcon'])
-    water_breaks = len(routes['drinkIcon'])
+    total_hours = total_time.total_seconds() / 3600.0
+    avg_speed = total_distance / total_hours
+
+    #these don't work yet because "object of type 'ManyToOneRel' has no len()" but I'm supposed to be passed in some sort of array of objects??
+    pee_stops = len(routes.get_field('peeIcon'))
+    poop_stops = len(routes.get_field('poopIcon'))
+    water_breaks = len(routes.get_field('drinkIcon'))
+
+    #TODO: serialize into JSON object
