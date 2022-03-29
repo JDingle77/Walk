@@ -68,7 +68,7 @@ class RouteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Route
         fields = ['route_name', 'id', 'user',
-                  'coordinates', 'start_time', 'end_time', 'peeIcon', 'poopIcon', 'drinkIcon', 'interactionIcon']
+                  'coordinates', 'start_time', 'end_time','total_distance', 'peeIcon', 'poopIcon', 'drinkIcon', 'interactionIcon']
         read_only = ['user', 'start_time', 'end_time']
 
 # use to update route

@@ -48,6 +48,8 @@ def handle_route(request, route_id):
 @api_view(['POST', 'GET'])
 def route(request):
     request.data['user'] = request.user.id
+    request.data['total_distance'] = -1 #idk if this is the right place to put it
+
     # create new route under user
     if request.method == "POST":
         serializer = RouteSerializer(data=request.data)
@@ -155,3 +157,9 @@ def get_all_icons(request, route_id):
         i += 1
 
     return Response(data)
+
+
+@api_view(['GET'])
+def get_summary(request):
+    userid = request.user.id
+    routes = 
