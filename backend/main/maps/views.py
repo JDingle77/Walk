@@ -48,7 +48,7 @@ def handle_route(request, route_id):
 @api_view(['POST', 'GET'])
 def route(request):
     request.data['user'] = request.user.id
-    request.data['total_distance'] = -1 #idk if this is the right place to put it
+    # request.data['total_distance'] use= -1 #idk if this is the right place to put it
 
     # create new route under user
     if request.method == "POST":
@@ -158,8 +158,18 @@ def get_all_icons(request, route_id):
 
     return Response(data)
 
-
 @api_view(['GET'])
 def get_summary(request):
     userid = request.user.id
-    routes = 
+    routes = Route.objects.filter(user=request.user.id)
+    route = routes.reverse()[0]
+
+    #TODO: calculate total distance for the first time
+    total_distance = route['total_distance']
+    total_time = str(route['end_time'] - route['start_time'])
+    #TODO: type matching and unit conversions
+    avg_speed = total_distance / total_time
+
+    pee_stops = len(routes['peeIcon'])
+    poop_stops = len(routes['poopIcon'])
+    water_breaks = len(routes['drinkIcon'])
