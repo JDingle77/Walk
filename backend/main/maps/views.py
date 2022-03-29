@@ -173,9 +173,9 @@ def get_summary(request):
     total_hours = total_time.total_seconds() / 3600.0
     avg_speed = total_distance / total_hours
 
-    #these don't work yet because "object of type 'ManyToOneRel' has no len()" but I'm supposed to be passed in some sort of array of objects??
-    pee_stops = len(routes.get_field('peeIcon'))
-    poop_stops = len(routes.get_field('poopIcon'))
-    water_breaks = len(routes.get_field('drinkIcon'))
+    #these don't work yet because "object of type 'RelatedManager' has no len()"
+    pee_stops = getattr(route, 'peeIcon')
+    poop_stops = getattr(route, 'poopIcon')
+    water_breaks = getattr(route, 'drinkIcon')
 
     #TODO: serialize into JSON object
