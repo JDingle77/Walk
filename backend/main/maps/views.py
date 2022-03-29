@@ -158,6 +158,10 @@ def get_all_icons(request, route_id):
 
     return Response(data)
 
+from math import sqrt
+def calculate_distance(sx, sy, ex, ey):
+    return sqrt((sx - ex)**2 + (sy - ey)**2)
+
 @api_view(['GET'])
 def get_summary(request):
     userid = request.user.id
@@ -165,17 +169,39 @@ def get_summary(request):
     route = routes.reverse()[0]
 
     #TODO: calculate total distance for the first time
-    total_distance = getattr(route, 'total_distance')
-    end_time = getattr(route, 'end_time')
-    start_time = getattr(route, 'start_time')
-    total_time = end_time - start_time #datetime.timedelta; remember to typecast when serializing!
+    total_distance = route.total_distance
+    if total_distance == None:
+        coords = route.coordinates.all()
+        if len(coords) == 1:
+            pass #or whatever breaks me out of the outer if statement
+        
+        total_distance = 0.0
+
+        s_lat = coords[0].latitude
+        s_lon = coords[0].longitude
+
+        for i, coord in enumerate(coords):
+            if i == 0:
+                pass
+            
+            e_lat = coords[i].latitude
+            e_lon = coords[i].longitude
+
+            total_distance += calculate_distance(s_lat, s_lon, e_lat, e_lon)
+            s_lat, s_lon = e_lat, e_lon
+        
+        route.total_distance = total_distance
+        route.save(update_fields=['total_distance'])
+
+    total_time = route.end_time - route.start_time #datetime.timedelta; remember to typecast when serializing!
 
     total_hours = total_time.total_seconds() / 3600.0
     avg_speed = total_distance / total_hours
 
     #these don't work yet because "object of type 'RelatedManager' has no len()"
-    pee_stops = getattr(route, 'peeIcon')
-    poop_stops = getattr(route, 'poopIcon')
-    water_breaks = getattr(route, 'drinkIcon')
+    pee_stops = len(route.peeIcon.all())
+    poop_stops = len(route.poopIcon.all())
+    water_breaks = len(route.drinkIcon.all())
 
     #TODO: serialize into JSON object
+
