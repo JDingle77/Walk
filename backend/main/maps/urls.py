@@ -12,5 +12,6 @@ urlpatterns = [
          views.handle_icon, name="specific_icon"),
     path('icon/<str:icon_name>/<uuid:route_id>/',
          views.icon, name="icon"),
-    path('all_icons/<uuid:route_id>/', views.get_all_icons, name="get_all_icons")
+    path('all_icons/<uuid:route_id>/', views.get_all_icons, name="get_all_icons"),
+    path('get_summary/', views.get_summary, name="get_summary")
 ]

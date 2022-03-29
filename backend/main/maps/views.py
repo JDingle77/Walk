@@ -166,8 +166,8 @@ import json
 @api_view(['GET'])
 def get_summary(request):
     userid = request.user.id
-    routes = Route.objects.filter(user=request.user.id)
-    route = routes.reverse()[0]
+    route = Route.objects.filter(user=request.user.id).last()
+    # print(route.route_name)
     datalist = []
 
     #TODO: calculate total distance for the first time
@@ -196,14 +196,13 @@ def get_summary(request):
         route.save(update_fields=['total_distance'])
     datalist.append(total_distance)
 
-    total_time = route.end_time - route.start_time #datetime.timedelta; remember to typecast when serializing!
-    datalist.append(total_time)
+    total_time = route.end_time - route.start_time #datetime.timedelta
+    datalist.append(str(total_time))
 
     total_hours = total_time.total_seconds() / 3600.0
     avg_speed = total_distance / total_hours
     datalist.append(avg_speed)
 
-    #these don't work yet because "object of type 'RelatedManager' has no len()"
     pee_stops = len(route.peeIcon.all())
     poop_stops = len(route.poopIcon.all())
     water_breaks = len(route.drinkIcon.all())
@@ -212,15 +211,17 @@ def get_summary(request):
     datalist.append(water_breaks)
 
     #TODO: serialize into JSON object but idk if this is the right way to do it
-    data = {}
     titles = ['Distance', 'Time', 'Avg Speed (mph)', 'Pee Stops', 'Poop Drops', 'Water Breaks']
+    json_list = []
     for i, title in enumerate(titles):
-        data['id'] = i
-        data['title'] = title
-        data['data'] = datalist[i]
+        data = {
+            "id": i,
+            "title": title,
+            "data": datalist[i]
+        }
+        json_list.append(data)
 
-    json_data = json.dumps(data)
-    summary_data = {"response": json_data}
-    return Response(json_data)
+    summary_data = {"response": json_list}
+    return Response(summary_data)
 
 
