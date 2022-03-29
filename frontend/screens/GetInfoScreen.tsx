@@ -1,8 +1,22 @@
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, Dimensions} from "react-native";
+import { SafeAreaView, StyleSheet, Dimensions, KeyboardAvoidingView, Platform} from "react-native";
 import TextInput from "../components/TextInput";
 import { Text, View } from "../components/Themed";
 import { Button } from "react-native-paper";
+import styles from '../stylesheets/globalStyles'
+import { ScrollView } from "react-native-gesture-handler";
+
+// import {
+//   useFonts,
+//   Montserrat_400Regular,
+//   Montserrat_700Bold,
+// } from "@expo-google-fonts/dev"
+
+// let [fontsLoaded] = useFonts({
+//     Montserrat: Montserrat_400Regular,
+//     MontserratBold: Montserrat_700Bold,
+// })
+
 
 const phoneWidth =  Dimensions.get("window").width;
 const phoneHeight =  Dimensions.get("window").height;
@@ -11,7 +25,6 @@ const boxWidth = (312*phoneWidth)/407
 
 const GetInfoScreen = () => {
   
-    console.log(phoneHeight)
 
     const [breed, setBreed] = useState("");
     const [gender, setGender] = useState("");
@@ -23,9 +36,13 @@ const GetInfoScreen = () => {
     }
 
   return (
-    <View style={stylesheet._iPhone_11_Pro___X___2}>
+   
+      // <KeyboardAvoidingView  
+      //   behavior={Platform.OS === "ios" ? "padding" : "height"}
+      //   enabled keyboardVerticalOffset={Platform.select({ios: 80, android: 500})}
+      //   style={stylesheet.test}>
+        <View style={stylesheet._iPhone_11_Pro___X___2} >
           <Text style={stylesheet.titleText}>Let's get some Info!</Text>
-
           <TextInput
               style={stylesheet._Text_Field_Breed}
               label="Breed"
@@ -62,35 +79,49 @@ const GetInfoScreen = () => {
                 setBirthday(text);
               }}
             />
-            <TextInput
-              style={stylesheet._Text_Field_Location}
-              label="Location"
-              autoCapitalize="none"
-              autoComplete="email"
-              textContentType="emailAddress"
-              enablesReturnKeyAutomatically
-              value={location}
-              onChangeText={(text) => {
-                setLocation(text);
-              }}
-            />
-            <Button
-                style={stylesheet._Rectangle_39}
-                mode="contained"
-                onPress={() => uploadInfo()}
-                uppercase={false}>
+            <KeyboardAvoidingView 
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={stylesheet._Text_Field_Location}
+             >
+              <TextInput
+                style={stylesheet._Text_Field_Style}
+                label="Location"
+                autoCapitalize="none"
+                autoComplete="email"
+                textContentType="emailAddress"
+                enablesReturnKeyAutomatically
+                value={location}
+                onChangeText={(text) => {
+                  setLocation(text);
+                }}
+              />
+            </KeyboardAvoidingView>
+           
+            <View style = {stylesheet._Rectangle_39} >
+              <Button 
+                style={[styles.button]} 
+                labelStyle={styles.buttonLabel}> 
                 Continue
-            </Button>
-   
+              </Button>
+            </View>
+          </View>
+      // </KeyboardAvoidingView>
 
-       
-    </View>
+    
   );
 };
+
+//todo
+//its working but not expandning in the direction we want
 
 
 
 const stylesheet = StyleSheet.create({
+    test: {
+      height: phoneHeight,
+      width: phoneWidth,
+
+    },
     titleText:{
       position: 'absolute',
       fontFamily: "braveold",
@@ -159,6 +190,13 @@ const stylesheet = StyleSheet.create({
       },
       _Text_Field_Location:{
         position: "absolute",
+        left: phoneWidth*0.115,
+        right: "auto",
+        top: phoneHeight*0.602,
+        bottom: "auto",
+        borderWidth: 5,
+      },
+      _Text_Field_Style:{
         width: boxWidth,
         height: boxHeight,
         fontFamily: "Montserrat",
@@ -166,10 +204,6 @@ const stylesheet = StyleSheet.create({
         borderWidth: 0.5,
         borderStyle: "solid",
         borderColor: "rgba(90, 67, 62, 1)",
-        left: phoneWidth*0.115,
-        right: "auto",
-        top: phoneHeight*0.502,
-        bottom: "auto",
         transform: [{ translateX: 0 }, { translateY: 0 }, { rotate: "0deg" }],
         backgroundColor: "rgba(255, 255, 255, 1)",
       },
@@ -177,14 +211,11 @@ const stylesheet = StyleSheet.create({
         position: "absolute",
         width: 299,
         height: 56, 
-        left: phoneWidth*0.133,
         right: "auto",
         top: phoneHeight* 0.756,
-        bottom: "auto",
-        opacity: 1,
-        borderRadius: 28,
-        transform: [{ translateX: 0 }, { translateY: 0 }, { rotate: "0deg" }],
-        backgroundColor: "rgba(233, 185, 94, 1)",
+        alignContent: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
       },
 })
 
