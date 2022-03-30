@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
-import { StyleSheet, Dimensions, Pressable, Image, ScrollView } from "react-native";
+import { StyleSheet, Dimensions, Pressable, Image, ScrollView,SafeAreaView } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import TextInput from "../components/TextInput";
 import { Text, View } from "../components/Themed";
 
@@ -11,11 +12,13 @@ const DogProfile = () => {
     const [buttonSelected, setSelect] = useState(false)
 
     return (
-        <ScrollView
-            bounces={false}
+        <KeyboardAwareScrollView
+        bounces={false}
             showsVerticalScrollIndicator={false}
             style={{ height: Dimensions.get("window").height, backgroundColor: '#F5EFE0' }}
         >
+            <View style={styles.separator}></View>
+            <View style={styles.separator}></View>
             <View style={styles.container}>
                 <View style={styles.image}>
                     <Image style={styles.imageSize} source={require('../assets/images/dogProfile.png')} />
@@ -73,7 +76,7 @@ const DogProfile = () => {
                     <Text style={styles.continueTitle}> Continue</Text>
                 </Pressable>
             </View >
-        </ScrollView>
+        </KeyboardAwareScrollView>
     );
 };
 

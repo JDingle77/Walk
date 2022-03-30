@@ -72,12 +72,18 @@ export default function Navigation({
         <Stack.Screen
           name="DogProfile"
           component={DogProfile}
-          options={{
-            headerBackTitleStyle: { color: "white" },
-            headerBackTitle: "Back",
-            headerTintColor: "white",
-            headerTitle: "DogProfile",
-          }}
+          options={({ navigation }) => ({
+            headerTransparent: true,
+            headerTitle: "",
+            headerLeft: () => (
+              <Button
+                labelStyle={{ color: "black" }}
+                onPress={() => navigation.navigate("Create")}
+              >
+                Back
+              </Button>
+            ),
+          })}
         />
         <Stack.Screen
           name="Summary"
