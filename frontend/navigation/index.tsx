@@ -85,6 +85,7 @@ export default function Navigation({
           options={({ navigation }) => ({
             headerTransparent: true,
             headerTitle: "",
+            headerLeft: "",
             headerRight: () => (
               <Button
                 labelStyle={{ color: "black" }}
