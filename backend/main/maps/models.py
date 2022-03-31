@@ -11,6 +11,7 @@ class Route(models.Model):
     route_name = models.CharField(max_length=50)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
+     # add total distance field here (should be float)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
 
