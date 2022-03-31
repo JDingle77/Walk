@@ -120,10 +120,7 @@ export default function Navigation({
           name="GetInfo"
           component={GetInfoScreen}
           options={{
-            headerBackTitleStyle: { color: "white" },
-            headerBackTitle: "Back",
-            headerTintColor: "white",
-            headerTitle: "GetInfo",
+            headerShown: false
           }}
         />
       </Stack.Navigator>

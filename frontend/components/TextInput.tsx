@@ -11,7 +11,7 @@ type Props = React.ComponentProps<typeof Input> & {
 };
 
 const TextInput = ({ errorText, helperText, ...props }: Props) => (
-    <View style={styles.container}>
+     <View style={styles.container}>
         <Input
           style={styles.input}
           activeUnderlineColor={'#5a433e'}
@@ -19,20 +19,14 @@ const TextInput = ({ errorText, helperText, ...props }: Props) => (
           {...props}
         />
         <ErrorText>{errorText}</ErrorText>
-      </View>
-      
-
-  
-  
+    </View>
 );
 
 const styles = StyleSheet.create({
-  test: {
-    //borderWidth: 3,
-  },
   container: {
     width: '100%',
     marginVertical: 12,
+    //borderWidth: 3,
   },
   input: {
     backgroundColor: '#E4DCCC',
