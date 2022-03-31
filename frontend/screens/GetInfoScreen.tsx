@@ -110,95 +110,12 @@ const GetInfoScreen = () => {
                 onPress={()=>uploadInfo()}> 
                 Continue
               </Button>
-            </View>
-         
-         
+            </View>  
     </KeyboardAvoidingView>
-      
- 
-   
-      // <KeyboardAvoidingView  
-      //   behavior={Platform.OS === "ios" ? "padding" : "height"}
-      //   enabled keyboardVerticalOffset={Platform.select({ios: 80, android: 500})}
-      //   style={stylesheet.test}>
-    // <SafeAreaView style = {{flex: 1}}>
-    // <KeyboardAvoidingView
-    // behavior={Platform.OS === "ios" ? "padding" : "height"}>
-    //     <View style={stylesheet._iPhone_11_Pro___X___2} >
-    //      
-    //       {/* <KeyboardAvoidingView 
-    //        behavior={Platform.OS === "ios" ? "padding" : "height"}
-    //       style={stylesheet.kav}> */}
-    //       <TextInput
-    //           style={stylesheet._Text_Field_Breed}
-    //           label="Breed"
-    //           autoCapitalize="none"
-    //           autoComplete="email"
-    //           textContentType="emailAddress"
-    //           value={breed}
-    //           onChangeText={(text) => {
-    //             setBreed(text);
-    //           }}
-    //         />
-    //         <TextInput
-    //           style={stylesheet._Text_Field_Gender}
-    //           label="Gender"
-    //           autoCapitalize="none"
-    //           autoComplete="email"
-    //           textContentType="emailAddress"
-    //           value={gender}
-    //           onChangeText={(text) => {
-    //             setGender(text);
-    //           }}
-    //         />
-    //         <TextInput
-    //           style={stylesheet._Text_Field_Birthday}
-    //           label="Birthday"
-    //           autoCapitalize="none"
-    //           autoComplete="email"
-    //           textContentType="emailAddress"
-    //           value={birthday}
-    //           onChangeText={(text) => {
-    //             setBirthday(text);
-    //           }}
-    //         />
-    //         {/* <View
-    //         style={stylesheet._Text_Field_Location}
-    //          > */}
-    //           <TextInput
-    //             style={stylesheet._Text_Field_Style}
-    //             label="Location"
-    //             autoCapitalize="none"
-    //             autoComplete="email"
-    //             textContentType="emailAddress"
-    //             value={location}
-    //             onChangeText={(text) => {
-    //               setLocation(text);
-    //             }}
-    //           />
-    //         {/* </View> */}
-    //         {/* </KeyboardAvoidingView> */}
-           
-    //         <View style = {stylesheet._Rectangle_39} >
-    //           <Button 
-    //             style={[styles.button]} 
-    //             labelStyle={styles.buttonLabel}> 
-    //             Continue
-    //           </Button>
-    //         </View>
-            
-    //     </View>
-                
-    // </KeyboardAvoidingView>
-    //       // </SafeAreaView>
-    
-
     
   );
 };
 
-//todo
-//change everything to relative
 
 
 
