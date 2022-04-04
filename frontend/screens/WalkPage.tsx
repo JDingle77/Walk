@@ -1,7 +1,8 @@
 import React from 'react';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { Icon } from 'react-native-elements';
+import * as Location from 'expo-location';
 
 import {
     View,
@@ -9,14 +10,36 @@ import {
     Text,
     Pressable,
     ScrollView,
-    Image
+    Image,
+    Dimensions,
 } from 'react-native';
+import { yellow100 } from 'react-native-paper/lib/typescript/styles/colors';
 
 export default function WalkPage({ navigation }) {
-    const currenLocation = {
-        'latitude': 37.78,
-        'longitude': -112.43
-    }
+
+    const [location, setLocation] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
+    const [mapRegion, setMapRegion] = useState(null)
+
+    useEffect(() => {
+        (async () => {
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+                setErrorMsg('Permission to access location was denied');
+                return;
+            }
+
+            let location = await (await Location.getCurrentPositionAsync({})).coords;
+            setMapRegion({
+                latitude: location.latitude,
+                longitude: location.longitude,
+                latitudeDelta: 0.005,
+                longitudeDelta: 0.005,
+            })
+            setLocation(location);
+
+        })();
+    }, []);
     const userFirstName = 'Milo'
 
     const routes = [
@@ -48,17 +71,27 @@ export default function WalkPage({ navigation }) {
                 <MapView 
                     style={styles.mapPreview}
                     provider={PROVIDER_GOOGLE}
-                    showsUserLocation
+                    showsUserLocation={true}
+                    initialRegion={mapRegion}
                 >
-                    <View style={styles.startTrackButton}>
-                        <Pressable onPress={trackButtonHandler} >
-                            <View style={styles.flexRow}>
-                                <Icon name='location-pin' color='#5A433E'/>
+                    {/* <View style={styles.startTrackButton}>
+                        <Pressable style={styles.startTrackPressable} onPress={trackButtonHandler} >
+                            <View style={styles.flexRowTrackButton}>
+                                <Icon style={styles.startTrackIcon} name='location-pin' color='#5A433E'/>
                                 <Text style={styles.startTrackText}>begin tracking</Text>
                             </View>
                         </Pressable>
-                    </View>
-                    
+                    </View> */}
+                    <Pressable style={styles.startTrackButton} onPress={trackButtonHandler} >
+                        {/* <View style={styles.flexRowTrackButton}>
+                        </View> */}
+                        <Icon style={styles.startTrackIcon} name='location-pin' color='#5A433E' />
+                        <Image
+                            style={styles.startTrackIcon}
+                            source={require('../assets/images/black-location.png')}
+                        />
+                        <Text style={styles.startTrackText}>begin tracking</Text>
+                    </Pressable>
                 </ MapView>
             </View>
             
@@ -71,9 +104,9 @@ export default function WalkPage({ navigation }) {
                         Average Distance
                     </Text>
                     <Text style={styles.averageNum}>
-                        4.82 km
+                        4.82 in
                     </Text>
-                    <View style={styles.flexRow}>
+                    <View style={styles.flexRowStats}>
                         <Image
                             style={styles.tinyIcon}
                             source={require('../assets/images/stats-up.png')}
@@ -90,7 +123,7 @@ export default function WalkPage({ navigation }) {
                     <Text style={styles.averageNum}>
                         1  <Text style={styles.smallText}>hour  </Text>22  <Text style={styles.smallText}>minutes</Text>
                     </Text>
-                    <View style={styles.flexRow}>
+                    <View style={styles.flexRowStats}>
                         <Image
                             style={styles.tinyIcon}
                             source={require('../assets/images/stats-down.png')}
@@ -147,7 +180,8 @@ export default function WalkPage({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingLeft: 30, 
+        paddingLeft: 30,
+        paddingRight: 30,
         backgroundColor: '#F5EFE0',
     },
     title: {
@@ -157,7 +191,6 @@ const styles = StyleSheet.create({
     },
     mapSection: {
         flex: 2,
-        paddingRight: 30,
     },
     mapPreview: {
         flex: 1,
@@ -174,12 +207,40 @@ const styles = StyleSheet.create({
         borderColor: '#5A433E',
         backgroundColor: 'white',
     },
-    flexRow: {
-        flexDirection: 'row',
-        alignItems: 'center',
+    // startTrackPressable: {
+    //     flex: 1,
+    //     position: 'relative'
+    // },
+    flexRowTrackButton: {
+        height: 50,
+        width: 150,
+        position: 'absolute',
+    },
+    startTrackIcon: {
+        position: 'absolute',
+        height: 21,
+        width: 14,
+        marginRight: 5,
+        marginLeft: 15,
+        marginTop: 3,
+        // marginTop: 90,
+        // marginLeft: 105,
     },
     startTrackText: {
-        color: '#5A433E'
+        position: 'absolute',
+        height: 200,
+        width: 300,
+        color: '#5A433E',
+        marginLeft: 35,
+        marginTop: 3,
+        // marginTop: 90,
+        // marginLeft: 125,
+    },
+    flexRowStats: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        flex: 1,
     },
     subtitle: {
         fontSize: 20,
