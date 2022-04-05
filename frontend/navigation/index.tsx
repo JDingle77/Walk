@@ -27,6 +27,7 @@ import LinkingConfiguration from "./LinkingConfiguration";
 import { paperTheme, paperDarkTheme } from "../../core/theme";
 import WalkPageNavigator from "./WalkPageStack";
 import { Appbar, Button } from "react-native-paper";
+import { UserDataProvider, useUserData } from "../hooks/userContext";
 
 export default function Navigation({
   colorScheme,
@@ -36,6 +37,7 @@ export default function Navigation({
   const Stack = createStackNavigator<RootStackParamList>();
 
   return (
+    <UserDataProvider>
     <NavigationContainer
       // linking={LinkingConfiguration}
       theme={colorScheme === "dark" ? paperDarkTheme : paperTheme}
@@ -118,6 +120,7 @@ export default function Navigation({
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </UserDataProvider>
   );
 }
 

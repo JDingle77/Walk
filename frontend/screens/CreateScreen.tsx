@@ -18,6 +18,9 @@ import {
 import { RootStackParamList } from "../types";
 import { StackNavigationProp } from "@react-navigation/stack";
 
+import { useContext } from "react";
+import { useUserData } from "../hooks/userContext";
+
 type LoginScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "Create"
@@ -31,6 +34,8 @@ const Create = ({ navigation }: Props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+
+  const { UserData, setUserData } = useUserData()!;
 
   let [fontsLoaded] = useFonts({
     Montserrat: Montserrat_400Regular,
@@ -62,6 +67,14 @@ const Create = ({ navigation }: Props) => {
   } else {
     return (
       <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
+        <View>
+          <TextInput 
+            value={UserData.email}
+            onChangeText={(text) => {
+              setUserData({email: text, password: text});
+            }}
+          />
+        </View>
         <View style={stylesheet.container}>
           <TextInput
             style={stylesheet.email}
