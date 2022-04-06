@@ -4,9 +4,9 @@ import { Text, View } from "../components/Themed";
 
 const Home = () => {
   return (
-      <View style={styles.container}>
-        <Text style={styles.title}>This is the Home Page</Text>
-      </View>
+    <View style={styles.container}>
+      <Text style={styles.title}>This is the Home Page</Text>
+    </View>
   );
 };
 

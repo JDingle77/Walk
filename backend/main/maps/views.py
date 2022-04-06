@@ -12,6 +12,7 @@ possible_icons = {'pee': [Pee, PeeIconSerializer], 'poop': [Poop, PoopIconSerial
                   'drink': [Drink, DrinkIconSerializer], 'interaction': [Interaction, InteractionIconSerializer]}
 
 
+# single route functionality
 @api_view(['GET', 'PUT', 'DELETE'])
 def handle_route(request, route_id):
     request.data['user'] = request.user.id
@@ -22,10 +23,12 @@ def handle_route(request, route_id):
     except Route.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
+    # handle getting a route
     if request.method == "GET":
         serializer = RouteSerializer(route)
         return Response(serializer.data)
 
+    # handle updating a route
     if request.method == "PUT":
         serializer = UpdateRouteSerializer(route, data=request.data)
         if serializer.is_valid():
@@ -33,6 +36,7 @@ def handle_route(request, route_id):
             return Response(status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    # handle deleting a route
     if request.method == "DELETE":
         operation = route.delete()
         data = {"isSuccessful": False}
@@ -44,6 +48,7 @@ def handle_route(request, route_id):
 @api_view(['POST', 'GET'])
 def route(request):
     request.data['user'] = request.user.id
+    # create new route under user
     if request.method == "POST":
         serializer = RouteSerializer(data=request.data)
         if serializer.is_valid():
@@ -51,6 +56,7 @@ def route(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    # get all routes under user
     if request.method == "GET":
         routes = Route.objects.filter(user=request.user.id)
         data = []
@@ -60,6 +66,7 @@ def route(request):
         return Response(data)
 
 
+# single icon functionality
 @api_view(['GET', 'DELETE'])
 def handle_icon(request, icon_name, icon_id):
     model_name = None
@@ -77,10 +84,12 @@ def handle_icon(request, icon_name, icon_id):
     if route.user != request.user:
         return Response(status=status.HTTP_403_FORBIDDEN)
 
+    # return icon associated with specified icon id
     if request.method == "GET":
         serializer = serializer_name(icon)
         return Response(serializer.data)
 
+    # delete icon associated with specified icon id
     if request.method == "DELETE":
         operation = icon.delete()
         data = {"isSuccessful": False}
@@ -100,10 +109,11 @@ def icon(request, icon_name, route_id):
     icon_name = icon_name.lower()
     if icon_name not in possible_icons:
         return Response("not valid icon type", status=status.HTTP_400_BAD_REQUEST)
-    else:
+    else:  # set the appropriate model and serializer based on icon type
         model_name = possible_icons[icon_name][0]
         serializer_name = possible_icons[icon_name][1]
 
+    # create new icon for specified route
     if request.method == "POST":
         request.data['route'] = route_id
         print(request.data)
@@ -113,6 +123,7 @@ def icon(request, icon_name, route_id):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    # get all icons (with specified type) associated with specified route
     if request.method == "GET":
         icons = model_name.objects.filter(route=route_id)
         data = []
@@ -122,6 +133,7 @@ def icon(request, icon_name, route_id):
         return Response(data)
 
 
+# get all icons (regardless of type) associated in specified route
 @api_view(['GET'])
 def get_all_icons(request, route_id):
     route = get_object_or_404(Route, id=route_id)
