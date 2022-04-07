@@ -19,7 +19,7 @@ import { RootStackParamList } from "../types";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 import { useContext } from "react";
-import { useUserData } from "../hooks/userContext";
+import { useUserData, UserDataType } from "../hooks/userContext";
 
 type LoginScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -61,6 +61,14 @@ const Create = ({ navigation }: Props) => {
       })
       .catch((err) => console.error(err));
   }
+
+  const handleChange = (text : string) => {
+    setUserData({
+      ...UserData,
+      email: text
+    });
+  };
+
   //password "red" box when not the same
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -90,9 +98,7 @@ const Create = ({ navigation }: Props) => {
             textContentType="emailAddress"
             enablesReturnKeyAutomatically
             value={UserData.email}
-            onChangeText={(text) => {
-              setUserData({ email: text, password: UserData.password });
-            }} 
+            onChangeText={handleChange} 
             // value={email}
             // onChangeText={(text) => {
             //   setEmail(text);
@@ -106,9 +112,7 @@ const Create = ({ navigation }: Props) => {
             textContentType="password"
             enablesReturnKeyAutomatically
             value={UserData.password}
-            onChangeText={(text) => {
-              setUserData({ email: UserData.email, password: text });
-            }}
+            onChangeText={handleChange}
             // value={password}
             // onChangeText={(text) => {
             //   setPassword(text);

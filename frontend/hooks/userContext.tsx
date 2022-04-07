@@ -1,14 +1,38 @@
 import * as React from "react";
 
-const defaultUserData = {email: "default", password: "default"};
-type UserDataType = {
+const defaultUserData = {
+  email: "default value",
+  password: "default value",
+  ownerName: "default value",
+  dogUsername: "default value",
+  dogName: "default value",
+  dogBreed: "default value",
+  dogGender: "default value",
+  dogBirthday: "default value",
+  dogLocation: "default value",
+};
+export type UserDataType = {
   UserData: {
     email: string,
     password: string,
+    ownerName: string,
+    dogUsername: string,
+    dogName: string,
+    dogBreed: string,
+    dogGender: string,
+    dogBirthday: string,
+    dogLocation: string,
   };
   setUserData: (value: {
     email: string,
     password: string,
+    ownerName: string,
+    dogUsername: string,
+    dogName: string,
+    dogBreed: string,
+    dogGender: string,
+    dogBirthday: string,
+    dogLocation: string,
   }) => void;
 };
 const UserDataContext = React.createContext<UserDataType | undefined>(
@@ -24,7 +48,17 @@ export const UserDataProvider = ({ children }: Props) => {
   React.useEffect(() => {
     // We'd get the UserData from a web API / local storage in a real app
     // We've hardcoded the UserData in our example
-    const currentData = {email: "", password: ""};
+    const currentData = {
+      email: "",
+      password: "",
+      ownerName: "",
+      dogUsername: "",
+      dogName: "",
+      dogBreed: "",
+      dogGender: "",
+      dogBirthday: "",
+      dogLocation: "",
+    };
     setUserData(currentData);
   }, []);
 

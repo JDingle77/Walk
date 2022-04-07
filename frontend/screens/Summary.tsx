@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, Image, SafeAreaView, FlatList } from "react-native";
-import { View } from "../components/UserDatad";
+import { View } from "../components/UserData";
 import { Button } from "react-native-paper";
 import styles from "../stylesheets/globalStyles";
 

@@ -4,7 +4,19 @@ import { StyleSheet, Dimensions, Pressable, Image, ScrollView } from "react-nati
 import TextInput from "../components/TextInput";
 import { Text, View } from "../components/Themed";
 
-const DogProfile = () => {
+import { RootStackParamList } from "../types";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+type LoginScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "Create"
+>;
+
+type Props = {
+  navigation: LoginScreenNavigationProp;
+};
+
+const DogProfile = ({ navigation }: Props) => {
     const [dogUsername, setDogUsername] = useState("");
     const [dogName, setDogName] = useState("");
     const [ownerName, setOwnerName] = useState("");
@@ -65,10 +77,7 @@ const DogProfile = () => {
                 <View style={styles.separator}></View>
                 <Pressable
                     style={[styles.continueButton, { opacity: buttonSelected ? 0.8 : 1 }]}
-                    onPress={() => {
-                        setSelect(!buttonSelected)
-                    }
-                    }
+                    onPress={() => navigation.navigate("Summary")}
                 >
                     <Text style={styles.continueTitle}> Continue</Text>
                 </Pressable>
