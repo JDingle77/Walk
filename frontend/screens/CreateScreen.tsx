@@ -67,14 +67,20 @@ const Create = ({ navigation }: Props) => {
   } else {
     return (
       <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
-        <View>
-          <TextInput 
+        {/* <View>
+          <TextInput
+            style={stylesheet.email}
+            label="Your email"
+            autoCapitalize="none"
+            autoComplete="email"
+            textContentType="emailAddress"
+            enablesReturnKeyAutomatically
             value={UserData.email}
             onChangeText={(text) => {
-              setUserData({email: text, password: text});
+              setUserData({ email: text, password: text });
             }}
           />
-        </View>
+        </View> */}
         <View style={stylesheet.container}>
           <TextInput
             style={stylesheet.email}
@@ -83,10 +89,14 @@ const Create = ({ navigation }: Props) => {
             autoComplete="email"
             textContentType="emailAddress"
             enablesReturnKeyAutomatically
-            value={email}
+            value={UserData.email}
             onChangeText={(text) => {
-              setEmail(text);
-            }}
+              setUserData({ email: text, password: UserData.password });
+            }} 
+            // value={email}
+            // onChangeText={(text) => {
+            //   setEmail(text);
+            // }}
           />
           <TextInput
             style={stylesheet.password}
@@ -95,10 +105,14 @@ const Create = ({ navigation }: Props) => {
             autoComplete="none"
             textContentType="password"
             enablesReturnKeyAutomatically
-            value={password}
+            value={UserData.password}
             onChangeText={(text) => {
-              setPassword(text);
+              setUserData({ email: UserData.email, password: text });
             }}
+            // value={password}
+            // onChangeText={(text) => {
+            //   setPassword(text);
+            // }}
           />
           <TextInput
             style={stylesheet.confirm}

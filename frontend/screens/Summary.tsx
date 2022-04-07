@@ -1,8 +1,8 @@
-import React from 'react'
-import { StyleSheet, Text, Image, SafeAreaView, FlatList } from 'react-native';
-import { View } from '../components/UserDatad';
+import React from "react";
+import { StyleSheet, Text, Image, SafeAreaView, FlatList } from "react-native";
+import { View } from "../components/UserDatad";
 import { Button } from "react-native-paper";
-import styles from '../stylesheets/globalStyles'
+import styles from "../stylesheets/globalStyles";
 
 // export default class SummaryPage extends React.Component<any, any> {
 //   constructor(props: any) {
@@ -41,9 +41,9 @@ import styles from '../stylesheets/globalStyles'
 //         // }
 //       ],
 //     }
-    
+
 //   }
-  
+
 //   async componentDidMount() {
 //     try {
 //       const res = await fetch(
@@ -76,17 +76,17 @@ import styles from '../stylesheets/globalStyles'
 //             </Text>
 //           </View>
 //           <View style={{height: '65%'}}>
-//             <Image 
+//             <Image
 //               style={styles.image}
-//               source={require('../assets/images/summary-image.png')} 
+//               source={require('../assets/images/summary-image.png')}
 //               resizeMode="contain"
 //             />
 //           </View>
 //           <View style={localStyles.speedBarContainer}>
 //             <Text style={styles.p}>Slow</Text>
-//             <Image 
+//             <Image
 //               style={styles.image}
-//               source={require('../assets/images/speed-bar.png')} 
+//               source={require('../assets/images/speed-bar.png')}
 //               resizeMode="contain"
 //             />
 //             <Text style={styles.p}>Fast</Text>
@@ -96,7 +96,7 @@ import styles from '../stylesheets/globalStyles'
 //           <View style={styles.header}>
 //             <Text style={styles.h1}>Nov 4 2021 - Casual Stroll</Text>
 //           </View>
-  
+
 //           <FlatList
 //             style={styles.list}
 //             data={this.state.recipes}
@@ -113,29 +113,24 @@ import styles from '../stylesheets/globalStyles'
 //                 );
 //             }}
 //             />
-  
-//         <Button style={styles.button} labelStyle={styles.buttonLabel}> 
+
+//         <Button style={styles.button} labelStyle={styles.buttonLabel}>
 //           Continue
 //         </Button>
 //         </View>
-        
-        
+
 //       </SafeAreaView>
 //     );
 //   }
-  
+
 // }
 import { useUserData } from "../hooks/userContext";
 export default function SummaryPage() {
   const { UserData, setUserData } = useUserData()!;
   return (
     <SafeAreaView>
-      <Text>
-        {UserData.email}
-      </Text>
-      <Text>
-        {UserData.password}
-      </Text>
+      <Text>"email", {UserData.email}</Text>
+      <Text>"password", {UserData.password}</Text>
     </SafeAreaView>
   );
 }
@@ -183,17 +178,17 @@ export default function SummaryPage() {
 //           </Text>
 //         </View>
 //         <View style={{height: '65%'}}>
-//           <Image 
+//           <Image
 //             style={styles.image}
-//             source={require('../assets/images/summary-image.png')} 
+//             source={require('../assets/images/summary-image.png')}
 //             resizeMode="contain"
 //           />
 //         </View>
 //         <View style={localStyles.speedBarContainer}>
 //           <Text style={styles.p}>Slow</Text>
-//           <Image 
+//           <Image
 //             style={styles.image}
-//             source={require('../assets/images/speed-bar.png')} 
+//             source={require('../assets/images/speed-bar.png')}
 //             resizeMode="contain"
 //           />
 //           <Text style={styles.p}>Fast</Text>
@@ -221,12 +216,11 @@ export default function SummaryPage() {
 //           }}
 //           />
 
-//       <Button style={styles.button} labelStyle={styles.buttonLabel}> 
+//       <Button style={styles.button} labelStyle={styles.buttonLabel}>
 //         Continue
 //       </Button>
 //       </View>
-      
-      
+
 //     </SafeAreaView>
 //   );
 // }
@@ -234,7 +228,7 @@ export default function SummaryPage() {
 const localStyles = StyleSheet.create({
   topContainer: {
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "rgb(244,238,225)",
@@ -243,17 +237,17 @@ const localStyles = StyleSheet.create({
   },
   bottomContainer: {
     flex: 1,
-    width: '100%',
-    backgroundColor: 'rgb(252,251,247)',
+    width: "100%",
+    backgroundColor: "rgb(252,251,247)",
     // borderWidth: 3,
     // borderColor: "pink",
   },
   speedBarContainer: {
-    flex: 1, 
-    flexDirection: 'row', 
-    width: '80%', 
-    justifyContent: 'center', 
-    alignItems: 'center', 
+    flex: 1,
+    flexDirection: "row",
+    width: "80%",
+    justifyContent: "center",
+    alignItems: "center",
     // borderWidth: 1
   },
 });
