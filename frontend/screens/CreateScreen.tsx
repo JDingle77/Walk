@@ -6,6 +6,8 @@ import {
   ScrollView,
   StyleSheet,
   Dimensions,
+  NativeSyntheticEvent, 
+  TextInputChangeEventData
 } from "react-native";
 import { Button } from "react-native-paper";
 import TextInput from "../components/TextInput";
@@ -62,10 +64,11 @@ const Create = ({ navigation }: Props) => {
       .catch((err) => console.error(err));
   }
 
-  const handleChange = (text : string) => {
+  const handleChange = (text: string, name: string): void => {
+    // console.log(name);
     setUserData({
       ...UserData,
-      email: text
+      [name]: text
     });
   };
 
@@ -98,7 +101,7 @@ const Create = ({ navigation }: Props) => {
             textContentType="emailAddress"
             enablesReturnKeyAutomatically
             value={UserData.email}
-            onChangeText={handleChange} 
+            onChangeText={text => handleChange(text, "email")} 
             // value={email}
             // onChangeText={(text) => {
             //   setEmail(text);
@@ -112,7 +115,7 @@ const Create = ({ navigation }: Props) => {
             textContentType="password"
             enablesReturnKeyAutomatically
             value={UserData.password}
-            onChangeText={handleChange}
+            onChangeText={text => handleChange(text, "password")}
             // value={password}
             // onChangeText={(text) => {
             //   setPassword(text);
