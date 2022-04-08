@@ -72,9 +72,9 @@ export const UserDataProvider = ({ children }: Props) => {
 export const useUserData = () => React.useContext(UserDataContext);
 
 
-// export const handleChange = (text: string, name: string): void => {
+// export const handleChange = (UserData: UserDataType, text: string, name: string): void => {
 //   // console.log(name);
-//   setUserData({
+//   UserDataProvider.setUserData({
 //     ...UserData,
 //     [name]: text
 //   });
