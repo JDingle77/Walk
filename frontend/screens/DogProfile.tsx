@@ -19,11 +19,13 @@ type Props = {
 };
 
 const DogProfile = ({ navigation }: Props) => {
+    //don't need these anymore
     const [dogUsername, setDogUsername] = useState("");
     const [dogName, setDogName] = useState("");
     const [ownerName, setOwnerName] = useState("");
     const [buttonSelected, setSelect] = useState(false)
 
+    //useContext stuff
     const { UserData, setUserData } = useUserData()!;
 
     const handleChange = (text: string, name: string): void => {
@@ -33,6 +35,7 @@ const DogProfile = ({ navigation }: Props) => {
           [name]: text
         });
     };
+
 
     return (
         <ScrollView
