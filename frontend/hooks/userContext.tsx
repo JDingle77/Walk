@@ -70,3 +70,12 @@ export const UserDataProvider = ({ children }: Props) => {
 };
 
 export const useUserData = () => React.useContext(UserDataContext);
+
+
+// export const handleChange = (text: string, name: string): void => {
+//   // console.log(name);
+//   setUserData({
+//     ...UserData,
+//     [name]: text
+//   });
+// };

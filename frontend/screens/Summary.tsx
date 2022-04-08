@@ -129,8 +129,12 @@ export default function SummaryPage() {
   const { UserData, setUserData } = useUserData()!;
   return (
     <SafeAreaView>
-      <Text>"email", {UserData.email}</Text>
-      <Text>"password", {UserData.password}</Text>
+        <Text>email: {UserData.email}</Text>
+        <Text>password: {UserData.password}</Text>
+        <Text>owner name: {UserData.ownerName}</Text>
+        <Text>dog username: {UserData.dogUsername}</Text>
+        <Text>dog name: {UserData.dogName}</Text>
+      {/* <Text>"password", {UserData.password}</Text> */}
     </SafeAreaView>
   );
 }
