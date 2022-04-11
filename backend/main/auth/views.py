@@ -33,13 +33,18 @@ class RegistrationViewSet(ModelViewSet, TokenObtainPairView):
                                          'is_admin': request.data['is_admin']})
 
         serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        refresh = RefreshToken.for_user(user)
+        user, isDuplicate = serializer.save()
+        if not isDuplicate:
+            refresh = RefreshToken.for_user(user)
 
-        return Response({
-            "refresh": str(refresh),
-            "access": str(refresh.access_token),
-        }, status=status.HTTP_201_CREATED)
+            return Response({
+                "refresh": str(refresh),
+                "access": str(refresh.access_token),
+            }, status=status.HTTP_201_CREATED)
+        else:
+            return Response({
+                "Specified email already in use."
+            }, status=status.HTTP_409_CONFLICT)
 
 
 class RefreshViewSet(ViewSet, TokenRefreshView):
