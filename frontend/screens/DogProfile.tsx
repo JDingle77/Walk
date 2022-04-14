@@ -11,96 +11,102 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import TextInput from "../components/TextInput";
 import { Text, View } from "../components/Themed";
-
 import { RootStackParamList } from "../types";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 import { useUserData, UserDataType } from "../hooks/userContext";
 
-type LoginScreenNavigationProp = StackNavigationProp<
+type NavigationProp = StackNavigationProp<
   RootStackParamList,
-  "Create"
+  "DogProfile"
 >;
 
 type Props = {
-  navigation: LoginScreenNavigationProp;
+  navigation: NavigationProp;
 };
 
 const DogProfile = ({ navigation }: Props) => {
-    //don't need these anymore
-    const [dogUsername, setDogUsername] = useState("");
-    const [dogName, setDogName] = useState("");
-    const [ownerName, setOwnerName] = useState("");
-    const [buttonSelected, setSelect] = useState(false)
+  const [dogUsername, setDogUsername] = useState("");
+  const [dogName, setDogName] = useState("");
+  const [ownerName, setOwnerName] = useState("");
+  const [buttonSelected, setSelect] = useState(false);
 
-    //useContext stuff
-    const { UserData, setUserData } = useUserData()!;
+  //useContext stuff
+  const { UserData, setUserData } = useUserData()!;
 
-    const handleChange = (text: string, name: string): void => {
-        // console.log(name);
-        setUserData({
-          ...UserData,
-          [name]: text
-        });
-    };
+  const handleChange = (text: string, name: string): void => {
+      // console.log(name);
+      setUserData({
+        ...UserData,
+        [name]: text
+      });
+  };
 
-
-    return (
-        <ScrollView
-            bounces={false}
-            showsVerticalScrollIndicator={false}
-            style={{ height: Dimensions.get("window").height, backgroundColor: '#F5EFE0' }}
+  return (
+    <KeyboardAwareScrollView
+      bounces={false}
+      showsVerticalScrollIndicator={false}
+      style={{
+        height: Dimensions.get("window").height,
+        backgroundColor: "#F5EFE0",
+      }}
+    >
+      <View style={styles.separator}></View>
+      <View style={styles.separator}></View>
+      <View style={styles.container}>
+        <View style={styles.image}>
+          <Image
+            style={styles.imageSize}
+            source={require("../assets/images/dogProfile.png")}
+          />
+        </View>
+        <View style={{ width: "90%" }}>
+          <Text style={styles.title}>Your Dog's</Text>
+          <Text style={styles.title}>Profile</Text>
+        </View>
+        <View style={styles.separator}></View>
+        <View>
+          <TextInput
+            style={styles.textInput}
+            enablesReturnKeyAutomatically
+            label="Your dog's username"
+            autoCapitalize="none"
+            autoComplete="none"
+            value={UserData.dogUsername}
+            onChangeText={text => handleChange(text, "dogUsername")}
+          />
+          <TextInput
+            label="Your dog's name"
+            style={styles.textInput}
+            value={UserData.dogName}
+            autoCapitalize="none"
+            autoComplete="none"
+            onChangeText={text => handleChange(text, "dogName")}
+            textContentType="name"
+          />
+          <TextInput
+            label="Owner's username"
+            style={styles.textInput}
+            value={UserData.ownerName}
+            autoCapitalize="none"
+            autoComplete="none"
+            onChangeText={text => handleChange(text, "ownerName")}
+            textContentType="name"
+          />
+        </View>
+        <View style={styles.separator}></View>
+        <Pressable
+          style={[styles.continueButton, { opacity: buttonSelected ? 0.8 : 1 }]}
+          onPress={() => {
+            setSelect(!buttonSelected);
+            navigation.navigate("GetInfo")
+          }}
         >
-            <View style={styles.container}>
-                <View style={styles.image}>
-                    <Image style={styles.imageSize} source={require('../assets/images/dogProfile.png')} />
-                </View>
-                <View style={{ width: "90%" }}>
-                    <Text style={styles.title}>Your Dog's</Text>
-                    <Text style={styles.title}>Profile</Text>
-                </View>
-                <View style={styles.separator}>
-                </View>
-                <View>
-                    <TextInput
-                        style={styles.textInput}
-                        enablesReturnKeyAutomatically
-                        label="Your dog's username"
-                        autoCapitalize="none"
-                        autoComplete="none"
-                        value={UserData.dogUsername}
-                        onChangeText={text => handleChange(text, "dogUsername")}
-                        textContentType="name"
-                    />
-                    <TextInput
-                        label="Your dog's name"
-                        style={styles.textInput}
-                        value={UserData.dogName}
-                        autoCapitalize="none"
-                        autoComplete="none"
-                        onChangeText={text => handleChange(text, "dogName")}
-                        textContentType="name"
-                    />
-                    <TextInput
-                        label="Owner's username"
-                        style={styles.textInput}
-                        value={UserData.ownerName}
-                        autoCapitalize="none"
-                        autoComplete="none"
-                        onChangeText={text => handleChange(text, "ownerName")}
-                        textContentType="name"
-                    />
-                </View>
-                <View style={styles.separator}></View>
-                <Pressable
-                    style={[styles.continueButton, { opacity: buttonSelected ? 0.8 : 1 }]}
-                    onPress={() => navigation.navigate("Summary")}
-                >
-                    <Text style={styles.continueTitle}> Continue</Text>
-                </Pressable>
-            </View >
-        </ScrollView>
-    );
+          <Text style={styles.continueTitle}> Continue</Text>
+        </Pressable>
+      </View>
+    </KeyboardAwareScrollView>
+  );
 };
 
 const styles = StyleSheet.create({
