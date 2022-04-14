@@ -1,4 +1,4 @@
-from .models import User
+from .models import User, Dog
 from rest_framework import serializers
 
 
@@ -24,4 +24,14 @@ class UpdateUserSerializer(serializers.ModelSerializer):
 class PostUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['email', 'password']
+        fields = ['id', 'email', 'password']
+
+class DogSerializer(serializers.ModelSerializer):
+    # json request field can either not be provided or have an empty value
+    breed = serializers.CharField(required=False, allow_blank = True)
+    # json request field can either not be provided or have 'null' or valid date
+    birthday = serializers.DateTimeField(required=False, allow_null = True)
+    class Meta:
+        model = Dog
+        fields = ['user','username','name','owner_name','breed','gender','birthday','id']
+        read_only = ['user']

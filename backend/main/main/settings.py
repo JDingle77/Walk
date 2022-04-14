@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
     'maps',
     'user',
+    'places',
 ]
 
 MIDDLEWARE = [

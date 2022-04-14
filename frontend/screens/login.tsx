@@ -119,12 +119,7 @@ export default function App() {
               onPress={() => login()}
               labelStyle={stylesheet.signIn}
               uppercase={false}
-              disabled={
-                email !== "" &&
-                password !== ""
-                  ? false
-                  : true
-              }
+              disabled={email !== "" && password !== "" ? false : true}
             >
               Sign In
             </Button>

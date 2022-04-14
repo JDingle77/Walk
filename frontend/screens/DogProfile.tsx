@@ -1,6 +1,14 @@
 import * as React from "react";
 import { useState } from "react";
-import { StyleSheet, Dimensions, Pressable, Image, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Dimensions,
+  Pressable,
+  Image,
+  ScrollView,
+  SafeAreaView,
+} from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import TextInput from "../components/TextInput";
 import { Text, View } from "../components/Themed";
 
@@ -96,57 +104,57 @@ const DogProfile = ({ navigation }: Props) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-    },
-    image: {
-        alignSelf: 'flex-start',
-        width: 0.4 * Dimensions.get('window').width,
-        height: 0.4 * Dimensions.get('window').width,
-        padding: 10,
-    },
-    imageSize: {
-        width: '100%',
-        height: undefined,
-        aspectRatio: 1,
-    },
-    title: {
-        fontSize: 40,
-        fontWeight: "bold",
-        textAlign: "left",
-        fontFamily: "braveold",
-    },
-    continueButton: {
-        width: 0.8 * Dimensions.get('window').width,
-        height: 60,
-        justifyContent: 'center',
-        alignItems: 'center',
-        margin: 10,
-        borderRadius: 100,
-        backgroundColor: '#E9B95E',
-    },
-    continueTitle: {
-        fontSize: 20,
-        fontWeight: "bold",
-        textAlign: "left",
-        fontFamily: "Montserrat",
-    },
-    separator: {
-        marginBottom: 40,
-    },
-    textInput: {
-        fontFamily: "Montserrat",
-        width: 0.9 * Dimensions.get('window').width,
-        borderRadius: 5,
-        borderWidth: 0.5,
-        borderStyle: "solid",
-        borderColor: "rgba(90, 67, 62, 1)",
-        backgroundColor: "rgba(255, 255, 255, 1)",
-        justifyContent: "center",
-    },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+  },
+  image: {
+    alignSelf: "flex-start",
+    width: 0.4 * Dimensions.get("window").width,
+    height: 0.4 * Dimensions.get("window").width,
+    padding: 10,
+  },
+  imageSize: {
+    width: "100%",
+    height: undefined,
+    aspectRatio: 1,
+  },
+  title: {
+    fontSize: 40,
+    fontWeight: "bold",
+    textAlign: "left",
+    fontFamily: "braveold",
+  },
+  continueButton: {
+    width: 0.8 * Dimensions.get("window").width,
+    height: 60,
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 10,
+    borderRadius: 100,
+    backgroundColor: "#E9B95E",
+  },
+  continueTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "left",
+    fontFamily: "Montserrat",
+  },
+  separator: {
+    marginBottom: 40,
+  },
+  textInput: {
+    fontFamily: "Montserrat",
+    width: 0.9 * Dimensions.get("window").width,
+    borderRadius: 5,
+    borderWidth: 0.5,
+    borderStyle: "solid",
+    borderColor: "rgba(90, 67, 62, 1)",
+    backgroundColor: "rgba(255, 255, 255, 1)",
+    justifyContent: "center",
+  },
 });
 
 export default DogProfile;

@@ -26,6 +26,7 @@ import { RootStackParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { paperTheme, paperDarkTheme } from "../../core/theme";
 import WalkPageNavigator from "./WalkPageStack";
+import GetInfoScreen from "../screens/GetInfoScreen"
 import { Appbar, Button } from "react-native-paper";
 import { UserDataProvider, useUserData } from "../hooks/userContext";
 
@@ -74,12 +75,18 @@ export default function Navigation({
         <Stack.Screen
           name="DogProfile"
           component={DogProfile}
-          options={{
-            headerBackTitleStyle: { color: "white" },
-            headerBackTitle: "Back",
-            headerTintColor: "white",
-            headerTitle: "DogProfile",
-          }}
+          options={({ navigation }) => ({
+            headerTransparent: true,
+            headerTitle: "",
+            headerLeft: () => (
+              <Button
+                labelStyle={{ color: "black" }}
+                onPress={() => navigation.navigate("Create")}
+              >
+                Back
+              </Button>
+            ),
+          })}
         />
         <Stack.Screen
           name="Summary"
@@ -116,6 +123,13 @@ export default function Navigation({
             headerBackTitle: "Back",
             headerTintColor: "white",
             headerTitle: "Home",
+          }}
+        />
+        <Stack.Screen
+          name="GetInfo"
+          component={GetInfoScreen}
+          options={{
+            headerShown: false
           }}
         />
       </Stack.Navigator>

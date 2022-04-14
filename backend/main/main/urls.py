@@ -22,4 +22,5 @@ urlpatterns = [
     path('maps/', include('maps.urls')),
     path('user/', include('user.urls')),
     path('auth/', include('auth.urls')),
+    path('places/', include('places.urls')),
 ]
