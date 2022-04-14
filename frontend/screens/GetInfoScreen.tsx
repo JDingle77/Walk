@@ -7,13 +7,13 @@ import {
   Dimensions,
   KeyboardAvoidingView,
   Platform,
+  
 } from "react-native";
 import TextInput from "../components/TextInput";
 import { Button } from "react-native-paper";
 import styles from "../stylesheets/globalStyles";
-import { ScrollView } from "react-native-gesture-handler";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { Input } from "react-native-elements";
+import DatePicker from "react-native-date-picker";
+
 
 // import {
 //   useFonts,
@@ -37,9 +37,12 @@ const GetInfoScreen = () => {
   const [birthday, setBirthday] = useState("");
   const [location, setLocation] = useState("");
   const [shift, setShift] = useState(false);
+  const [date, setDate] = useState(new Date());
+
+
 
   function uploadInfo() {
-    console.log("Success");
+    console.log(date);
   }
 
   return (
@@ -89,12 +92,25 @@ const GetInfoScreen = () => {
           autoComplete="email"
           textContentType="emailAddress"
           value={birthday}
-          onFocus={() => setShift(false)}
+          onFocus={() => setShift(true)}
           onChangeText={(text) => {
             setBirthday(text);
           }}
         />
-      </View>
+
+    <DatePicker
+          style={stylesheet.datePickerStyle}
+          date={date}
+          mode="date"
+          //placeholder="select date"
+          //format="DD/MM/YYYY"
+          minimumDate={new Date("2000-01-01")}
+          maximumDate= {new Date("2050-12-31")}
+          onConfirm={(date)=>{
+              setDate(date);
+          }}
+        />
+    </View>
       <View style={stylesheet._Text_Field_Location}>
         <TextInput
           style={stylesheet._Input_Box_Style}
@@ -123,6 +139,10 @@ const GetInfoScreen = () => {
 };
 
 const stylesheet = StyleSheet.create({
+  datePickerStyle: {
+    width: 230,
+    top: 50,
+  },
   backGround: {
     flex: 1,
     backgroundColor: "rgba(245, 239, 224, 1)",
