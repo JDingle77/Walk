@@ -11,8 +11,19 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import TextInput from "../components/TextInput";
 import { Text, View } from "../components/Themed";
+import { RootStackParamList } from "../types";
+import { StackNavigationProp } from "@react-navigation/stack";
 
-const DogProfile = () => {
+type NavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "DogProfile"
+>;
+
+type Props = {
+  navigation: NavigationProp;
+};
+
+const DogProfile = ({ navigation }: Props) => {
   const [dogUsername, setDogUsername] = useState("");
   const [dogName, setDogName] = useState("");
   const [ownerName, setOwnerName] = useState("");
@@ -82,6 +93,7 @@ const DogProfile = () => {
           style={[styles.continueButton, { opacity: buttonSelected ? 0.8 : 1 }]}
           onPress={() => {
             setSelect(!buttonSelected);
+            navigation.navigate("GetInfo")
           }}
         >
           <Text style={styles.continueTitle}> Continue</Text>
