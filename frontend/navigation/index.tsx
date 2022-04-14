@@ -128,9 +128,18 @@ export default function Navigation({
         <Stack.Screen
           name="GetInfo"
           component={GetInfoScreen}
-          options={{
-            headerShown: false
-          }}
+          options={({ navigation }) => ({
+            headerTransparent: true,
+            headerTitle: "",
+            headerLeft: () => (
+              <Button
+                labelStyle={{ color: "black" }}
+                onPress={() => navigation.navigate("DogProfile")}
+              >
+                Back
+              </Button>
+            ),
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>

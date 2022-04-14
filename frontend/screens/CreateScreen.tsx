@@ -150,7 +150,7 @@ const Create = ({ navigation }: Props) => {
             <Button
               style={stylesheet.oval}
               mode="contained"
-              onPress={() => createProfile()}
+              onPress={() => navigation.navigate("DogProfile")}
               labelStyle={stylesheet.signUp}
               uppercase={false}
               disabled={
