@@ -9,7 +9,10 @@ const Stack = createNativeStackNavigator();
 
 export default function WalkPageNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false
+    }}>
         <Stack.Screen name="WalkPage" component={WalkPage} />
         <Stack.Screen name="WalkTracking" component={WalkTrackingPage} />
     </Stack.Navigator>

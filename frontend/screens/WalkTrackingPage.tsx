@@ -13,13 +13,14 @@ import {
     Image,
 } from 'react-native';
 import WalkModalPicker from '../components/WalkModalPicker';
+import { LocationSubscriber } from 'expo-location/build/LocationSubscribers';
 
 type LatLng = {
     latitude: Number,
     longitude: Number,
   }
 
-export default function WalkTracking() {
+export default function WalkTracking({ navigation, client }) {
     const [errorMsg, setErrorMsg] = useState(null);
     const [currLocation, setCurrLocation] = useState({latitude: 0.0, longitude: 0.0});
     const [mapRegion, setMapRegion] = useState(null);
@@ -34,9 +35,11 @@ export default function WalkTracking() {
     const [distance, setDistance] = useState(0.0);
     const [actionListVisible, setActionListVisible] = useState(false);
     const mountedRef = useRef(true);
+    const watchLocationRef = useRef(null);
+
 
     useEffect(() => {
-        (async () => {
+        const getLocation = async () => {
             if (!mountedRef.current) return null;
             let { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
@@ -56,11 +59,11 @@ export default function WalkTracking() {
                 latitude: location.latitude,
                 longitude: location.longitude,
             });
-            
-            // track user location
-            onRegionChange();
+        }
+        
+        getLocation();
 
-        })();
+        const watchLocation = onRegionChange()
 
         return () => {
             mountedRef.current = false;
@@ -79,11 +82,9 @@ export default function WalkTracking() {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            //console.log(duration);
             const old_duration = duration;
             setDuration(duration + 1);
             updateDurationFields(old_duration);
-            //console.log(durationFields);
         }, 1000);
         
         return () => {
@@ -137,9 +138,9 @@ export default function WalkTracking() {
     }
 
     const onRegionChange = async () => {
-        await Location.watchPositionAsync({
-            accuracy: Location.Accuracy.Highest,
-            distanceInterval: 1,
+        const watchLocation = await Location.watchPositionAsync({
+            accuracy: Location.Accuracy.Lowest,
+            distanceInterval: 10,
             timeInterval: 5000,
         }, (loc) => {
             // update mapRegion
@@ -161,11 +162,16 @@ export default function WalkTracking() {
             // update total distance
             
         });
+        return watchLocation;
     }
 
 
     const toggleActionListVisible = () => {
         setActionListVisible(!actionListVisible);
+    }
+
+    const endWalkHandler = () => {
+        navigation.pop();
     }
 
     return (
@@ -175,7 +181,6 @@ export default function WalkTracking() {
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
                 region={mapRegion}
-                
             >
                 <Polyline
                     // coordinates={[
@@ -206,7 +211,7 @@ export default function WalkTracking() {
                     />
                 </TouchableOpacity>
                 
-                <TouchableOpacity onPress={() => {}} style={styles.endWalkButton}>
+                <TouchableOpacity onPress={endWalkHandler} style={styles.endWalkButton}>
                     <Text style={styles.endWalkText}>End Walk</Text>
                 </TouchableOpacity>
             </MapView>
@@ -231,6 +236,10 @@ export default function WalkTracking() {
 }
 
 const styles = StyleSheet.create({
+    safeAreaView: {
+        flex: 1,
+        backgroundColor: '#F5EFE0',
+    },
     container: {
         flex: 1,
         backgroundColor: '#fff',
@@ -238,7 +247,7 @@ const styles = StyleSheet.create({
     },
     map: {
         width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height * 0.73,
+        height: Dimensions.get('window').height * 0.83,
         padding: 20,
         flexDirection: 'column',
         justifyContent: 'flex-end',

@@ -44,7 +44,8 @@ export default function Navigation({
       <Stack.Navigator
         initialRouteName="Create"
         screenOptions={{
-          headerStyle: { backgroundColor: paperTheme.colors.primary },
+          //headerStyle: { backgroundColor: paperTheme.colors.primary },
+          headerShown: false,
         }}
       >
         <Stack.Screen

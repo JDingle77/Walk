@@ -138,7 +138,7 @@ const Create = ({ navigation }: Props) => {
             <Button
               labelStyle={[{ fontFamily: "MontserratBold", fontWeight: "900" }]}
               mode="text"
-              onPress={() => navigation.navigate("Login")}
+              onPress={() => navigation.navigate("WalkPageNavigator")}
               uppercase={false}
               color="black"
             >

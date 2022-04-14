@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { Icon } from 'react-native-elements';
 import * as Location from 'expo-location';
-
+import { paperTheme, paperDarkTheme } from "../../core/theme";
 import {
     View,
     StyleSheet,
@@ -12,8 +12,8 @@ import {
     ScrollView,
     Image,
     Dimensions,
+    SafeAreaView,
 } from 'react-native';
-import { yellow100 } from 'react-native-paper/lib/typescript/styles/colors';
 
 export default function WalkPage({ navigation }) {
 
@@ -62,122 +62,128 @@ export default function WalkPage({ navigation }) {
     }
 
     return (
-        <ScrollView style={styles.container}>
-            <Text style={styles.title}>
-                Hi {userFirstName}, {"\n"}
-                Ready to start today's walk?
-            </Text>
-            <View style={styles.mapSection}>
-                <MapView 
-                    style={styles.mapPreview}
-                    provider={PROVIDER_GOOGLE}
-                    showsUserLocation={true}
-                    initialRegion={mapRegion}
-                >
-                    {/* <View style={styles.startTrackButton}>
-                        <Pressable style={styles.startTrackPressable} onPress={trackButtonHandler} >
-                            <View style={styles.flexRowTrackButton}>
-                                <Icon style={styles.startTrackIcon} name='location-pin' color='#5A433E'/>
-                                <Text style={styles.startTrackText}>begin tracking</Text>
-                            </View>
-                        </Pressable>
-                    </View> */}
-                    <Pressable style={styles.startTrackButton} onPress={trackButtonHandler} >
-                        {/* <View style={styles.flexRowTrackButton}>
-                        </View> */}
-                        <Icon style={styles.startTrackIcon} name='location-pin' color='#5A433E' />
-                        <Image
-                            style={styles.startTrackIcon}
-                            source={require('../assets/images/black-location.png')}
-                        />
-                        <Text style={styles.startTrackText}>begin tracking</Text>
-                    </Pressable>
-                </ MapView>
-            </View>
-            
-            <Text style={styles.subtitle}>
-                Weekly Report
-            </Text>
-            <View style={styles.statsSection}>
-                <View style={[styles.statsCards, styles.stats1]}>
-                    <Text style={styles.statsCaption}>
-                        Average Distance
-                    </Text>
-                    <Text style={styles.averageNum}>
-                        4.82 in
-                    </Text>
-                    <View style={styles.flexRowStats}>
-                        <Image
-                            style={styles.tinyIcon}
-                            source={require('../assets/images/stats-up.png')}
-                        />
-                        <Text style={styles.greenText}>
-                            5.3%
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.statsCards}>
-                    <Text style={styles.statsCaption}>
-                        Average Time
-                    </Text>
-                    <Text style={styles.averageNum}>
-                        1  <Text style={styles.smallText}>hour  </Text>22  <Text style={styles.smallText}>minutes</Text>
-                    </Text>
-                    <View style={styles.flexRowStats}>
-                        <Image
-                            style={styles.tinyIcon}
-                            source={require('../assets/images/stats-down.png')}
-                        />
-                        <Text style={styles.redText}>
-                            10.3%
-                        </Text>
-                    </View>
-                </View>
-            </View>
-            <Text style={styles.subtitle}>
-                Choose a Route
-            </Text>
-            <ScrollView style={styles.routesSection} horizontal={true}>
-                <Pressable onPress={trackButtonHandler} style={styles.routesCards}>
-                    <MapView
-                        style={styles.routesMap}
+        <SafeAreaView style={styles.safeAreaView}>
+            <ScrollView style={styles.container}>
+                <Text style={styles.title}>
+                    Hi {userFirstName}, {"\n"}
+                    Ready to start today's walk?
+                </Text>
+                <View style={styles.mapSection}>
+                    <MapView 
+                        style={styles.mapPreview}
                         provider={PROVIDER_GOOGLE}
-                        scrollEnabled={false}
-                    />
-                    <View style={styles.routeInfo}>
-                    <Text>Casual Stroll</Text>
+                        showsUserLocation={true}
+                        initialRegion={mapRegion}
+                    >
+                        {/* <View style={styles.startTrackButton}>
+                            <Pressable style={styles.startTrackPressable} onPress={trackButtonHandler} >
+                                <View style={styles.flexRowTrackButton}>
+                                    <Icon style={styles.startTrackIcon} name='location-pin' color='#5A433E'/>
+                                    <Text style={styles.startTrackText}>begin tracking</Text>
+                                </View>
+                            </Pressable>
+                        </View> */}
+                        <Pressable style={styles.startTrackButton} onPress={trackButtonHandler} >
+                            {/* <View style={styles.flexRowTrackButton}>
+                            </View> */}
+                            <Icon style={styles.startTrackIcon} name='location-pin' color='#5A433E' />
+                            <Image
+                                style={styles.startTrackIcon}
+                                source={require('../assets/images/black-location.png')}
+                            />
+                            <Text style={styles.startTrackText}>begin tracking</Text>
+                        </Pressable>
+                    </ MapView>
+                </View>
+                
+                <Text style={styles.subtitle}>
+                    Weekly Report
+                </Text>
+                <View style={styles.statsSection}>
+                    <View style={[styles.statsCards, styles.stats1]}>
+                        <Text style={styles.statsCaption}>
+                            Average Distance
+                        </Text>
+                        <Text style={styles.averageNum}>
+                            4.82 in
+                        </Text>
+                        <View style={styles.flexRowStats}>
+                            <Image
+                                style={styles.tinyIcon}
+                                source={require('../assets/images/stats-up.png')}
+                            />
+                            <Text style={styles.greenText}>
+                                5.3%
+                            </Text>
+                        </View>
                     </View>
-                    <View style={styles.routeStats}>
-                        <Text>2.70 km</Text>
-                        <Text>0:32:34 time to complete</Text>
+                    <View style={styles.statsCards}>
+                        <Text style={styles.statsCaption}>
+                            Average Time
+                        </Text>
+                        <Text style={styles.averageNum}>
+                            1  <Text style={styles.smallText}>hour  </Text>22  <Text style={styles.smallText}>minutes</Text>
+                        </Text>
+                        <View style={styles.flexRowStats}>
+                            <Image
+                                style={styles.tinyIcon}
+                                source={require('../assets/images/stats-down.png')}
+                            />
+                            <Text style={styles.redText}>
+                                10.3%
+                            </Text>
+                        </View>
                     </View>
-                </Pressable>
-                <Pressable onPress={trackButtonHandler} style={styles.routesCards}>
-                    <MapView style={styles.routesMap} provider={PROVIDER_GOOGLE}/>
-                    <View style={styles.routeInfo}>
-                    <Text>Casual Stroll</Text>
-                    </View>
-                    <View style={styles.routeStats}>
-                        <Text>2.70 km</Text>
-                        <Text>0:32:34 time to complete</Text>
-                    </View>
-                </Pressable>
-                <Pressable onPress={trackButtonHandler} style={styles.routesCards}>
-                    <MapView style={styles.routesMap} provider={PROVIDER_GOOGLE}/>
-                    <View>
-                        <Text style={styles.routeTitle}>Casual Stroll</Text>
-                    </View>
-                    <View style={styles.routeStats}>
-                        <Text>2.70 km</Text>
-                        <Text>0:32:34 time to complete</Text>
-                    </View>
-                </Pressable>
+                </View>
+                <Text style={styles.subtitle}>
+                    Choose a Route
+                </Text>
+                <ScrollView style={styles.routesSection} horizontal={true}>
+                    <Pressable onPress={trackButtonHandler} style={styles.routesCards}>
+                        <MapView
+                            style={styles.routesMap}
+                            provider={PROVIDER_GOOGLE}
+                            scrollEnabled={false}
+                        />
+                        <View style={styles.routeInfo}>
+                        <Text>Casual Stroll</Text>
+                        </View>
+                        <View style={styles.routeStats}>
+                            <Text>2.70 km</Text>
+                            <Text>0:32:34 time to complete</Text>
+                        </View>
+                    </Pressable>
+                    <Pressable onPress={trackButtonHandler} style={styles.routesCards}>
+                        <MapView style={styles.routesMap} provider={PROVIDER_GOOGLE}/>
+                        <View style={styles.routeInfo}>
+                        <Text>Casual Stroll</Text>
+                        </View>
+                        <View style={styles.routeStats}>
+                            <Text>2.70 km</Text>
+                            <Text>0:32:34 time to complete</Text>
+                        </View>
+                    </Pressable>
+                    <Pressable onPress={trackButtonHandler} style={styles.routesCards}>
+                        <MapView style={styles.routesMap} provider={PROVIDER_GOOGLE}/>
+                        <View>
+                            <Text style={styles.routeTitle}>Casual Stroll</Text>
+                        </View>
+                        <View style={styles.routeStats}>
+                            <Text>2.70 km</Text>
+                            <Text>0:32:34 time to complete</Text>
+                        </View>
+                    </Pressable>
+                </ScrollView>
             </ScrollView>
-        </ScrollView>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
+    safeAreaView: {
+        flex: 1,
+        backgroundColor: '#F5EFE0',
+    },
     container: {
         flex: 1,
         paddingLeft: 30,
