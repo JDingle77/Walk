@@ -133,6 +133,10 @@ export default function SummaryPage() {
         <Text>owner name: {UserData.ownerName}</Text>
         <Text>dog username: {UserData.dogUsername}</Text>
         <Text>dog name: {UserData.dogName}</Text>
+        <Text>dog breed: {UserData.dogBreed}</Text>
+        <Text>dog gender: {UserData.dogGender}</Text>
+        <Text>dog birthday: {UserData.dogBirthday}</Text>
+        <Text>dog location: {UserData.dogLocation}</Text>
       {/* <Text>"password", {UserData.password}</Text> */}
     </SafeAreaView>
   );
