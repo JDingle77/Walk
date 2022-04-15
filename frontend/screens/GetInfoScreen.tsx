@@ -12,7 +12,7 @@ import {
 import TextInput from "../components/TextInput";
 import { Button } from "react-native-paper";
 import styles from "../stylesheets/globalStyles";
-import DatePicker from "react-native-date-picker";
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 // import {
