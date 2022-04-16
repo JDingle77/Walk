@@ -823,7 +823,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"refresh\": \"{{refresh_token}}\"\n}",
+          "raw": "{\n    \"email\":\"jainmehul0518@gmail.com\"\n}",
           "options": {
             "raw": {
               "language": "json"
