@@ -830,7 +830,7 @@
             }
           }
         },
-        "url": "http://localhost:8000/auth/refresh/"
+        "url": "http://localhost:8000/auth/validEmail/"
       },
       "response": []
     },
