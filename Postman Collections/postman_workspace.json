@@ -7,7 +7,7 @@
   "item": [
     {
       "name": "All Routes",
-      "_postman_id": "d8704e9f-487e-4a85-8ea1-a6053a118719",
+      "id": "d8704e9f-487e-4a85-8ea1-a6053a118719",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -53,7 +53,7 @@
           }
         }
       ],
-      "_postman_id": "f2c35252-ca45-496e-a83a-0af3f73bc7de",
+      "id": "f2c35252-ca45-496e-a83a-0af3f73bc7de",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -72,7 +72,7 @@
     },
     {
       "name": "Route",
-      "_postman_id": "fd82bd35-ec1b-4214-a302-061fb5842d5d",
+      "id": "fd82bd35-ec1b-4214-a302-061fb5842d5d",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -113,7 +113,7 @@
           }
         }
       ],
-      "_postman_id": "1587180a-ac57-4eec-95b2-2e3699476987",
+      "id": "1587180a-ac57-4eec-95b2-2e3699476987",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -141,7 +141,7 @@
     },
     {
       "name": "Route",
-      "_postman_id": "39941b4c-8e16-4ae9-bd4c-a63801338bbc",
+      "id": "39941b4c-8e16-4ae9-bd4c-a63801338bbc",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -173,7 +173,7 @@
           }
         }
       ],
-      "_postman_id": "d63e1c8d-6192-481f-badf-b17ab37ab9d0",
+      "id": "d63e1c8d-6192-481f-badf-b17ab37ab9d0",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -201,7 +201,7 @@
     },
     {
       "name": "Pee_icon",
-      "_postman_id": "8986c5b7-f99f-4a6f-9044-d657bdb6c21c",
+      "id": "8986c5b7-f99f-4a6f-9044-d657bdb6c21c",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -220,7 +220,7 @@
     },
     {
       "name": "Pee_icons for route",
-      "_postman_id": "f54b6a47-21c5-4220-8842-c6015563b38d",
+      "id": "f54b6a47-21c5-4220-8842-c6015563b38d",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -239,7 +239,7 @@
     },
     {
       "name": "Pee_icon",
-      "_postman_id": "86e4bf94-4883-4800-a540-d09314032030",
+      "id": "86e4bf94-4883-4800-a540-d09314032030",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -271,7 +271,7 @@
           }
         }
       ],
-      "_postman_id": "6c293a51-2c87-4b1b-89b1-46e986811bf1",
+      "id": "6c293a51-2c87-4b1b-89b1-46e986811bf1",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -299,7 +299,7 @@
     },
     {
       "name": "Poop_icon",
-      "_postman_id": "561e8f5e-ff4f-4365-96af-d7d1cb7ed697",
+      "id": "561e8f5e-ff4f-4365-96af-d7d1cb7ed697",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -318,7 +318,7 @@
     },
     {
       "name": "Poop_icons for route",
-      "_postman_id": "56f33437-564b-40d2-9679-90c38163a9ff",
+      "id": "56f33437-564b-40d2-9679-90c38163a9ff",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -337,7 +337,7 @@
     },
     {
       "name": "Poop_icon",
-      "_postman_id": "ca8f870b-a74d-4d6b-854d-5e980e6b2fb8",
+      "id": "ca8f870b-a74d-4d6b-854d-5e980e6b2fb8",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -369,7 +369,7 @@
           }
         }
       ],
-      "_postman_id": "467791ad-a278-4b16-bd13-5a3e74be03a0",
+      "id": "467791ad-a278-4b16-bd13-5a3e74be03a0",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -397,7 +397,7 @@
     },
     {
       "name": "Drink_icon",
-      "_postman_id": "b869fae8-a8df-4fee-b329-17189ec99c97",
+      "id": "b869fae8-a8df-4fee-b329-17189ec99c97",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -416,7 +416,7 @@
     },
     {
       "name": "Drink_icons for route",
-      "_postman_id": "1600dee0-cb8e-46a9-9afe-759b9079e39e",
+      "id": "1600dee0-cb8e-46a9-9afe-759b9079e39e",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -435,7 +435,7 @@
     },
     {
       "name": "Drink_icon",
-      "_postman_id": "18f7f83c-fd3f-4abb-a2cb-69c2791d0e5d",
+      "id": "18f7f83c-fd3f-4abb-a2cb-69c2791d0e5d",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -467,7 +467,7 @@
           }
         }
       ],
-      "_postman_id": "dddcbf7f-e337-4db7-8c36-3b058d1b03f7",
+      "id": "dddcbf7f-e337-4db7-8c36-3b058d1b03f7",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -501,7 +501,7 @@
     },
     {
       "name": "Interaction_icon",
-      "_postman_id": "15d1c8e1-5ee9-4a2d-afaa-3161a8a8ec29",
+      "id": "15d1c8e1-5ee9-4a2d-afaa-3161a8a8ec29",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -526,7 +526,7 @@
     },
     {
       "name": "Interaction_icons for route",
-      "_postman_id": "f42d9b83-5e59-46b1-8c6c-820f07d1e64a",
+      "id": "f42d9b83-5e59-46b1-8c6c-820f07d1e64a",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -545,7 +545,7 @@
     },
     {
       "name": "Interaction_icon",
-      "_postman_id": "00a1951f-5bee-44d9-8a46-ebdb2ac50ee0",
+      "id": "00a1951f-5bee-44d9-8a46-ebdb2ac50ee0",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -564,7 +564,7 @@
     },
     {
       "name": "Get all icons for route",
-      "_postman_id": "1c082221-d34d-469d-b1ef-8a786903b5c9",
+      "id": "1c082221-d34d-469d-b1ef-8a786903b5c9",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -583,7 +583,7 @@
     },
     {
       "name": "All Users",
-      "_postman_id": "2b0c7acc-52d8-4863-a6f0-8ba02067b360",
+      "id": "2b0c7acc-52d8-4863-a6f0-8ba02067b360",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -602,7 +602,7 @@
     },
     {
       "name": "User",
-      "_postman_id": "a2732392-1ddd-4699-9cb0-8ced7340e7c3",
+      "id": "a2732392-1ddd-4699-9cb0-8ced7340e7c3",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -627,7 +627,7 @@
     },
     {
       "name": "User",
-      "_postman_id": "8ddf20a1-c76a-4dcc-acfd-445a806b01d1",
+      "id": "8ddf20a1-c76a-4dcc-acfd-445a806b01d1",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -646,7 +646,7 @@
     },
     {
       "name": "User",
-      "_postman_id": "7b52dc39-532a-46f3-b7e7-5a49467a9a6d",
+      "id": "7b52dc39-532a-46f3-b7e7-5a49467a9a6d",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -689,7 +689,7 @@
           }
         }
       ],
-      "_postman_id": "ad183538-3d70-402d-a69f-2ded5cc944b0",
+      "id": "ad183538-3d70-402d-a69f-2ded5cc944b0",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -732,7 +732,7 @@
           }
         }
       ],
-      "_postman_id": "4708404f-0ef0-4d3d-86be-f8c51eba0154",
+      "id": "4708404f-0ef0-4d3d-86be-f8c51eba0154",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -767,7 +767,48 @@
           }
         }
       ],
-      "_postman_id": "f3c24169-da94-47be-87a9-157e112f376c",
+      "id": "f3c24169-da94-47be-87a9-157e112f376c",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"refresh\": \"{{refresh_token}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:8000/auth/refresh/"
+      },
+      "response": []
+    },
+    {
+      "name": "Validate Email",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "277a539a-b046-447e-b972-9b997619684c",
+            "exec": [
+              "const response = pm.response.json();",
+              "pm.environment.set(\"access_token\", response.access);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "64152a22-50f6-4033-a355-f2d4af863a9c",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -795,14 +836,13 @@
     },
     {
       "name": "DogProfile",
-      "_postman_id": "d816d503-5856-48f7-b1b4-f771280ba565",
+      "id": "d816d503-5856-48f7-b1b4-f771280ba565",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
       "request": {
         "method": "GET",
-        "header": [],
-        "url": null
+        "header": []
       },
       "response": []
     }
