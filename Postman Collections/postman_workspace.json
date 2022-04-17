@@ -813,14 +813,7 @@
       },
       "request": {
         "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text",
-            "disabled": true
-          }
-        ],
+        "header": [],
         "body": {
           "mode": "raw",
           "raw": "{\n    \"email\":\"mehuljain02@gmail.com\"\n}",
