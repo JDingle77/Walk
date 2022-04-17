@@ -801,8 +801,7 @@
           "script": {
             "id": "277a539a-b046-447e-b972-9b997619684c",
             "exec": [
-              "const response = pm.response.json();",
-              "pm.environment.set(\"access_token\", response.access);"
+              ""
             ],
             "type": "text/javascript"
           }
@@ -818,12 +817,13 @@
           {
             "key": "Authorization",
             "value": "Bearer {{access_token}}",
-            "type": "text"
+            "type": "text",
+            "disabled": true
           }
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"email\":\"jainmehul0518@gmail.com\"\n}",
+          "raw": "{\n    \"email\":\"mehuljain02@gmail.com\"\n}",
           "options": {
             "raw": {
               "language": "json"
