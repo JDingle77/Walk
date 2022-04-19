@@ -37,9 +37,22 @@ const GetInfoScreen = () => {
   const [birthday, setBirthday] = useState("");
   const [location, setLocation] = useState("");
   const [shift, setShift] = useState(false);
-  const [date, setDate] = useState(new Date());
-
-
+  const [date, setDate] =useState(new Date());
+  const [show, setShow] = useState(false);
+  
+  const onChange = (event, selectedDate) => {
+    //console.log(selectedDate);
+    var date = new Date(selectedDate);
+    var year = date.getFullYear();
+    var month = date.getMonth()+1;
+    var dt = date.getDate();
+    const fullDate = month + "-" + dt + "-" + year;
+    console.log(fullDate) 
+   // console.log(date)
+    setShow(false);
+    setBirthday(fullDate);
+    setDate(selectedDate);
+  };
 
   function uploadInfo() {
     console.log(date);
@@ -85,6 +98,7 @@ const GetInfoScreen = () => {
         />
       </View>
       <View style={stylesheet._Text_Field_Birthday}>
+        
         <TextInput
           style={stylesheet._Input_Box_Style}
           label="Birthday"
@@ -92,25 +106,33 @@ const GetInfoScreen = () => {
           autoComplete="email"
           textContentType="emailAddress"
           value={birthday}
-          onFocus={() => setShift(true)}
+          onFocus={() => {
+            setShift(true);
+            setShow(true)
+          }}
           onChangeText={(text) => {
             setBirthday(text);
           }}
         />
-
-    <DatePicker
-          style={stylesheet.datePickerStyle}
-          date={date}
-          mode="date"
-          //placeholder="select date"
-          //format="DD/MM/YYYY"
-          minimumDate={new Date("2000-01-01")}
-          maximumDate= {new Date("2050-12-31")}
-          onConfirm={(date)=>{
-              setDate(date);
-          }}
-        />
+      
+        
+    
     </View>
+    
+    <View style ={stylesheet.pickerView}>
+        <View style = {stylesheet.pickerStyle}>
+        <DateTimePicker
+            style={{width: 200, height: 35, right: 10,}}
+            testID="dateTimePicker"
+            value={date}
+            mode="date"
+            is24Hour={true}
+            onChange={onChange}
+        />
+        </View>
+        
+    </View>
+
       <View style={stylesheet._Text_Field_Location}>
         <TextInput
           style={stylesheet._Input_Box_Style}
@@ -139,10 +161,25 @@ const GetInfoScreen = () => {
 };
 
 const stylesheet = StyleSheet.create({
-  datePickerStyle: {
-    width: 230,
-    top: 50,
+  picker:{
+    height: 500,
+    flex:1
+    
   },
+  pickerStyle:{
+    opacity: 0,
+    borderRadius: 5,
+    borderWidth: 0.5,
+    width: boxWidth,
+    height: boxHeight,
+  },
+  pickerView:{
+    //borderWidth: 5,
+    position: "absolute",
+    alignSelf: "center",
+    top: phoneHeight * 0.520,
+  },
+
   backGround: {
     flex: 1,
     backgroundColor: "rgba(245, 239, 224, 1)",
