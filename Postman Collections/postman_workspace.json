@@ -1,843 +1,1107 @@
 {
-  "info": {
-    "_postman_id": "49a04adf-f25a-450b-b028-52e14cdf7e16",
-    "name": "Walk",
-    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "All Routes",
-      "id": "d8704e9f-487e-4a85-8ea1-a6053a118719",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          },
-          {
-            "key": "",
-            "value": "",
-            "type": "text",
-            "disabled": true
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": "http://localhost:8000/maps/route/"
-      },
-      "response": []
-    },
-    {
-      "name": "Route",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "3cd3687c-15f6-4258-b272-2a5be2bb6265",
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "id": "f2c35252-ca45-496e-a83a-0af3f73bc7de",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "url": "http://localhost:8000/maps/route/{{route_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "Route",
-      "id": "fd82bd35-ec1b-4214-a302-061fb5842d5d",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"route_name\":\"Mehul's Route\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": "http://localhost:8000/maps/route/{{route_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "Route",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "78cee344-375f-4cc9-83a7-bbe89968667c",
-            "exec": [
-              "const response = pm.response.json();",
-              "pm.environment.set(\"route_id\", response.id);"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "id": "1587180a-ac57-4eec-95b2-2e3699476987",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"route_name\": \"Route 2\",\n    \"coordinates\": [\n        {\"latitude\":25.000, \"longitude\":15.0000}\n    ],\n    \"peeIcon\": [\n        {\n        \"pee_latitude\": \"35.659423\",\n        \"pee_longitude\": \"-120.441421\"\n        }\n    ],\n    \"poopIcon\" : [\n        {\n        \"poop_latitude\": \"18.000000\",\n        \"poop_longitude\": \"12.000000\"\n        }\n    ],\n    \"drinkIcon\": [\n        {\n        \"drink_latitude\": \"10.000000\",\n        \"drink_longitude\": \"12.000000\"\n        }\n    ],\n    \"interactionIcon\": [\n        {\n        \"interaction_latitude\": \"10.000000\",\n        \"interaction_longitude\": \"12.000000\"\n        }\n    ],\n    \"start_time\":\"2022-01-27T03:41:37Z\",\n    \"end_time\":\"2022-01-27T03:42:12Z\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": "http://localhost:8000/maps/route/"
-      },
-      "response": []
-    },
-    {
-      "name": "Route",
-      "id": "39941b4c-8e16-4ae9-bd4c-a63801338bbc",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "DELETE",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "url": "http://localhost:8000/maps/route/{{route_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "Pee_icon",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "1ff37423-6a19-4044-9950-1662f9c2cf9d",
-            "exec": [
-              "const response = pm.response.json();",
-              "pm.environment.set(\"pee_id\", response.id);"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "id": "d63e1c8d-6192-481f-badf-b17ab37ab9d0",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"pee_latitude\": \"35.659423\",\n    \"pee_longitude\": \"-120.441421\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": "http://localhost:8000/maps/icon/pee/{{route_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "Pee_icon",
-      "id": "8986c5b7-f99f-4a6f-9044-d657bdb6c21c",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "url": "http://localhost:8000/maps/specific_icon/pee/{{pee_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "Pee_icons for route",
-      "id": "f54b6a47-21c5-4220-8842-c6015563b38d",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "url": "http://localhost:8000/maps/icon/pee/{{route_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "Pee_icon",
-      "id": "86e4bf94-4883-4800-a540-d09314032030",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "DELETE",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "url": "http://localhost:8000/maps/specific_icon/pee/{{pee_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "Poop_icon",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "8feeebeb-149a-499c-afa3-9e7b09ec8deb",
-            "exec": [
-              "const response = pm.response.json();",
-              "pm.environment.set(\"poop_id\", response.id);"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "id": "6c293a51-2c87-4b1b-89b1-46e986811bf1",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"poop_latitude\": \"18.000000\",\n    \"poop_longitude\": \"12.000000\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": "http://localhost:8000/maps/icon/poop/{{route_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "Poop_icon",
-      "id": "561e8f5e-ff4f-4365-96af-d7d1cb7ed697",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "url": "http://localhost:8000/maps/specific_icon/poop/{{poop_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "Poop_icons for route",
-      "id": "56f33437-564b-40d2-9679-90c38163a9ff",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "url": "http://localhost:8000/maps/icon/poop/{{route_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "Poop_icon",
-      "id": "ca8f870b-a74d-4d6b-854d-5e980e6b2fb8",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "DELETE",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "url": "http://localhost:8000/maps/specific_icon/poop/{{poop_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "Drink_icon",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "2e996b2a-aa4b-43b9-82c9-c91b96e26a19",
-            "exec": [
-              "const response = pm.response.json();",
-              "pm.environment.set(\"drink_id\", response.id);"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "id": "467791ad-a278-4b16-bd13-5a3e74be03a0",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"drink_latitude\": \"10.000000\",\n    \"drink_longitude\": \"12.000000\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": "http://localhost:8000/maps/icon/Drink/{{route_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "Drink_icon",
-      "id": "b869fae8-a8df-4fee-b329-17189ec99c97",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "url": "http://localhost:8000/maps/specific_icon/drink/{{drink_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "Drink_icons for route",
-      "id": "1600dee0-cb8e-46a9-9afe-759b9079e39e",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "url": "http://localhost:8000/maps/icon/drink/{{route_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "Drink_icon",
-      "id": "18f7f83c-fd3f-4abb-a2cb-69c2791d0e5d",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "DELETE",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "url": "http://localhost:8000/maps/specific_icon/drink/{{drink_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "Interaction_icon",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "bfd2cccb-4112-4e5a-b49b-ea6055fb1e85",
-            "exec": [
-              "const response = pm.response.json();",
-              "pm.environment.set(\"interaction_id\", response.id);"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "id": "dddcbf7f-e337-4db7-8c36-3b058d1b03f7",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          },
-          {
-            "key": "",
-            "value": "",
-            "type": "text",
-            "disabled": true
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"interaction_latitude\": \"10.000000\",\n    \"interaction_longitude\": \"12.000000\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": "http://localhost:8000/maps/icon/interaction/{{route_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "Interaction_icon",
-      "id": "15d1c8e1-5ee9-4a2d-afaa-3161a8a8ec29",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          },
-          {
-            "key": "",
-            "value": "",
-            "type": "text",
-            "disabled": true
-          }
-        ],
-        "url": "http://localhost:8000/maps/specific_icon/interaction/{{interaction_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "Interaction_icons for route",
-      "id": "f42d9b83-5e59-46b1-8c6c-820f07d1e64a",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "url": "http://localhost:8000/maps/icon/interaction/{{route_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "Interaction_icon",
-      "id": "00a1951f-5bee-44d9-8a46-ebdb2ac50ee0",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "DELETE",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "url": "http://localhost:8000/maps/specific_icon/interaction/{{interaction_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "Get all icons for route",
-      "id": "1c082221-d34d-469d-b1ef-8a786903b5c9",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "url": "http://localhost:8000/maps/all_icons/{{route_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "All Users",
-      "id": "2b0c7acc-52d8-4863-a6f0-8ba02067b360",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "url": "http://localhost:8000/user/"
-      },
-      "response": []
-    },
-    {
-      "name": "User",
-      "id": "a2732392-1ddd-4699-9cb0-8ced7340e7c3",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          },
-          {
-            "key": "",
-            "value": "",
-            "type": "text",
-            "disabled": true
-          }
-        ],
-        "url": "http://localhost:8000/user/{{user_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "User",
-      "id": "8ddf20a1-c76a-4dcc-acfd-445a806b01d1",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "DELETE",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "url": "http://localhost:8000/user/{{user_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "User",
-      "id": "7b52dc39-532a-46f3-b7e7-5a49467a9a6d",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"email\": \"mehuljain@gmail.com\",\n    \"is_active\": \"true\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": "http://localhost:8000/user/{{user_id}}/"
-      },
-      "response": []
-    },
-    {
-      "name": "Login",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "58d373a9-3a9a-4a2b-819e-6ca54472ea2e",
-            "exec": [
-              "const response = pm.response.json();",
-              "pm.environment.set(\"access_token\", response.access);",
-              "pm.environment.set(\"refresh_token\", response.refresh);",
-              "pm.environment.set(\"user_id\", response.user.id);"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "id": "ad183538-3d70-402d-a69f-2ded5cc944b0",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text",
-            "disabled": true
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"email\": \"newuser@gmail.com\",\n    \"password\": \"password\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": "http://localhost:8000/auth/login/"
-      },
-      "response": []
-    },
-    {
-      "name": "Create Account",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "8827b2a1-4318-43b1-a66f-20d0b737b79b",
-            "exec": [
-              "const response = pm.response.json();",
-              "pm.environment.set(\"access_token\", response.access);",
-              "pm.environment.set(\"refresh_token\", response.refresh);"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "id": "4708404f-0ef0-4d3d-86be-f8c51eba0154",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"email\": \"newuser@gmail.com\",\n    \"password\": \"password\",\n    \"is_admin\": true\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": "http://localhost:8000/auth/register/"
-      },
-      "response": []
-    },
-    {
-      "name": "Refresh Token",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "277a539a-b046-447e-b972-9b997619684c",
-            "exec": [
-              "const response = pm.response.json();",
-              "pm.environment.set(\"access_token\", response.access);"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "id": "f3c24169-da94-47be-87a9-157e112f376c",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{access_token}}",
-            "type": "text"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"refresh\": \"{{refresh_token}}\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": "http://localhost:8000/auth/refresh/"
-      },
-      "response": []
-    },
-    {
-      "name": "Validate Email",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "277a539a-b046-447e-b972-9b997619684c",
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "id": "64152a22-50f6-4033-a355-f2d4af863a9c",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"email\":\"mehuljain02@gmail.com\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": "http://localhost:8000/auth/validEmail/"
-      },
-      "response": []
-    },
-    {
-      "name": "DogProfile",
-      "id": "d816d503-5856-48f7-b1b4-f771280ba565",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": []
-      },
-      "response": []
-    }
-  ]
+	"info": {
+		"_postman_id": "49a04adf-f25a-450b-b028-52e14cdf7e16",
+		"name": "Walk",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "All Routes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/maps/route/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"route",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Route",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/maps/route/{{route_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"route",
+						"{{route_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Route",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"route_name\":\"Mehul's Route\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/maps/route/{{route_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"route",
+						"{{route_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Route",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();",
+							"pm.environment.set(\"route_id\", response.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"route_name\": \"Route 2\",\n    \"coordinates\": [\n        {\"latitude\":25.000, \"longitude\":15.0000}\n    ],\n    \"peeIcon\": [\n        {\n        \"pee_latitude\": \"35.659423\",\n        \"pee_longitude\": \"-120.441421\"\n        }\n    ],\n    \"poopIcon\" : [\n        {\n        \"poop_latitude\": \"18.000000\",\n        \"poop_longitude\": \"12.000000\"\n        }\n    ],\n    \"drinkIcon\": [\n        {\n        \"drink_latitude\": \"10.000000\",\n        \"drink_longitude\": \"12.000000\"\n        }\n    ],\n    \"interactionIcon\": [\n        {\n        \"interaction_latitude\": \"10.000000\",\n        \"interaction_longitude\": \"12.000000\"\n        }\n    ],\n    \"start_time\":\"2022-01-27T03:41:37Z\",\n    \"end_time\":\"2022-01-27T03:42:12Z\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/maps/route/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"route",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Route",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/maps/route/{{route_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"route",
+						"{{route_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pee_icon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();",
+							"pm.environment.set(\"pee_id\", response.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"pee_latitude\": \"35.659423\",\n    \"pee_longitude\": \"-120.441421\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/maps/icon/pee/{{route_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"icon",
+						"pee",
+						"{{route_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pee_icon",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/maps/specific_icon/pee/{{pee_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"specific_icon",
+						"pee",
+						"{{pee_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pee_icons for route",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/maps/icon/pee/{{route_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"icon",
+						"pee",
+						"{{route_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pee_icon",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/maps/specific_icon/pee/{{pee_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"specific_icon",
+						"pee",
+						"{{pee_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Poop_icon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();",
+							"pm.environment.set(\"poop_id\", response.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"poop_latitude\": \"18.000000\",\n    \"poop_longitude\": \"12.000000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/maps/icon/poop/{{route_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"icon",
+						"poop",
+						"{{route_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Poop_icon",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/maps/specific_icon/poop/{{poop_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"specific_icon",
+						"poop",
+						"{{poop_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Poop_icons for route",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/maps/icon/poop/{{route_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"icon",
+						"poop",
+						"{{route_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Poop_icon",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/maps/specific_icon/poop/{{poop_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"specific_icon",
+						"poop",
+						"{{poop_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Drink_icon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();",
+							"pm.environment.set(\"drink_id\", response.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"drink_latitude\": \"10.000000\",\n    \"drink_longitude\": \"12.000000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/maps/icon/Drink/{{route_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"icon",
+						"Drink",
+						"{{route_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Drink_icon",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/maps/specific_icon/drink/{{drink_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"specific_icon",
+						"drink",
+						"{{drink_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Drink_icons for route",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/maps/icon/drink/{{route_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"icon",
+						"drink",
+						"{{route_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Drink_icon",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/maps/specific_icon/drink/{{drink_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"specific_icon",
+						"drink",
+						"{{drink_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Interaction_icon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();",
+							"pm.environment.set(\"interaction_id\", response.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"interaction_latitude\": \"10.000000\",\n    \"interaction_longitude\": \"12.000000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/maps/icon/interaction/{{route_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"icon",
+						"interaction",
+						"{{route_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Interaction_icon",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/maps/specific_icon/interaction/{{interaction_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"specific_icon",
+						"interaction",
+						"{{interaction_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Interaction_icons for route",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/maps/icon/interaction/{{route_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"icon",
+						"interaction",
+						"{{route_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Interaction_icon",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/maps/specific_icon/interaction/{{interaction_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"specific_icon",
+						"interaction",
+						"{{interaction_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all icons for route",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/maps/all_icons/{{route_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"maps",
+						"all_icons",
+						"{{route_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/user/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/user/{{user_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"{{user_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/user/{{user_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"{{user_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"mehuljain@gmail.com\",\n    \"is_active\": \"true\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/user/{{user_id}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"{{user_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();",
+							"pm.environment.set(\"access_token\", response.access);",
+							"pm.environment.set(\"refresh_token\", response.refresh);",
+							"pm.environment.set(\"user_id\", response.user.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"newuser@gmail.com\",\n    \"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/auth/login/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();",
+							"pm.environment.set(\"access_token\", response.access);",
+							"pm.environment.set(\"refresh_token\", response.refresh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"newuser@gmail.com\",\n    \"password\": \"password\",\n    \"is_admin\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/auth/register/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();",
+							"pm.environment.set(\"access_token\", response.access);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"refresh\": \"{{refresh_token}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/auth/refresh/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"refresh",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate Email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"mehuljain02@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/auth/validEmail/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"validEmail",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DogProfile",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
 }
