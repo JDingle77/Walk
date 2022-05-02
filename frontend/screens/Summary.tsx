@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, Image, SafeAreaView, FlatList } from "react-native";
+import { useEffect, useState } from "react";
+import { StyleSheet, Text, Image, SafeAreaView, FlatList, View } from "react-native";
 import { Button } from "react-native-paper";
 import styles from "../stylesheets/globalStyles";
 
@@ -123,114 +124,138 @@ import styles from "../stylesheets/globalStyles";
 //   }
 
 // }
-import { useUserData } from "../hooks/userContext";
-export default function SummaryPage() {
-  const { UserData, setUserData } = useUserData()!;
-  return (
-    <SafeAreaView>
-        <Text>email: {UserData.email}</Text>
-        <Text>password: {UserData.password}</Text>
-        <Text>owner name: {UserData.ownerName}</Text>
-        <Text>dog username: {UserData.dogUsername}</Text>
-        <Text>dog name: {UserData.dogName}</Text>
-        <Text>dog breed: {UserData.dogBreed}</Text>
-        <Text>dog gender: {UserData.dogGender}</Text>
-        <Text>dog birthday: {UserData.dogBirthday}</Text>
-        <Text>dog location: {UserData.dogLocation}</Text>
-      {/* <Text>"password", {UserData.password}</Text> */}
-    </SafeAreaView>
-  );
-}
-
+// import { useUserData } from "../hooks/userContext";
 // export default function SummaryPage() {
-//   const recipes = [ //test data; get data later
-//     {
-//         id: 0,
-//         title: 'Distance',
-//         data: '0.20 mi',
-//     },
-//     {
-//         id: 1,
-//         title: 'Time',
-//         data: '00:04:32',
-//     },
-//     {
-//         id: 2,
-//         title: 'Avg Speed (mph)',
-//         data: '2.65',
-//     },
-//     {
-//         id: 3,
-//         title: 'Pee Stops',
-//         data: '5',
-//     },
-//     {
-//         id: 4,
-//         title: 'Poop Drops',
-//         data: '3',
-//     },
-//     {
-//         id: 5,
-//         title: 'Water Breaks',
-//         data: '2',
-//     }
-//   ];
-
+//   const { UserData, setUserData } = useUserData()!;
 //   return (
-//     <SafeAreaView style={styles.container} >
-//       <View style={localStyles.topContainer}>
-//         <View style={styles.titleView}>
-//           <Text style={styles.title} >
-//             Summary
-//           </Text>
-//         </View>
-//         <View style={{height: '65%'}}>
-//           <Image
-//             style={styles.image}
-//             source={require('../assets/images/summary-image.png')}
-//             resizeMode="contain"
-//           />
-//         </View>
-//         <View style={localStyles.speedBarContainer}>
-//           <Text style={styles.p}>Slow</Text>
-//           <Image
-//             style={styles.image}
-//             source={require('../assets/images/speed-bar.png')}
-//             resizeMode="contain"
-//           />
-//           <Text style={styles.p}>Fast</Text>
-//         </View>
-//       </View>
-//       <View style={localStyles.bottomContainer}>
-//         <View style={styles.header}>
-//           <Text style={styles.h1}>Nov 4 2021 - Casual Stroll</Text>
-//         </View>
-
-//         <FlatList
-//           style={styles.list}
-//           data={recipes}
-//           renderItem={(obj) => {
-//               return (
-//                   <View style={styles.row}>
-//                     <View style={styles.cell}>
-//                       <Text style={styles.p}>{obj.item.title}</Text>
-//                     </View>
-//                     <View style={styles.cell}>
-//                       <Text style={[styles.p,  {textAlign: 'right'}]}>{obj.item.data}</Text>
-//                     </View>
-//                   </View>
-//               );
-//           }}
-//           />
-
-//       <Button style={styles.button} labelStyle={styles.buttonLabel}>
-//         Continue
-//       </Button>
-//       </View>
-
+//     <SafeAreaView>
+//         <Text>email: {UserData.email}</Text>
+//         <Text>password: {UserData.password}</Text>
+//         <Text>owner name: {UserData.ownerName}</Text>
+//         <Text>dog username: {UserData.dogUsername}</Text>
+//         <Text>dog name: {UserData.dogName}</Text>
+//         <Text>dog breed: {UserData.dogBreed}</Text>
+//         <Text>dog gender: {UserData.dogGender}</Text>
+//         <Text>dog birthday: {UserData.dogBirthday}</Text>
+//         <Text>dog location: {UserData.dogLocation}</Text>
+//       {/* <Text>"password", {UserData.password}</Text> */}
 //     </SafeAreaView>
 //   );
 // }
+
+export default function SummaryPage() {
+  const recipes = [ //test data; get data later
+    {
+        id: 0,
+        title: 'Distance',
+        data: '0.20 mi',
+    },
+    {
+        id: 1,
+        title: 'Time',
+        data: '00:04:32',
+    },
+    {
+        id: 2,
+        title: 'Avg Speed (mph)',
+        data: '2.65',
+    },
+    {
+        id: 3,
+        title: 'Pee Stops',
+        data: '5',
+    },
+    {
+        id: 4,
+        title: 'Poop Drops',
+        data: '3',
+    },
+    {
+        id: 5,
+        title: 'Water Breaks',
+        data: '2',
+    }
+  ];
+
+  const [summaryData, setSummaryData] = useState({});
+
+  useEffect(() => {
+    try {
+            const res = fetch(
+              'http://localhost:8000/maps/get_summary', {
+                method: "GET",
+                credentials: 'same-origin',
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application.json",
+                  Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUxNTM3MDQ2LCJpYXQiOjE2NTE0NTA2NDYsImp0aSI6IjFlM2ViNjIyYTkyNzQyODJiOGVhMTVmYTJjNjNjMzY2IiwidXNlcl9pZCI6IjEwNDM3NDY0LTEyNGYtNDhjYy05OGZmLTE4ZGYzYmRhZmI2ZCJ9.JGLzvEwBNYD0bynBriC_mGreQ42YnP7RS5ZUEmzoN4s"
+                }
+              }
+            );
+            console.log(res);
+            const data = res.json();
+            console.log(data)
+            setSummaryData(data);
+          } catch (e) {
+            console.log(e);
+          }
+  }, [summaryData]);
+
+  return (
+    <SafeAreaView style={styles.container} >
+      <View style={localStyles.topContainer}>
+        <View style={styles.titleView}>
+          <Text style={styles.title} >
+            Summary
+          </Text>
+        </View>
+        <View style={{height: '65%'}}>
+          <Image
+            style={styles.image}
+            source={require('../assets/images/summary-image.png')}
+            resizeMode="contain"
+          />
+        </View>
+        <View style={localStyles.speedBarContainer}>
+          <Text style={styles.p}>Slow</Text>
+          <Image
+            style={styles.image}
+            source={require('../assets/images/speed-bar.png')}
+            resizeMode="contain"
+          />
+          <Text style={styles.p}>Fast</Text>
+        </View>
+      </View>
+      <View style={localStyles.bottomContainer}>
+        <View style={styles.header}>
+          <Text style={styles.h1}>Nov 4 2021 - Casual Stroll</Text>
+        </View>
+
+        <FlatList
+          style={styles.list}
+          data={recipes}
+          renderItem={(obj) => {
+              return (
+                  <View style={styles.row}>
+                    <View style={styles.cell}>
+                      <Text style={styles.p}>{obj.item.title}</Text>
+                    </View>
+                    <View style={styles.cell}>
+                      <Text style={[styles.p,  {textAlign: 'right'}]}>{obj.item.data}</Text>
+                    </View>
+                  </View>
+              );
+          }}
+          />
+
+      <Button style={styles.button} labelStyle={styles.buttonLabel}>
+        Continue
+      </Button>
+      </View>
+
+    </SafeAreaView>
+  );
+}
 
 const localStyles = StyleSheet.create({
   topContainer: {
