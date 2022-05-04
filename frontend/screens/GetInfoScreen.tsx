@@ -120,9 +120,12 @@ const GetInfoScreen = () => {
     </View>
     
     <View style ={stylesheet.pickerView}>
+      <View style = {stylesheet.bdayText_container}>
+        <Text style={stylesheet.bdayText}>Change Date</Text>
+      </View>
         <View style = {stylesheet.pickerStyle}>
         <DateTimePicker
-            style={{width: 200, height: 35, right: 10,}}
+            style={{width: 200, height: 35}}
             testID="dateTimePicker"
             value={date}
             mode="date"
@@ -161,6 +164,28 @@ const GetInfoScreen = () => {
 };
 
 const stylesheet = StyleSheet.create({
+  bdayText_container:{
+    borderWidth: 1,
+    borderRadius: 5,
+    top: phoneHeight*0.018,
+    left: phoneWidth * 0.63,
+    height: phoneHeight*0.03,
+    width: phoneWidth* 0.25,
+    alignItems: 'center',
+    backgroundColor: 'rgb(226,186,108)'
+  },
+  bdayText:{
+    
+    fontFamily: "Montserrat",
+    fontSize: 15,
+    
+    
+    
+    //alignSelf: 'center'
+    //backgroundColor: 
+
+
+  },
   picker:{
     height: 500,
     flex:1
@@ -172,12 +197,16 @@ const stylesheet = StyleSheet.create({
     borderWidth: 0.5,
     width: boxWidth,
     height: boxHeight,
+    left: phoneWidth * 0.15,
+    top: phoneHeight * 0.01
   },
   pickerView:{
-    //borderWidth: 5,
+    //borderWidth: 1,
     position: "absolute",
     alignSelf: "center",
     top: phoneHeight * 0.520,
+    flexDirection: "row",
+    height: phoneHeight * 0.075,
   },
 
   backGround: {
@@ -207,6 +236,7 @@ const stylesheet = StyleSheet.create({
     position: "absolute",
     alignSelf: "center",
     top: phoneHeight * 0.506,
+    zIndex: -1
   },
   _Text_Field_Location: {
     position: "absolute",
