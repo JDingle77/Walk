@@ -38,14 +38,22 @@ class RegisterSerializer(PostUserSerializer):
         fields = ['email', 'password','dogProfile']
 
     def create(self, validated_data):
-        try:  # check if user already exists
-            user = User.objects.get(email=validated_data['email'])
-            return user, True
+        dogProfile = validated_data.pop("dogProfile")
+        if (self.context.get("is_admin")):
+            user = User.objects.create_superuser(**validated_data)
+        else:
+            user = User.objects.create_user(**validated_data)
+        Dog.objects.create(**dogProfile, user = user)
+        return user
+
+class EmailVerificationSerializer(serializers.Serializer):
+    email = serializers.EmailField(
+        required=True, write_only=True, max_length=128)
+    class Meta:
+        fields = ['email']
+    def create(self, validated_data):
+        try:
+            User.objects.get(email=validated_data['email'])
+            return True
         except:
-            dogProfile = validated_data.pop("dogProfile")
-            if (self.context.get("is_admin")):
-                user = User.objects.create_superuser(**validated_data)
-            else:
-                user = User.objects.create_user(**validated_data)
-            Dog.objects.create(**dogProfile, user = user)
-            return user, False
+            return False
