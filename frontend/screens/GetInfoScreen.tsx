@@ -7,12 +7,16 @@ import {
   Dimensions,
   KeyboardAvoidingView,
   Platform,
+  Image,
   
 } from "react-native";
 import TextInput from "../components/TextInput";
 import { Button } from "react-native-paper";
 import styles from "../stylesheets/globalStyles";
 import DateTimePicker from '@react-native-community/datetimepicker';
+
+import {Picker} from '@react-native-picker/picker';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 
 // import {
@@ -32,13 +36,22 @@ const boxHeight = (48 * phoneHeight) / 844;
 const boxWidth = (312 * phoneWidth) / 407;
 
 const GetInfoScreen = () => {
+
   const [breed, setBreed] = useState("");
-  const [gender, setGender] = useState("");
+  
   const [birthday, setBirthday] = useState("");
   const [location, setLocation] = useState("");
   const [shift, setShift] = useState(false);
   const [date, setDate] =useState(new Date());
   const [show, setShow] = useState(false);
+
+  const [open, setOpen] = useState(false);
+  const [gender, setGender] = useState("");
+  const [items, setItems] = useState([
+    {label: 'Male', value: 'Male'},
+    {label: 'Female', value: 'Female'},
+    {label: 'Unspecified', value: 'Unspecified'}
+  ]);
   
   const onChange = (event, selectedDate) => {
     //console.log(selectedDate);
@@ -83,7 +96,9 @@ const GetInfoScreen = () => {
           }}
         />
       </View>
-      <View style={stylesheet._Text_Field_Gender}>
+
+      
+     <View style={stylesheet._Text_Field_Gender}>
         <TextInput
           style={stylesheet._Input_Box_Style}
           label="Gender"
@@ -97,6 +112,57 @@ const GetInfoScreen = () => {
           }}
         />
       </View>
+        <View style={stylesheet.drop_down_picker_view}>
+
+        
+        <DropDownPicker
+            style = {{width: phoneWidth* 0.77, height: phoneHeight * 0, opacity: 0}}
+            //autoScroll={true}
+            placeholder=""
+            textStyle={{fontSize: -2}}
+            open={open}
+            value={gender}
+            items={items}
+            setOpen={setOpen}
+            setValue={setGender}
+            setItems={setItems}
+            disableBorderRadius={true}
+          /> 
+          </View>
+
+    
+
+
+      {/* <View style={stylesheet._Text_Field_Gender}>
+        <View style={{borderWidth: 5, width: 50, height: 20}}>
+          <Picker
+            selectedValue={gender}
+            style = {{height: 50, width: 150, alignSelf: 'center', bottom: 50}}
+            onValueChange={(itemValue, itemIndex) =>{
+              setGender(itemValue)
+            }}
+          >
+            <Picker.Item label = "Male" value='male'/>
+            <Picker.Item label = "Female" value='female'/>
+            <Picker.Item label = "Unspecified" value='unspecified'/>
+          </Picker>
+        </View>
+      </View>
+       */}
+      {/* <View style={stylesheet._Text_Field_Gender}>
+        <TextInput
+          style={stylesheet._Input_Box_Style}
+          label="Gender"
+          autoCapitalize="none"
+          autoComplete="email"
+          textContentType="emailAddress"
+          value={gender}
+          onFocus={() => setShift(false)}
+          onChangeText={(text) => {
+            setGender(text);
+          }}
+        />
+      </View> */}
       <View style={stylesheet._Text_Field_Birthday}>
         
         <TextInput
@@ -118,10 +184,14 @@ const GetInfoScreen = () => {
         
     
     </View>
+
     
     <View style ={stylesheet.pickerView}>
       <View style = {stylesheet.bdayText_container}>
-        <Text style={stylesheet.bdayText}>Change Date</Text>
+      <Image 
+            source={{uri: "https://img.icons8.com/ios/50/000000/calendar--v1.png"}} 
+            style={{zIndex: 9, height: 30, width: 30, bottom: phoneHeight* 0.008}}
+          />
       </View>
         <View style = {stylesheet.pickerStyle}>
         <DateTimePicker
@@ -135,6 +205,8 @@ const GetInfoScreen = () => {
         </View>
         
     </View>
+          
+    
 
       <View style={stylesheet._Text_Field_Location}>
         <TextInput
@@ -165,14 +237,14 @@ const GetInfoScreen = () => {
 
 const stylesheet = StyleSheet.create({
   bdayText_container:{
-    borderWidth: 1,
-    borderRadius: 5,
+    // borderWidth: 1,
+    // borderRadius: 5,
     top: phoneHeight*0.018,
-    left: phoneWidth * 0.63,
-    height: phoneHeight*0.03,
+    left: phoneWidth * 0.66,
+    height: phoneHeight*0.035,
     width: phoneWidth* 0.25,
     alignItems: 'center',
-    backgroundColor: 'rgb(226,186,108)'
+    //backgroundColor: 'rgb(226,186,108)'
   },
   bdayText:{
     
@@ -231,6 +303,15 @@ const stylesheet = StyleSheet.create({
     position: "absolute",
     alignSelf: "center",
     top: phoneHeight * 0.406,
+    //borderWidth: 5,
+    zIndex: 3,
+  },
+  drop_down_picker_view:{
+    position: "absolute",
+    alignSelf: "center",
+    top: phoneHeight * 0.416,
+    //borderWidth: 5,
+    zIndex: 4,
   },
   _Text_Field_Birthday: {
     position: "absolute",

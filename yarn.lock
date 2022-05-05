@@ -1674,6 +1674,11 @@
   dependencies:
     invariant "^2.2.4"
 
+"@react-native-picker/picker@^2.4.1":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.1.tgz#92feb7e0672d739624517dae04bf4de1452dfcdc"
+  integrity sha512-1XWy3IQgwr7MWd30KdY1iUh2gQZD+JiotN1ifj/ptFUYKon/0UFwngKQaWCO/CP/FdLl20/huSSLwKedYrdMMA==
+
 "@react-native/assets@1.0.0":
   version "1.0.0"
   resolved "https://registry.npmjs.org/@react-native/assets/-/assets-1.0.0.tgz"
@@ -6200,6 +6205,11 @@ react-native-codegen@^0.0.6:
     flow-parser "^0.121.0"
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
+
+react-native-dropdown-picker@^5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-dropdown-picker/-/react-native-dropdown-picker-5.4.0.tgz#8f5b16c44edf0e9aba152025c9c43683a0dbb32b"
+  integrity sha512-O5jlHb9+MRurVXNL3IrNK4f2HGODxYRoE1n+7MMA0NvrO0Mz7ICwrWZWC3qfbopTBy0ERjIWf+BRQiS2vFnaRQ==
 
 react-native-elements@^3.4.2:
   version "3.4.2"
