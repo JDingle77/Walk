@@ -224,4 +224,49 @@ def get_summary(request):
     summary_data = {"response": json_list}
     return Response(summary_data)
 
+from datetime import datetime, timedelta
+from django.utils.timezone import make_aware
+@api_view(['GET'])
+def get_summary_statistics(request):
+    #query by time; last week and week before that
+    userid = request.user.id
+    now = datetime.now()
+    now = make_aware(now)
+    one_wk_ago = now - timedelta(days=7)
+    two_wk_ago = one_wk_ago - timedelta(days=7)
+    routes_last_week = Route.objects.filter(user=request.user.id, end_time__range=(one_wk_ago, now))
+    routes_last_last_week = Route.objects.filter(user=request.user.id, end_time__range=(two_wk_ago, one_wk_ago))
+    
+    #calculate:
+    tt_dist_last = 0
+    tt_time_last = timedelta(minutes=0)
+    n_routes_last = 0
+    for route in routes_last_week:
+        tt_dist_last += route.total_distance
+        tt_time_last += (route.end_time - route.start_time)
+        n_routes_last += 1
 
+    tt_dist_last2 = 0
+    tt_time_last2 = timedelta(minutes=0)
+    n_routes_last2 = 0
+    for route in routes_last_last_week:
+        tt_dist_last2 += route.total_distance
+        tt_time_last2 += (route.end_time - route.start_time)
+        n_routes_last2 += 1
+
+        # average dist, time
+    avg_dist_last = tt_dist_last / n_routes_last
+    avg_dist_last2 = tt_dist_last2 / n_routes_last2
+    avg_time_last = tt_time_last / n_routes_last
+    avg_time_last2 = tt_time_last2 / n_routes_last2
+        # percent change distance, time
+    change_dist = (avg_dist_last - avg_dist_last2) / avg_dist_last2 * 100
+    change_time = (avg_time_last - avg_time_last2) / avg_time_last2 * 100
+
+    response = {
+        "avg_dist": avg_dist_last,
+        "avg_time": str(avg_time_last),
+        "change_dist": change_dist,
+        "change_time": change_time
+    }
+    return Response(response)
