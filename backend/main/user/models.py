@@ -28,7 +28,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.CharField(db_index=True, max_length=255, unique=True)
+    email = models.EmailField(db_index=True, max_length=128, unique=True) # db_index=true allows faster searches by email field 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     is_active = models.BooleanField(default=True)  # login/logout
     is_staff = models.BooleanField(default=False)
