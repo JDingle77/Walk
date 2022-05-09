@@ -14,8 +14,6 @@ import TextInput from "../components/TextInput";
 import { Button } from "react-native-paper";
 import styles from "../stylesheets/globalStyles";
 import DateTimePicker from '@react-native-community/datetimepicker';
-
-import {Picker} from '@react-native-picker/picker';
 import DropDownPicker from 'react-native-dropdown-picker';
 
 
@@ -112,11 +110,11 @@ const GetInfoScreen = () => {
           }}
         />
       </View>
-        <View style={stylesheet.drop_down_picker_view}>
+        <View style={open? stylesheet.drop_down_picker_view: stylesheet.drop_down_picker_view_hide}>
 
         
         <DropDownPicker
-            style = {{width: phoneWidth* 0.77, height: phoneHeight * 0, opacity: 0}}
+            style = {[{borderWidth: 0, width: phoneWidth* 0.77, height: phoneHeight * 0, }, open? {opacity: 0}:{opacity: 0}]}
             //autoScroll={true}
             placeholder=""
             textStyle={{fontSize: -2}}
@@ -127,42 +125,14 @@ const GetInfoScreen = () => {
             setValue={setGender}
             setItems={setItems}
             disableBorderRadius={true}
-          /> 
-          </View>
-
-    
-
-
-      {/* <View style={stylesheet._Text_Field_Gender}>
-        <View style={{borderWidth: 5, width: 50, height: 20}}>
-          <Picker
-            selectedValue={gender}
-            style = {{height: 50, width: 150, alignSelf: 'center', bottom: 50}}
-            onValueChange={(itemValue, itemIndex) =>{
-              setGender(itemValue)
+            props={{
+              activeOpacity:0
             }}
-          >
-            <Picker.Item label = "Male" value='male'/>
-            <Picker.Item label = "Female" value='female'/>
-            <Picker.Item label = "Unspecified" value='unspecified'/>
-          </Picker>
-        </View>
+          
+          /> 
       </View>
-       */}
-      {/* <View style={stylesheet._Text_Field_Gender}>
-        <TextInput
-          style={stylesheet._Input_Box_Style}
-          label="Gender"
-          autoCapitalize="none"
-          autoComplete="email"
-          textContentType="emailAddress"
-          value={gender}
-          onFocus={() => setShift(false)}
-          onChangeText={(text) => {
-            setGender(text);
-          }}
-        />
-      </View> */}
+
+  
       <View style={stylesheet._Text_Field_Birthday}>
         
         <TextInput
@@ -263,6 +233,7 @@ const stylesheet = StyleSheet.create({
     flex:1
     
   },
+  
   pickerStyle:{
     opacity: 0,
     borderRadius: 5,
@@ -312,6 +283,14 @@ const stylesheet = StyleSheet.create({
     top: phoneHeight * 0.416,
     //borderWidth: 5,
     zIndex: 4,
+  },
+  drop_down_picker_view_hide:{
+    position: "absolute",
+    alignSelf: "center",
+    top: phoneHeight * 0.416,
+    //borderWidth: 5,
+    zIndex: 4,
+    opacity: 0,
   },
   _Text_Field_Birthday: {
     position: "absolute",
