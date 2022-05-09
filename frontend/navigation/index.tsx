@@ -42,7 +42,7 @@ export default function Navigation({
       theme={colorScheme === "dark" ? paperDarkTheme : paperTheme}
     >
       <Stack.Navigator
-        initialRouteName="Create"
+        initialRouteName="GetInfo"
         screenOptions={{
           headerStyle: { backgroundColor: paperTheme.colors.primary },
         }}
