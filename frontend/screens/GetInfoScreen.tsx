@@ -16,7 +16,6 @@ import styles from "../stylesheets/globalStyles";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import DropDownPicker from 'react-native-dropdown-picker';
 
-
 import { useUserData, UserDataType } from "../hooks/userContext";
 
 import { RootStackParamList } from "../types";
@@ -47,7 +46,9 @@ const phoneHeight = Dimensions.get("window").height;
 const boxHeight = (48 * phoneHeight) / 844;
 const boxWidth = (312 * phoneWidth) / 407;
 
+
 const GetInfoScreen = ({ navigation }: Props) => {
+
   const [breed, setBreed] = useState("");
   
   const [birthday, setBirthday] = useState("");
@@ -77,6 +78,7 @@ const GetInfoScreen = ({ navigation }: Props) => {
     setBirthday(fullDate);
     setDate(selectedDate);
   };
+
 
   //useContext stuff
   const { UserData, setUserData } = useUserData()!;
