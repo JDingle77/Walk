@@ -7,13 +7,15 @@ import {
   Dimensions,
   KeyboardAvoidingView,
   Platform,
+  Image,
+  
 } from "react-native";
 import TextInput from "../components/TextInput";
 import { Button } from "react-native-paper";
 import styles from "../stylesheets/globalStyles";
-import { ScrollView } from "react-native-gesture-handler";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { Input } from "react-native-elements";
+import DateTimePicker from '@react-native-community/datetimepicker';
+import DropDownPicker from 'react-native-dropdown-picker';
+
 
 import { useUserData, UserDataType } from "../hooks/userContext";
 
@@ -47,10 +49,34 @@ const boxWidth = (312 * phoneWidth) / 407;
 
 const GetInfoScreen = ({ navigation }: Props) => {
   const [breed, setBreed] = useState("");
-  const [gender, setGender] = useState("");
+  
   const [birthday, setBirthday] = useState("");
   const [location, setLocation] = useState("");
   const [shift, setShift] = useState(false);
+  const [date, setDate] =useState(new Date());
+  const [show, setShow] = useState(false);
+
+  const [open, setOpen] = useState(false);
+  const [gender, setGender] = useState("");
+  const [items, setItems] = useState([
+    {label: 'Male', value: 'Male'},
+    {label: 'Female', value: 'Female'},
+    {label: 'Unspecified', value: 'Unspecified'}
+  ]);
+  
+  const onChange = (event, selectedDate) => {
+    //console.log(selectedDate);
+    var date = new Date(selectedDate);
+    var year = date.getFullYear();
+    var month = date.getMonth()+1;
+    var dt = date.getDate();
+    const fullDate = month + "-" + dt + "-" + year;
+    console.log(fullDate) 
+   // console.log(date)
+    setShow(false);
+    setBirthday(fullDate);
+    setDate(selectedDate);
+  };
 
   //useContext stuff
   const { UserData, setUserData } = useUserData()!;
@@ -64,7 +90,7 @@ const GetInfoScreen = ({ navigation }: Props) => {
   };
 
   function uploadInfo() {
-    console.log("Success");
+    console.log(date);
   }
 
   return (
@@ -90,7 +116,9 @@ const GetInfoScreen = ({ navigation }: Props) => {
           onChangeText={text => handleChange(text, "dogBreed")}
         />
       </View>
-      <View style={stylesheet._Text_Field_Gender}>
+
+      
+     <View style={stylesheet._Text_Field_Gender}>
         <TextInput
           style={stylesheet._Input_Box_Style}
           label="Gender"
@@ -102,18 +130,74 @@ const GetInfoScreen = ({ navigation }: Props) => {
           onChangeText={text => handleChange(text, "dogGender")}
         />
       </View>
+        <View style={open? stylesheet.drop_down_picker_view: stylesheet.drop_down_picker_view_hide}>
+
+        
+        <DropDownPicker
+            style = {[{borderWidth: 0, width: phoneWidth* 0.77, height: phoneHeight * 0, }, open? {opacity: 0}:{opacity: 0}]}
+            //autoScroll={true}
+            placeholder=""
+            textStyle={{fontSize: -2}}
+            open={open}
+            value={gender}
+            items={items}
+            setOpen={setOpen}
+            setValue={setGender}
+            setItems={setItems}
+            disableBorderRadius={true}
+            props={{
+              activeOpacity:0
+            }}
+          
+          /> 
+      </View>
+
+  
       <View style={stylesheet._Text_Field_Birthday}>
+        
         <TextInput
           style={stylesheet._Input_Box_Style}
           label="Birthday"
           autoCapitalize="none"
           autoComplete="email"
           textContentType="emailAddress"
-          value={UserData.dogBirthday}
-          onFocus={() => setShift(false)}
-          onChangeText={text => handleChange(text, "dogBirthday")}
+          value={birthday}
+          onFocus={() => {
+            setShift(true);
+            setShow(true)
+          }}
+          onChangeText={(text) => {
+            setBirthday(text);
+          }}
         />
+      
+        
+    
+    </View>
+
+    
+    <View style ={stylesheet.pickerView}>
+      <View style = {stylesheet.bdayText_container}>
+      <Image 
+            source={{uri: "https://img.icons8.com/ios/50/000000/calendar--v1.png"}} 
+            style={{zIndex: 9, height: 30, width: 30, bottom: phoneHeight* 0.008}}
+          />
       </View>
+        <View style = {stylesheet.pickerStyle}>
+        <DateTimePicker
+            style={{width: 200, height: 35}}
+            testID="dateTimePicker"
+            value={date}
+            mode="date"
+            is24Hour={true}
+            onChange={onChange}
+        />
+        </View>
+        
+    </View>
+          
+    
+
       <View style={stylesheet._Text_Field_Location}>
         <TextInput
           style={stylesheet._Input_Box_Style}
@@ -140,6 +224,52 @@ const GetInfoScreen = ({ navigation }: Props) => {
 };
 
 const stylesheet = StyleSheet.create({
+  bdayText_container:{
+    // borderWidth: 1,
+    // borderRadius: 5,
+    top: phoneHeight*0.018,
+    left: phoneWidth * 0.66,
+    height: phoneHeight*0.035,
+    width: phoneWidth* 0.25,
+    alignItems: 'center',
+    //backgroundColor: 'rgb(226,186,108)'
+  },
+  bdayText:{
+    
+    fontFamily: "Montserrat",
+    fontSize: 15,
+    
+    
+    
+    //alignSelf: 'center'
+    //backgroundColor: 
+
+
+  },
+  picker:{
+    height: 500,
+    flex:1
+    
+  },
+  
+  pickerStyle:{
+    opacity: 0,
+    borderRadius: 5,
+    borderWidth: 0.5,
+    width: boxWidth,
+    height: boxHeight,
+    left: phoneWidth * 0.15,
+    top: phoneHeight * 0.01
+  },
+  pickerView:{
+    //borderWidth: 1,
+    position: "absolute",
+    alignSelf: "center",
+    top: phoneHeight * 0.520,
+    flexDirection: "row",
+    height: phoneHeight * 0.075,
+  },
+
   backGround: {
     flex: 1,
     backgroundColor: "rgba(245, 239, 224, 1)",
@@ -162,11 +292,29 @@ const stylesheet = StyleSheet.create({
     position: "absolute",
     alignSelf: "center",
     top: phoneHeight * 0.406,
+    //borderWidth: 5,
+    zIndex: 3,
+  },
+  drop_down_picker_view:{
+    position: "absolute",
+    alignSelf: "center",
+    top: phoneHeight * 0.416,
+    //borderWidth: 5,
+    zIndex: 4,
+  },
+  drop_down_picker_view_hide:{
+    position: "absolute",
+    alignSelf: "center",
+    top: phoneHeight * 0.416,
+    //borderWidth: 5,
+    zIndex: 4,
+    opacity: 0,
   },
   _Text_Field_Birthday: {
     position: "absolute",
     alignSelf: "center",
     top: phoneHeight * 0.506,
+    zIndex: -1
   },
   _Text_Field_Location: {
     position: "absolute",
