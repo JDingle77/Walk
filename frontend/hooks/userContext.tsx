@@ -1,15 +1,15 @@
 import * as React from "react";
 
 const defaultUserData = {
-  email: "default value",
-  password: "default value",
-  ownerName: "default value",
-  dogUsername: "default value",
-  dogName: "default value",
-  dogBreed: "default value",
-  dogGender: "default value",
-  dogBirthday: "default value",
-  dogLocation: "default value",
+  email: "",
+  password: "",
+  ownerName: "",
+  dogUsername: "",
+  dogName: "",
+  dogBreed: "",
+  dogGender: "",
+  dogBirthday: "",
+  dogLocation: "",
 };
 export type UserDataType = {
   UserData: {

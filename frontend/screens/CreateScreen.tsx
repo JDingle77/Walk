@@ -182,7 +182,7 @@ const Create = ({ navigation }: Props) => {
             <Button
               labelStyle={[{ fontFamily: "MontserratBold", fontWeight: "900" }]}
               mode="text"
-              onPress={() => navigation.navigate("Summary")}
+              onPress={() => navigation.navigate("DogProfile")}
               uppercase={false}
               color="black"
             >

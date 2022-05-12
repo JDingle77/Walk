@@ -21,7 +21,7 @@ const AuthDataContext = React.createContext<AuthDataType | undefined>(
 type Props = {
   children: React.ReactNode;
 };
-export const AuthataProvider = ({ children }: Props) => {
+export const AuthDataProvider = ({ children }: Props) => {
   const [AuthData, setAuthData] = React.useState(defaultAuthData);
 
   React.useEffect(() => {
