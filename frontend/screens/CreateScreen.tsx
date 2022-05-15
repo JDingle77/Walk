@@ -56,7 +56,7 @@ const Create = ({ navigation }: Props) => {
         } else if (status == 409) {
           Alert.alert("Specified email already in use.");
         } else {
-          Alert.alert("Specified email invalid");
+          //Alert.alert("Specified email invalid");
         }
       })
       .catch((err) => console.error(err));
