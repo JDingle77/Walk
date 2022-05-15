@@ -28,6 +28,7 @@ import { paperTheme, paperDarkTheme } from "../../core/theme";
 import WalkPageNavigator from "./WalkPageStack";
 import GetInfoScreen from "../screens/GetInfoScreen"
 import { Appbar, Button } from "react-native-paper";
+import { UserDataProvider, useUserData } from "../hooks/userContext";
 
 export default function Navigation({
   colorScheme,
@@ -37,6 +38,7 @@ export default function Navigation({
   const Stack = createStackNavigator<RootStackParamList>();
 
   return (
+    <UserDataProvider>
     <NavigationContainer
       // linking={LinkingConfiguration}
       theme={colorScheme === "dark" ? paperDarkTheme : paperTheme}
@@ -90,12 +92,19 @@ export default function Navigation({
         <Stack.Screen
           name="Summary"
           component={Summary}
-          options={{
-            headerBackTitleStyle: { color: "white" },
-            headerBackTitle: "Back",
-            headerTintColor: "white",
-            headerTitle: "Summary",
-          }}
+          options={({ navigation }) => ({
+            headerTransparent: true,
+            headerTitle: "",
+            headerLeft: "",
+            headerRight: () => (
+              <Button
+                labelStyle={{ color: "black" }}
+                onPress={() => navigation.navigate("Create")}
+              >
+                close
+              </Button>
+            ),
+          })}
         />
         <Stack.Screen
           name="WalkPageNavigator"
@@ -120,11 +129,22 @@ export default function Navigation({
         <Stack.Screen
           name="GetInfo"
           component={GetInfoScreen}
-          options={{
-            headerShown: false
-          }}
+          options={({ navigation }) => ({
+            headerTransparent: true,
+            headerTitle: "",
+            headerLeft: () => (
+              <Button
+                labelStyle={{ color: "black" }}
+                onPress={() => navigation.navigate("DogProfile")}
+              >
+                Back
+              </Button>
+            ),
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </UserDataProvider>
   );
 }
+

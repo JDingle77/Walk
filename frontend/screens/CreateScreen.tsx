@@ -6,6 +6,9 @@ import {
   ScrollView,
   StyleSheet,
   Dimensions,
+  NativeSyntheticEvent, 
+  TextInputChangeEventData,
+  Alert
 } from "react-native";
 import { Button } from "react-native-paper";
 import TextInput from "../components/TextInput";
@@ -17,6 +20,9 @@ import {
 } from "@expo-google-fonts/dev";
 import { RootStackParamList } from "../types";
 import { StackNavigationProp } from "@react-navigation/stack";
+
+import { useContext } from "react";
+import { useUserData, UserDataType } from "../hooks/userContext";
 
 type LoginScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -32,36 +38,65 @@ const Create = ({ navigation }: Props) => {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
 
+  const { UserData, setUserData } = useUserData()!;
+
   let [fontsLoaded] = useFonts({
     Montserrat: Montserrat_400Regular,
     MontserratBold: Montserrat_700Bold,
   });
 
   function createProfile() {
-    fetch("http://localhost:8000/auth/register/", {
+    fetch("http://localhost:8000/auth/validEmail/", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        is_admin: true,
         email: email,
-        password: password,
       }),
     })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
+      .then((response) => response.status)
+      .then((status) => {
+        if (status == 200) {
+          navigation.navigate("DogProfile");
+        } else if (status == 409) {
+          Alert.alert("Specified email already in use.");
+        } else {
+          Alert.alert("Specified email invalid");
+        }
       })
       .catch((err) => console.error(err));
   }
+
+  const handleChange = (text: string, name: string): void => {
+    // console.log(name);
+    setUserData({
+      ...UserData,
+      [name]: text
+    });
+  };
+
   //password "red" box when not the same
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
     return (
       <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
+        {/* <View>
+          <TextInput
+            style={stylesheet.email}
+            label="Your email"
+            autoCapitalize="none"
+            autoComplete="email"
+            textContentType="emailAddress"
+            enablesReturnKeyAutomatically
+            value={UserData.email}
+            onChangeText={(text) => {
+              setUserData({ email: text, password: text });
+            }}
+          />
+        </View> */}
         <View style={stylesheet.container}>
           <TextInput
             style={stylesheet.email}
@@ -70,10 +105,12 @@ const Create = ({ navigation }: Props) => {
             autoComplete="email"
             textContentType="emailAddress"
             enablesReturnKeyAutomatically
-            value={email}
-            onChangeText={(text) => {
-              setEmail(text);
-            }}
+            value={UserData.email}
+            onChangeText={text => handleChange(text, "email")} 
+            // value={email}
+            // onChangeText={(text) => {
+            //   setEmail(text);
+            // }}
           />
           <TextInput
             style={stylesheet.password}
@@ -82,10 +119,12 @@ const Create = ({ navigation }: Props) => {
             autoComplete="none"
             textContentType="password"
             enablesReturnKeyAutomatically
-            value={password}
-            onChangeText={(text) => {
-              setPassword(text);
-            }}
+            value={UserData.password}
+            onChangeText={text => handleChange(text, "password")}
+            // value={password}
+            // onChangeText={(text) => {
+            //   setPassword(text);
+            // }}
           />
           <TextInput
             style={stylesheet.confirm}

@@ -28,7 +28,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.CharField(db_index=True, max_length=255, unique=True)
+    email = models.EmailField(db_index=True, max_length=128, unique=True) # db_index=true allows faster searches by email field 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     is_active = models.BooleanField(default=True)  # login/logout
     is_staff = models.BooleanField(default=False)
@@ -40,3 +40,31 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return f"{self.email}"
+
+class Dog(models.Model):
+    username = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
+    owner_name = models.CharField(max_length=50)
+
+    MALE = 'Male'
+    FEMALE = 'Female'
+    NOT_SPECIFIED = 'Not specified'
+    gender_choices = (
+        (MALE,'Male'),
+        (FEMALE,'Female'),
+        (NOT_SPECIFIED,'Not specified')
+    )
+    gender = models.CharField(max_length=15,default=NOT_SPECIFIED,choices=gender_choices)
+    # Note: To access the gender values, object_name.get_gender_display()
+
+    # Optional Fields
+    # =====================================================
+    breed = models.CharField(max_length=30,blank=True)
+    birthday = models.DateTimeField(null=True,blank=True)
+    # =====================================================
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+
+    def __str__(self):
+        return self.username
