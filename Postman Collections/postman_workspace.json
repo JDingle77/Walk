@@ -983,7 +983,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"newuser@gmail.com\",\n    \"password\": \"password\",\n    \"is_admin\": true\n}",
+					"raw": "{\n    \"email\": \"watermylawn3@gmail.com\",\n    \"password\": \"password\",\n    \"is_admin\": false,\n    \"dogProfile\":\n    {\n        \"username\": \"Milo\",\n        \"name\": \"Milopolis\",\n        \"owner_name\": \"Mehul\",\n        \"gender\": \"Not specified\",\n        \"breed\": \"\",\n        \"birthday\": null,\n        \"location\": \"\"\n    }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
