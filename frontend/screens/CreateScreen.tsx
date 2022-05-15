@@ -7,7 +7,8 @@ import {
   StyleSheet,
   Dimensions,
   NativeSyntheticEvent, 
-  TextInputChangeEventData
+  TextInputChangeEventData,
+  Alert
 } from "react-native";
 import { Button } from "react-native-paper";
 import TextInput from "../components/TextInput";
@@ -45,21 +46,25 @@ const Create = ({ navigation }: Props) => {
   });
 
   function createProfile() {
-    fetch("http://localhost:8000/auth/register/", {
+    fetch("http://localhost:8000/auth/validEmail/", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        is_admin: true,
         email: email,
-        password: password,
       }),
     })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
+      .then((response) => response.status)
+      .then((status) => {
+        if (status == 200) {
+          navigation.navigate("DogProfile");
+        } else if (status == 409) {
+          Alert.alert("Specified email already in use.");
+        } else {
+          Alert.alert("Specified email invalid");
+        }
       })
       .catch((err) => console.error(err));
   }
@@ -150,7 +155,7 @@ const Create = ({ navigation }: Props) => {
             <Button
               style={stylesheet.oval}
               mode="contained"
-              onPress={() => navigation.navigate("DogProfile")}
+              onPress={() => createProfile()}
               labelStyle={stylesheet.signUp}
               uppercase={false}
               disabled={
