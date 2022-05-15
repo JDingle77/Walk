@@ -19,7 +19,7 @@ const ICONS = [
   require('../assets/images/interaction-icon.png'),
 ]
 
-const WalkModalPicker = ({ toggleActionListVisible }) => {
+const WalkModalPicker = ({ toggleActionListVisible, addPee, addPoop, addDrink, addInteraction }) => {
 
   return (
     <View>
@@ -31,6 +31,7 @@ const WalkModalPicker = ({ toggleActionListVisible }) => {
           <TouchableOpacity
             key={0}
             style={styles.option}
+            onPress={addPee}
           >
             <Image
                 style={styles.peeIcon}
@@ -42,6 +43,7 @@ const WalkModalPicker = ({ toggleActionListVisible }) => {
           <TouchableOpacity
             key={1}
             style={styles.option}
+            onPress={addPoop}
           >
             <Image
                 style={styles.poopIcon}
@@ -53,6 +55,7 @@ const WalkModalPicker = ({ toggleActionListVisible }) => {
           <TouchableOpacity
             key={2}
             style={styles.option}
+            onPress={addDrink}
           >
             <Image
                 style={styles.drinkIcon}
@@ -64,6 +67,7 @@ const WalkModalPicker = ({ toggleActionListVisible }) => {
           <TouchableOpacity
             key={3}
             style={[styles.option, styles.lastOption]}
+            onPress={addInteraction}
           >
             <Image
                 style={styles.interactionIcon}
@@ -89,7 +93,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 10,
     marginLeft: 20,
-    marginBottom: 250,
+    marginBottom: 200,
   },
   option: {
     padding: 10,

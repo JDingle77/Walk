@@ -13,14 +13,15 @@ import {
     Image,
 } from 'react-native';
 import WalkModalPicker from '../components/WalkModalPicker';
-import { LocationSubscriber } from 'expo-location/build/LocationSubscribers';
+import { useFonts, Montserrat_400Regular } from "@expo-google-fonts/dev";
+import { Marker } from 'react-native-svg';
 
 type LatLng = {
     latitude: Number,
     longitude: Number,
   }
 
-export default function WalkTracking({ navigation, client }) {
+export default function WalkTracking({ navigation }) {
     const [errorMsg, setErrorMsg] = useState(null);
     const [currLocation, setCurrLocation] = useState({latitude: 0.0, longitude: 0.0});
     const [mapRegion, setMapRegion] = useState(null);
@@ -35,8 +36,14 @@ export default function WalkTracking({ navigation, client }) {
     const [distance, setDistance] = useState(0.0);
     const [actionListVisible, setActionListVisible] = useState(false);
     const mountedRef = useRef(true);
-    const watchLocationRef = useRef(null);
+    const [peeCoords, setPeeCoords] = useState<Array<LatLng>>([]);
+    const [poopCoords, setPoopCoords] = useState<Array<LatLng>>([]);
+    const [drinkCoords, setDrinkCoords] = useState<Array<LatLng>>([]);
+    const [interactionCoords, setInteractionCoords] = useState<Array<LatLng>>([]);
 
+    let [fontsLoaded] = useFonts({
+        Montserrat: Montserrat_400Regular,
+    });
 
     useEffect(() => {
         const getLocation = async () => {
@@ -174,6 +181,34 @@ export default function WalkTracking({ navigation, client }) {
         navigation.pop();
     }
 
+    const addPee = () => {
+        setPeeCoords(prevList => [...prevList, {
+            latitude: currLocation.latitude,
+            longitude: currLocation.longitude,
+        }]);
+    }
+
+    const addPoop = () => {
+        setPoopCoords(prevList => [...prevList, {
+            latitude: currLocation.latitude,
+            longitude: currLocation.longitude,
+        }]);
+    }
+
+    const addDrink = () => {
+        setDrinkCoords(prevList => [...prevList, {
+            latitude: currLocation.latitude,
+            longitude: currLocation.longitude,
+        }]);
+    }
+
+    const addInteraction = () => {
+        setInteractionCoords(prevList => [...prevList, {
+            latitude: currLocation.latitude,
+            longitude: currLocation.longitude,
+        }]);
+    }
+
     return (
         <View style={styles.container}>
             <MapView
@@ -183,38 +218,81 @@ export default function WalkTracking({ navigation, client }) {
                 region={mapRegion}
             >
                 <Polyline
-                    // coordinates={[
-                    //     { latitude: 37.32634816, longitude: 37.32634816 },
-                    //     { latitude: 37.32632152, longitude: 37.32632152 },
-                    //     { latitude: 37.32629461, longitude: 37.32629461 },
-                    //     { latitude: 37.3262638, longitude: 37.3262638 },
-                    //     { latitude: 37.32623015, longitude: 37.32623015 },
-                    //     { latitude: 37.3261991, longitude: 37.3261991 }
-                    // ]}
                     coordinates={coordinatesList}
                     strokeColor="#000" // fallback for when `strokeColors` is not supported by the map-provider
                     strokeWidth={6}
                 />
-                {/* <View style={styles.floatingButtons}>
-                    <TouchableOpacity onPress={toggleActionListVisible} style={styles.actionButton}>
-                        <Icon name="pets" color="white" size="35"/>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => {}} style={styles.endWalkButton}>
-                        <Text style={styles.text}>End Walk</Text>
-                    </TouchableOpacity>
-                </View> */}
-                <TouchableOpacity onPress={toggleActionListVisible} style={styles.actionButton}>
-                    {/* <Icon style={styles.pawIcon} name="pets" color="white" size="35"/> */}
-                    <Image
-                        style={styles.pawIcon}
-                        source={require('../assets/images/white-paw.png')}
-                    />
-                </TouchableOpacity>
+                {
+                    poopCoords.map((coord, i) => {
+                        return(
+                            <MapView.Marker coordinate={coord}>
+                                <Image
+                                    source={require('../assets/images/poop-icon.png')}
+                                    style={{width: 26, height: 28}}
+                                    resizeMode="contain"
+                                />
+                            </MapView.Marker>
+                        );
+                    })
+                }
+                {
+                    peeCoords.map((coord, i) => {
+                        return(
+                            <MapView.Marker coordinate={coord}>
+                                <Image
+                                    source={require('../assets/images/pee-icon.png')}
+                                    style={{width: 26, height: 28}}
+                                    resizeMode="contain"
+                                />
+                            </MapView.Marker>
+                        );
+                    })
+                }
+                {
+                    drinkCoords.map((coord, i) => {
+                        return(
+                            <MapView.Marker coordinate={coord}>
+                                <Image
+                                    source={require('../assets/images/drink-icon.png')}
+                                    style={{width: 26, height: 28}}
+                                    resizeMode="contain"
+                                />
+                            </MapView.Marker>
+                        );
+                    })
+                }
+                {
+                    interactionCoords.map((coord, i) => {
+                        return(
+                            <MapView.Marker coordinate={coord}>
+                                <Image
+                                    source={require('../assets/images/interaction-icon.png')}
+                                    style={{width: 26, height: 28}}
+                                    resizeMode="contain"
+                                />
+                            </MapView.Marker>
+                        );
+                    })
+                }
                 
-                <TouchableOpacity onPress={endWalkHandler} style={styles.endWalkButton}>
-                    <Text style={styles.endWalkText}>End Walk</Text>
-                </TouchableOpacity>
+
+                <TouchableOpacity onPress={toggleActionListVisible} style={styles.actionButton} />
+                
+                <TouchableOpacity onPress={endWalkHandler} style={styles.endWalkButton} />
+                
             </MapView>
+            <View pointerEvents='none' style={styles.pawIconContainer}>
+                <Image
+                    source={require('../assets/images/white-paw.png')}
+                    style={styles.pawIcon}
+                />
+            </View>
+            <View pointerEvents='none' style={styles.endWalkTextContainer}>
+                <Text style={styles.endWalkText}>End Walk</Text>
+            </View>
+            
+            
+            
             <View style={styles.bottomBar}>
                 <Text style={styles.text}>
                     {durationFields.str}
@@ -228,7 +306,11 @@ export default function WalkTracking({ navigation, client }) {
                 transparent={true}
             >
                 <WalkModalPicker 
-                    toggleActionListVisible={toggleActionListVisible}    
+                    toggleActionListVisible={toggleActionListVisible}
+                    addPee={addPee}
+                    addPoop={addPoop}
+                    addDrink={addDrink}
+                    addInteraction={addInteraction}    
                 />
             </Modal>
         </View>
@@ -243,11 +325,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
+        // alignItems: 'center',
     },
     map: {
         width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height * 0.83,
+        height: Dimensions.get('window').height * 0.89,
         padding: 20,
         flexDirection: 'column',
         justifyContent: 'flex-end',
@@ -272,33 +354,38 @@ const styles = StyleSheet.create({
         backgroundColor: '#5A433E',
         marginBottom: -40,
     },
-    pawIcon: {
+    pawIconContainer: {
         position: 'absolute',
+        flex: 1,
+        marginTop: Dimensions.get('window').height * 0.89 - 73,
+        marginLeft: 32,
+    },
+    pawIcon: {
         width: 45,
         height: 45,
-        marginTop: 13,
-        marginLeft: 13,
-        flex: 1,
-        // marginTop: Dimensions.get('window').height * 0.73 - 73,
-        // marginLeft: 32.5,
     },
     endWalkButton: {
-        width: 100,
+        width: 110,
         height: 35,
         backgroundColor: '#E9B95E',
         borderRadius: 7,
-        marginLeft: Dimensions.get('window').width - 140,
+        marginLeft: Dimensions.get('window').width - 145,
     },
-    endWalkText: {
+    endWalkTextContainer: {
         position: 'absolute',
         flex: 1,
-        marginTop: 8,
-        marginLeft: 17,
-        // marginLeft: Dimensions.get('window').width - 120,
-        // marginTop: Dimensions.get('window').height * 0.73 - 50,
+        marginLeft: Dimensions.get('window').width - 109,
+        marginTop: Dimensions.get('window').height * 0.89 - 48,
+        
+    },
+    endWalkText: {
         fontSize: 16,
+        fontFamily: "Montserrat",
+        fontWeight: "400",
     },
     text: {
-        fontSize: 16,
+        fontSize: 18,
+        fontFamily: "Montserrat",
+        fontWeight: "400",
     }
 });

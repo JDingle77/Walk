@@ -75,26 +75,61 @@ export default function WalkPage({ navigation }) {
                         showsUserLocation={true}
                         initialRegion={mapRegion}
                     >
-                        {/* <View style={styles.startTrackButton}>
-                            <Pressable style={styles.startTrackPressable} onPress={trackButtonHandler} >
-                                <View style={styles.flexRowTrackButton}>
-                                    <Icon style={styles.startTrackIcon} name='location-pin' color='#5A433E'/>
-                                    <Text style={styles.startTrackText}>begin tracking</Text>
-                                </View>
-                            </Pressable>
-                        </View> */}
-                        <Pressable style={styles.startTrackButton} onPress={trackButtonHandler} >
-                            {/* <View style={styles.flexRowTrackButton}>
-                            </View> */}
-                            <Icon style={styles.startTrackIcon} name='location-pin' color='#5A433E' />
-                            <Image
-                                style={styles.startTrackIcon}
-                                source={require('../assets/images/black-location.png')}
-                            />
-                            <Text style={styles.startTrackText}>begin tracking</Text>
-                        </Pressable>
+                        <Pressable style={styles.startTrackButton} onPress={trackButtonHandler} />
                     </ MapView>
+                    <View pointerEvents='none' style={styles.startTrackIconContainer}>
+                        <Image
+                            style={styles.startTrackIcon}
+                            source={require('../assets/images/white-location.png')}
+                        />
+                    </View>
+                    <View pointerEvents='none' style={styles.startTrackTextContainer}>
+                        <Text style={styles.startTrackText}>begin tracking</Text>
+                    </View>
                 </View>
+
+                <Text style={styles.subtitle}>
+                    Favorites Around You
+                </Text>
+                <ScrollView horizontal={true}>
+                    <View style={styles.favoritesItem}>
+                        <Pressable style={styles.favoritesButton} onPress={() => {}} >
+                            <Image
+                                source={require('../assets/images/food-icon.png')}
+                                style={{width: 27, height: 27}}
+                            />
+                        </Pressable>
+                        <Text style={styles.favoritesText}>Starbucks</Text>
+                    </View>
+                    <View style={styles.favoritesItem}>
+                        <Pressable style={styles.favoritesButton} onPress={() => {}} >
+                            <Image
+                                source={require('../assets/images/fun-icon.png')}
+                                style={{width: 27, height: 27}}
+                            />
+                        </Pressable>
+                        <Text style={styles.favoritesText}>Westfield</Text>
+                    </View>
+                    <View style={styles.favoritesItem}>
+                        <Pressable style={styles.favoritesButton} onPress={() => {}} >
+                            <Image
+                                source={require('../assets/images/shopping-icon.png')}
+                                style={{width: 25, height: 27}}
+                            />
+                        </Pressable>
+                        <Text style={styles.favoritesText}>Petco</Text>
+                    </View>
+                    <View style={styles.favoritesItem}>
+                        <Pressable style={styles.favoritesButton} onPress={() => {}} >
+                            <Image
+                                source={require('../assets/images/park-icon.png')}
+                                style={{width: 23, height: 27}}
+                            />
+                        </Pressable>
+                        <Text style={styles.favoritesText}>Botanical Park</Text>
+                    </View>
+
+                </ScrollView>
                 
                 <Text style={styles.subtitle}>
                     Weekly Report
@@ -135,45 +170,6 @@ export default function WalkPage({ navigation }) {
                         </View>
                     </View>
                 </View>
-                <Text style={styles.subtitle}>
-                    Choose a Route
-                </Text>
-                <ScrollView style={styles.routesSection} horizontal={true}>
-                    <Pressable onPress={trackButtonHandler} style={styles.routesCards}>
-                        <MapView
-                            style={styles.routesMap}
-                            provider={PROVIDER_GOOGLE}
-                            scrollEnabled={false}
-                        />
-                        <View style={styles.routeInfo}>
-                        <Text>Casual Stroll</Text>
-                        </View>
-                        <View style={styles.routeStats}>
-                            <Text>2.70 km</Text>
-                            <Text>0:32:34 time to complete</Text>
-                        </View>
-                    </Pressable>
-                    <Pressable onPress={trackButtonHandler} style={styles.routesCards}>
-                        <MapView style={styles.routesMap} provider={PROVIDER_GOOGLE}/>
-                        <View style={styles.routeInfo}>
-                        <Text>Casual Stroll</Text>
-                        </View>
-                        <View style={styles.routeStats}>
-                            <Text>2.70 km</Text>
-                            <Text>0:32:34 time to complete</Text>
-                        </View>
-                    </Pressable>
-                    <Pressable onPress={trackButtonHandler} style={styles.routesCards}>
-                        <MapView style={styles.routesMap} provider={PROVIDER_GOOGLE}/>
-                        <View>
-                            <Text style={styles.routeTitle}>Casual Stroll</Text>
-                        </View>
-                        <View style={styles.routeStats}>
-                            <Text>2.70 km</Text>
-                            <Text>0:32:34 time to complete</Text>
-                        </View>
-                    </Pressable>
-                </ScrollView>
             </ScrollView>
         </SafeAreaView>
     );
@@ -206,42 +202,58 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     startTrackButton: {
+        position: 'absolute',
         height: 30,
         width: 150,
         borderRadius: 6,
-        borderWidth: 1,
-        borderColor: '#5A433E',
-        backgroundColor: 'white',
+        backgroundColor: '#2F80ED',
+        zIndex: 1,
     },
-    // startTrackPressable: {
-    //     flex: 1,
-    //     position: 'relative'
-    // },
-    flexRowTrackButton: {
-        height: 50,
-        width: 150,
+    startTrackIconContainer: {
         position: 'absolute',
+        zIndex: 2,
+        marginLeft: 100,
+        marginTop: 90,
     },
     startTrackIcon: {
-        position: 'absolute',
         height: 21,
         width: 14,
-        marginRight: 5,
-        marginLeft: 15,
-        marginTop: 3,
-        // marginTop: 90,
-        // marginLeft: 105,
+    },
+    startTrackTextContainer: {
+        position: 'absolute',
+        flex: 1,
+        zIndex: 2,
+        marginTop: 91,
+        marginLeft: 127,
     },
     startTrackText: {
-        position: 'absolute',
-        height: 200,
-        width: 300,
-        color: '#5A433E',
-        marginLeft: 35,
-        marginTop: 3,
-        // marginTop: 90,
-        // marginLeft: 125,
+        height: 30,
+        width: 100,
+        color: 'white',
     },
+    favoritesItem: {
+        width: 80,
+        alignItems: 'center',
+    },
+    favoritesButton: {
+        // sizing
+        height: 55,
+        width: 55,
+        backgroundColor: 'white',
+        borderRadius: 50,
+        marginBottom: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        // shadowing
+        shadowColor: 'black',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
+    },
+    favoritesText: {
+        textAlign: 'center',
+    },
+
     flexRowStats: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -249,12 +261,11 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     subtitle: {
-        fontSize: 20,
+        fontSize: 24,
         fontFamily: "braveold",
         paddingVertical: 20,
     },
     statsSection: {
-        paddingRight: 30,
         height: 100,
         flex: 1,
         flexDirection: 'row',
@@ -262,8 +273,6 @@ const styles = StyleSheet.create({
     statsCards: {
         borderRadius: 7,
         flex: 1,
-        borderWidth: 1,
-        borderColor: '#5A433E',
         backgroundColor: '#FBF9F3',
         padding: 10,
     },
@@ -291,32 +300,7 @@ const styles = StyleSheet.create({
     redText: {
         color: '#F56565'
     },
-    routesSection: {
-        flex: 2,
-        flexDirection: 'row',
-    },
-    routesCards: {
-        shadowOffset: {
-            width: 4,
-            height: 4
-        },
-        shadowOpacity: 0.16,
-        shadowRadius: 5,
-        width: 250,
-        height: 230,
-        marginRight: 20,
-    },
-    routesMap: {
-        flex: 1,
-        borderRadius: 30,
-    },
-    routeTitle: {
-        fontSize: 16
-    },
-    routeSubtitle: {
 
-    },
-    routeStats: {
 
-    }
+
 });
