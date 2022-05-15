@@ -8,7 +8,6 @@ class Restaurant(models.Model):
     is_closed = models.BooleanField()
     desc = models.CharField(max_length=50)
 
-
     rating = models.DecimalField(max_digits=2, decimal_places=1)
     review_count = models.IntegerField()
 

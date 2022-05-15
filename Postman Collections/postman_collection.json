@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "49a04adf-f25a-450b-b028-52e14cdf7e16",
+		"_postman_id": "76fc69fe-8347-4496-a001-5cc2d200115b",
 		"name": "Walk",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1099,7 +1099,74 @@
 			"name": "DogProfile",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Restaurant Search",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/places/restaurants?location=Los Angeles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"places",
+						"restaurants"
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "Los Angeles"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Park Search",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/places/parks?location=UCLA",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"places",
+						"parks"
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "UCLA"
+						}
+					]
+				}
 			},
 			"response": []
 		}
