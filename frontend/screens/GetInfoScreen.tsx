@@ -16,6 +16,19 @@ import styles from "../stylesheets/globalStyles";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import DropDownPicker from 'react-native-dropdown-picker';
 
+import { useUserData, UserDataType } from "../hooks/userContext";
+
+import { RootStackParamList } from "../types";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+type NavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "GetInfo"
+>;
+
+type Props = {
+  navigation: NavigationProp;
+};
 
 // import {
 //   useFonts,
@@ -33,7 +46,8 @@ const phoneHeight = Dimensions.get("window").height;
 const boxHeight = (48 * phoneHeight) / 844;
 const boxWidth = (312 * phoneWidth) / 407;
 
-const GetInfoScreen = () => {
+
+const GetInfoScreen = ({ navigation }: Props) => {
 
   const [breed, setBreed] = useState("");
   
@@ -65,6 +79,18 @@ const GetInfoScreen = () => {
     setDate(selectedDate);
   };
 
+
+  //useContext stuff
+  const { UserData, setUserData } = useUserData()!;
+
+  const handleChange = (text: string, name: string): void => {
+      // console.log(name);
+      setUserData({
+        ...UserData,
+        [name]: text
+      });
+  };
+
   function uploadInfo() {
     console.log(date);
   }
@@ -87,11 +113,9 @@ const GetInfoScreen = () => {
           autoCapitalize="none"
           autoComplete="email"
           textContentType="emailAddress"
-          value={breed}
+          value={UserData.dogBreed}
           onFocus={() => setShift(false)}
-          onChangeText={(text) => {
-            setBreed(text);
-          }}
+          onChangeText={text => handleChange(text, "dogBreed")}
         />
       </View>
 
@@ -103,11 +127,9 @@ const GetInfoScreen = () => {
           autoCapitalize="none"
           autoComplete="email"
           textContentType="emailAddress"
-          value={gender}
+          value={UserData.dogGender}
           onFocus={() => setShift(false)}
-          onChangeText={(text) => {
-            setGender(text);
-          }}
+          onChangeText={text => handleChange(text, "dogGender")}
         />
       </View>
         <View style={open? stylesheet.drop_down_picker_view: stylesheet.drop_down_picker_view_hide}>
@@ -185,18 +207,16 @@ const GetInfoScreen = () => {
           autoCapitalize="none"
           autoComplete="email"
           textContentType="emailAddress"
-          value={location}
+          value={UserData.dogLocation}
           onFocus={() => setShift(true)}
-          onChangeText={(text) => {
-            setLocation(text);
-          }}
+          onChangeText={text => handleChange(text, "dogLocation")}
         />
       </View>
       <View style={stylesheet._Rectangle_39}>
         <Button
           style={[styles.button]}
           labelStyle={styles.buttonLabel}
-          onPress={() => uploadInfo()}
+          onPress={() => navigation.navigate("Summary")}
         >
           Continue
         </Button>

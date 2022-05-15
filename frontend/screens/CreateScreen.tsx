@@ -6,7 +6,9 @@ import {
   ScrollView,
   StyleSheet,
   Dimensions,
-  Alert,
+  NativeSyntheticEvent, 
+  TextInputChangeEventData,
+  Alert
 } from "react-native";
 import { Button } from "react-native-paper";
 import TextInput from "../components/TextInput";
@@ -18,6 +20,9 @@ import {
 } from "@expo-google-fonts/dev";
 import { RootStackParamList } from "../types";
 import { StackNavigationProp } from "@react-navigation/stack";
+
+import { useContext } from "react";
+import { useUserData, UserDataType } from "../hooks/userContext";
 
 type LoginScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -32,6 +37,8 @@ const Create = ({ navigation }: Props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+
+  const { UserData, setUserData } = useUserData()!;
 
   let [fontsLoaded] = useFonts({
     Montserrat: Montserrat_400Regular,
@@ -62,12 +69,34 @@ const Create = ({ navigation }: Props) => {
       .catch((err) => console.error(err));
   }
 
+  const handleChange = (text: string, name: string): void => {
+    // console.log(name);
+    setUserData({
+      ...UserData,
+      [name]: text
+    });
+  };
+
   //password "red" box when not the same
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
     return (
       <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
+        {/* <View>
+          <TextInput
+            style={stylesheet.email}
+            label="Your email"
+            autoCapitalize="none"
+            autoComplete="email"
+            textContentType="emailAddress"
+            enablesReturnKeyAutomatically
+            value={UserData.email}
+            onChangeText={(text) => {
+              setUserData({ email: text, password: text });
+            }}
+          />
+        </View> */}
         <View style={stylesheet.container}>
           <TextInput
             style={stylesheet.email}
@@ -76,10 +105,12 @@ const Create = ({ navigation }: Props) => {
             autoComplete="email"
             textContentType="emailAddress"
             enablesReturnKeyAutomatically
-            value={email}
-            onChangeText={(text) => {
-              setEmail(text);
-            }}
+            value={UserData.email}
+            onChangeText={text => handleChange(text, "email")} 
+            // value={email}
+            // onChangeText={(text) => {
+            //   setEmail(text);
+            // }}
           />
           <TextInput
             style={stylesheet.password}
@@ -88,10 +119,12 @@ const Create = ({ navigation }: Props) => {
             autoComplete="none"
             textContentType="password"
             enablesReturnKeyAutomatically
-            value={password}
-            onChangeText={(text) => {
-              setPassword(text);
-            }}
+            value={UserData.password}
+            onChangeText={text => handleChange(text, "password")}
+            // value={password}
+            // onChangeText={(text) => {
+            //   setPassword(text);
+            // }}
           />
           <TextInput
             style={stylesheet.confirm}
