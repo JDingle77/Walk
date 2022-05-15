@@ -74,8 +74,6 @@ const GetInfoScreen = () => {
       style={stylesheet.backGround}
       behavior={"position"}
       enabled={shift}
-      //enabled
-      // keyboardVerticalOffset={Platform.select({ios: 500, android: 500})}
     >
       <View style={stylesheet.textView}>
         <Text style={stylesheet.titleText}>Let's get some Info!</Text>
@@ -115,7 +113,6 @@ const GetInfoScreen = () => {
         
         <DropDownPicker
             style = {[{borderWidth: 0, width: phoneWidth* 0.77, height: phoneHeight * 0, }, open? {opacity: 0}:{opacity: 0}]}
-            //autoScroll={true}
             placeholder=""
             textStyle={{fontSize: -2}}
             open={open}
@@ -153,9 +150,7 @@ const GetInfoScreen = () => {
       
         
     
-    </View>
-
-    
+    </View>  
     <View style ={stylesheet.pickerView}>
       <View style = {stylesheet.bdayText_container}>
       <Image 
@@ -175,10 +170,7 @@ const GetInfoScreen = () => {
         </View>
         
     </View>
-          
-    
-
-      <View style={stylesheet._Text_Field_Location}>
+      {/* <View style={stylesheet._Text_Field_Location}>
         <TextInput
           style={stylesheet._Input_Box_Style}
           label="Location"
@@ -191,7 +183,7 @@ const GetInfoScreen = () => {
             setLocation(text);
           }}
         />
-      </View>
+      </View> */}    
       <View style={stylesheet._Rectangle_39}>
         <Button
           style={[styles.button]}
@@ -207,33 +199,20 @@ const GetInfoScreen = () => {
 
 const stylesheet = StyleSheet.create({
   bdayText_container:{
-    // borderWidth: 1,
-    // borderRadius: 5,
     top: phoneHeight*0.018,
     left: phoneWidth * 0.66,
     height: phoneHeight*0.035,
     width: phoneWidth* 0.25,
     alignItems: 'center',
-    //backgroundColor: 'rgb(226,186,108)'
   },
   bdayText:{
-    
     fontFamily: "Montserrat",
     fontSize: 15,
-    
-    
-    
-    //alignSelf: 'center'
-    //backgroundColor: 
-
-
   },
   picker:{
     height: 500,
     flex:1
-    
   },
-  
   pickerStyle:{
     opacity: 0,
     borderRadius: 5,
@@ -244,7 +223,6 @@ const stylesheet = StyleSheet.create({
     top: phoneHeight * 0.01
   },
   pickerView:{
-    //borderWidth: 1,
     position: "absolute",
     alignSelf: "center",
     top: phoneHeight * 0.520,
