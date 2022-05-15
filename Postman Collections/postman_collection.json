@@ -1099,10 +1099,7 @@
 			"name": "DogProfile",
 			"request": {
 				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
-				}
+				"header": []
 			},
 			"response": []
 		},
