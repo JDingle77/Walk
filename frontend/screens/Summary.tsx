@@ -13,12 +13,12 @@ export default function SummaryPage() {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUxOTM0MTk1LCJpYXQiOjE2NTE0NTA2NDYsImp0aSI6ImRmZTIzNzEyOTgwZTQ2YTc4ODM2MzQ1Zjg4NDE0ZTk4IiwidXNlcl9pZCI6IjEwNDM3NDY0LTEyNGYtNDhjYy05OGZmLTE4ZGYzYmRhZmI2ZCJ9.R99egWC_f_Mn7Li-E_zcC_5j09e7Z7e4EX-n45aip6Y"
+        Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUyNjcxMDczLCJpYXQiOjE2NTI1ODQ2NzMsImp0aSI6Ijc2ZmFlNDE4MDU1ZTQxMzNiMzU2OWYwNzI5YTljYWFiIiwidXNlcl9pZCI6ImUzZmQ2MjdmLTU4NmMtNGIxNS1iYjUzLWExNWI0OTdkMTIxZiJ9.4yfFGpMBt_r2N2xfc_8_Qch2yC4WExByzf_SlW1G5A0"
       },
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setSummaryData(response.response)
       })
       .catch((err) => console.error(err));
@@ -30,7 +30,7 @@ export default function SummaryPage() {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUxOTM0MTk1LCJpYXQiOjE2NTE0NTA2NDYsImp0aSI6ImRmZTIzNzEyOTgwZTQ2YTc4ODM2MzQ1Zjg4NDE0ZTk4IiwidXNlcl9pZCI6IjEwNDM3NDY0LTEyNGYtNDhjYy05OGZmLTE4ZGYzYmRhZmI2ZCJ9.R99egWC_f_Mn7Li-E_zcC_5j09e7Z7e4EX-n45aip6Y"
+        Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUyNjcxMDczLCJpYXQiOjE2NTI1ODQ2NzMsImp0aSI6Ijc2ZmFlNDE4MDU1ZTQxMzNiMzU2OWYwNzI5YTljYWFiIiwidXNlcl9pZCI6ImUzZmQ2MjdmLTU4NmMtNGIxNS1iYjUzLWExNWI0OTdkMTIxZiJ9.4yfFGpMBt_r2N2xfc_8_Qch2yC4WExByzf_SlW1G5A0"
       },
     })
       .then((response) => response.json())
@@ -41,7 +41,11 @@ export default function SummaryPage() {
   }
 
   useEffect(() => {
-    getSummary()
+    getSummary();
+    getSummaryStats();
+    return () => {
+      setSummaryData([]); // This worked for me
+    };
   }, [summaryData]);
 
   return (

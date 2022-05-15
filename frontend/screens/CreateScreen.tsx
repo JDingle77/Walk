@@ -183,17 +183,6 @@ const Create = ({ navigation }: Props) => {
             >
               Log In
             </Button>
-            {/* REMOVE IN PROD */}
-            <Button
-              labelStyle={[{ fontFamily: "MontserratBold", fontWeight: "900" }]}
-              mode="text"
-              onPress={() => navigation.navigate("DogProfile")}
-              uppercase={false}
-              color="black"
-            >
-              DogProfile
-            </Button>
-            {/* UP TO HERE */}
           </View>
           <View style={[stylesheet.orRegisterWith]}>
             <Text
