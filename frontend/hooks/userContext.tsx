@@ -8,7 +8,7 @@ const defaultUserData = {
   dogName: "",
   dogBreed: "",
   dogGender: "",
-  dogBirthday: "",
+  dogBirthday: new Date(),
   dogLocation: "",
 };
 export type UserDataType = {
@@ -20,7 +20,7 @@ export type UserDataType = {
     dogName: string,
     dogBreed: string,
     dogGender: string,
-    dogBirthday: string,
+    dogBirthday: Date,
     dogLocation: string,
   };
   setUserData: (value: {
@@ -31,7 +31,7 @@ export type UserDataType = {
     dogName: string,
     dogBreed: string,
     dogGender: string,
-    dogBirthday: string,
+    dogBirthday: Date,
     dogLocation: string,
   }) => void;
 };
@@ -56,7 +56,7 @@ export const UserDataProvider = ({ children }: Props) => {
       dogName: "",
       dogBreed: "",
       dogGender: "",
-      dogBirthday: "",
+      dogBirthday: new Date(),
       dogLocation: "",
     };
     setUserData(currentData);

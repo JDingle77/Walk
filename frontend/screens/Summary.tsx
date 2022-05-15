@@ -41,8 +41,8 @@ export default function SummaryPage() {
   }
 
   useEffect(() => {
-    getSummary();
-    getSummaryStats();
+    // getSummary();
+    // getSummaryStats();
     return () => {
       setSummaryData([]); // This worked for me
     };
