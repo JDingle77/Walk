@@ -100,13 +100,13 @@ def GetSummaryStatisticsSerializer(routes_last_week, routes_last_last_week):
         n_routes_last2 += 1
 
         # average dist, time
-    avg_dist_last = tt_dist_last / n_routes_last
-    avg_dist_last2 = tt_dist_last2 / n_routes_last2
-    avg_time_last = tt_time_last / n_routes_last
-    avg_time_last2 = tt_time_last2 / n_routes_last2
+    avg_dist_last = tt_dist_last / n_routes_last if n_routes_last != 0 else 0
+    avg_dist_last2 = tt_dist_last2 / n_routes_last2 if n_routes_last2 != 0 else 0
+    avg_time_last = tt_time_last / n_routes_last if n_routes_last != 0 else timedelta(minutes=0)
+    avg_time_last2 = tt_time_last2 / n_routes_last2 if n_routes_last2 != 0 else timedelta(minutes=0)
         # percent change distance, time
-    change_dist = (avg_dist_last - avg_dist_last2) / avg_dist_last2 * 100
-    change_time = (avg_time_last - avg_time_last2) / avg_time_last2 * 100
+    change_dist = (avg_dist_last - avg_dist_last2) / avg_dist_last2 * 100 if avg_dist_last2 != 0 else 0
+    change_time = (avg_time_last - avg_time_last2) / avg_time_last2 * 100 if avg_time_last2 != 0 else 0
 
     response = {
         "avg_dist": avg_dist_last,
