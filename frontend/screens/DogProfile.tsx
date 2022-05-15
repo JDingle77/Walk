@@ -14,6 +14,8 @@ import { Text, View } from "../components/Themed";
 import { RootStackParamList } from "../types";
 import { StackNavigationProp } from "@react-navigation/stack";
 
+import { useUserData, UserDataType } from "../hooks/userContext";
+
 type NavigationProp = StackNavigationProp<
   RootStackParamList,
   "DogProfile"
@@ -28,6 +30,17 @@ const DogProfile = ({ navigation }: Props) => {
   const [dogName, setDogName] = useState("");
   const [ownerName, setOwnerName] = useState("");
   const [buttonSelected, setSelect] = useState(false);
+
+  //useContext stuff
+  const { UserData, setUserData } = useUserData()!;
+
+  const handleChange = (text: string, name: string): void => {
+      // console.log(name);
+      setUserData({
+        ...UserData,
+        [name]: text
+      });
+  };
 
   return (
     <KeyboardAwareScrollView
@@ -59,32 +72,25 @@ const DogProfile = ({ navigation }: Props) => {
             label="Your dog's username"
             autoCapitalize="none"
             autoComplete="none"
-            value={dogUsername}
-            onChangeText={(text) => {
-              setDogUsername(text);
-            }}
-            textContentType="name"
+            value={UserData.dogUsername}
+            onChangeText={text => handleChange(text, "dogUsername")}
           />
           <TextInput
             label="Your dog's name"
             style={styles.textInput}
-            value={dogName}
+            value={UserData.dogName}
             autoCapitalize="none"
             autoComplete="none"
-            onChangeText={(text) => {
-              setDogName(text);
-            }}
+            onChangeText={text => handleChange(text, "dogName")}
             textContentType="name"
           />
           <TextInput
             label="Owner's username"
             style={styles.textInput}
-            value={ownerName}
+            value={UserData.ownerName}
             autoCapitalize="none"
             autoComplete="none"
-            onChangeText={(text) => {
-              setOwnerName(text);
-            }}
+            onChangeText={text => handleChange(text, "ownerName")}
             textContentType="name"
           />
         </View>
