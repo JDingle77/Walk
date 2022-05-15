@@ -1102,6 +1102,70 @@
 				"header": []
 			},
 			"response": []
+		},
+		{
+			"name": "Restaurant Search",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/places/restaurants?location=Los Angeles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"places",
+						"restaurants"
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "Los Angeles"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Park Search",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/places/parks?location=UCLA",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"places",
+						"parks"
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "UCLA"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
