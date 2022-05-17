@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Route, Pee, Poop, Drink, Interaction, Coordinate
 import uuid
+from datetime import timedelta
 
 
 class CoordinateSerializer(serializers.ModelSerializer):
@@ -68,7 +69,7 @@ class RouteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Route
         fields = ['route_name', 'id', 'user',
-                  'coordinates', 'start_time', 'end_time','total_distance', 'peeIcon', 'poopIcon', 'drinkIcon', 'interactionIcon']
+                  'coordinates', 'start_time', 'end_time', 'total_distance', 'peeIcon', 'poopIcon', 'drinkIcon', 'interactionIcon']
         read_only = ['user', 'start_time', 'end_time']
 
 # use to update route
@@ -81,8 +82,9 @@ class UpdateRouteSerializer(serializers.ModelSerializer):
         model = Route
         fields = ['route_name']
 
+
 def GetSummaryStatisticsSerializer(routes_last_week, routes_last_last_week):
-    #calculate:
+    # calculate:
     tt_dist_last = 0
     tt_time_last = timedelta(minutes=0)
     n_routes_last = 0
@@ -90,6 +92,8 @@ def GetSummaryStatisticsSerializer(routes_last_week, routes_last_last_week):
         tt_dist_last += route.total_distance
         tt_time_last += (route.end_time - route.start_time)
         n_routes_last += 1
+
+    if_routes_last_week = False if n_routes_last == 0 else True
 
     tt_dist_last2 = 0
     tt_time_last2 = timedelta(minutes=0)
@@ -99,18 +103,38 @@ def GetSummaryStatisticsSerializer(routes_last_week, routes_last_last_week):
         tt_time_last2 += (route.end_time - route.start_time)
         n_routes_last2 += 1
 
-        # average dist, time
-    avg_dist_last = tt_dist_last / n_routes_last if n_routes_last != 0 else 0
-    avg_dist_last2 = tt_dist_last2 / n_routes_last2 if n_routes_last2 != 0 else 0
-    avg_time_last = tt_time_last / n_routes_last if n_routes_last != 0 else timedelta(minutes=0)
-    avg_time_last2 = tt_time_last2 / n_routes_last2 if n_routes_last2 != 0 else timedelta(minutes=0)
-        # percent change distance, time
-    change_dist = (avg_dist_last - avg_dist_last2) / avg_dist_last2 * 100 if avg_dist_last2 != 0 else 0
-    change_time = (avg_time_last - avg_time_last2) / avg_time_last2 * 100 if avg_time_last2 != 0 else 0
+    if_routes_last_week2 = False if n_routes_last2 == 0 else True
+
+    # average dist, time
+    if n_routes_last != 0:
+        avg_dist_last = tt_dist_last / n_routes_last
+        avg_time_last = tt_time_last / n_routes_last
+    else:
+        avg_dist_last = 0
+        avg_time_last = 0
+        
+    if n_routes_last2 != 0:
+        avg_dist_last2 = tt_dist_last2 / n_routes_last2
+        avg_time_last2 = tt_time_last2 / n_routes_last2
+    else:
+        avg_dist_last2 = 0
+        avg_time_last2 = 0
+
+    # percent change distance, time
+    if n_routes_last != 0 and n_routes_last2 != 0:
+        change_dist = ((avg_dist_last - avg_dist_last2) / avg_dist_last2 * 100)
+        change_time = ((avg_time_last - avg_time_last2) / avg_time_last2 * 100)
+    else:
+        change_dist = 0
+        change_time = 0
 
     response = {
-        "avg_dist": avg_dist_last,
-        "avg_time": str(avg_time_last),
-        "change_dist": change_dist,
-        "change_time": change_time
+        "avg_dist": round(avg_dist_last+0.0049, 2),
+        "avg_time": str(avg_time_last).split('.')[0],
+        "change_dist": round(change_dist+0.0049, 2),
+        "change_time": round(change_time+0.0049, 2),
+        "routes_last_week": if_routes_last_week,
+        "routes_last_week2": if_routes_last_week2,
     }
+
+    return response
