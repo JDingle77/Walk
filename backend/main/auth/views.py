@@ -30,6 +30,8 @@ class RegistrationViewSet(ModelViewSet, TokenObtainPairView):
     http_method_names = ['post']
 
     def create(self, request, *args, **kwargs):
+        if 'is_admin' not in request.data:
+            request.data['is_admin'] = False
         serializer = self.get_serializer(data=request.data, context={
                                          'is_admin': request.data['is_admin']})
         serializer.is_valid(raise_exception=True)
