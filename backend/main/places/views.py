@@ -15,7 +15,7 @@ RADIUS = 4000 #for search (in meters)
 
 #current API key is for a class project that I had last time
 CLIENT_ID = "bTFkcwBT7_IoIaYYIrHUTg"
-API_KEY = "XTQYgyBjrmFoUE4CbMEGDUP6F6cmZN_6gniRNUyAd64oxQIVraRbhlFb6Qnv09NpZOudGETBgt8MHCOHTrc3Jo_PGs3SegbXolRgL_nHW0J8VH3JP_wW3rPG1U1KYnYx"
+API_KEY = "LYp6n8UlBQ1-AWc9MJGKrDao6oK3fR2t5feaaqzk7f9KZCCqLSKxfFUK8aYdP7kF64RH3gG-xXKkGbp2YgZga2z0IdEMig_i_6Wk2_qh2tLkpzpVktlE8h3GeXGAYnYx"
 HEADERS = {"authorization" : "BEARER {}".format(API_KEY)}
 
 #https://stackoverflow.com/questions/19412462/getting-distance-between-two-points-based-on-latitude-longitude
