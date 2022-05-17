@@ -3,7 +3,6 @@ import * as React from "react";
 const defaultUserData = {
   email: "",
   password: "",
-  is_admin: false,
   dogProfile: {
     owner_name: "",
     username: "",
@@ -18,7 +17,6 @@ export type UserDataType = {
   UserData: {
     email: string,
     password: string,
-    is_admin: boolean,
     dogProfile: {
       owner_name: string,
       username: string,
@@ -32,7 +30,6 @@ export type UserDataType = {
   setUserData: (value: {
     email: string,
     password: string,
-    is_admin: boolean,
     dogProfile: {
       owner_name: string,
       username: string,
@@ -60,7 +57,6 @@ export const UserDataProvider = ({ children }: Props) => {
     const currentData = {
       email: "",
       password: "",
-      is_admin: false,
       dogProfile: {
         owner_name: "",
         username: "",
