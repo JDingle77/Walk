@@ -1,8 +1,12 @@
+import json
+from math import sqrt
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
+from datetime import datetime, timedelta
+from django.utils.timezone import make_aware
 
 from .models import Route, Pee, Poop, Drink, Interaction
 from user.models import User
@@ -158,11 +162,11 @@ def get_all_icons(request, route_id):
 
     return Response(data)
 
-from math import sqrt
+
 def calculate_distance(sx, sy, ex, ey):
     return sqrt((sx - ex)**2 + (sy - ey)**2)
 
-import json
+
 @api_view(['GET'])
 def get_summary(request):
     userid = request.user.id
@@ -170,13 +174,13 @@ def get_summary(request):
     # print(route.route_name)
     datalist = []
 
-    #TODO: calculate total distance for the first time
+    # TODO: calculate total distance for the first time
     total_distance = route.total_distance
     if total_distance == None:
         coords = route.coordinates.all()
         if len(coords) == 1:
-            pass #or whatever breaks me out of the outer if statement
-        
+            pass  # or whatever breaks me out of the outer if statement
+
         total_distance = 0.0
 
         s_lat = coords[0].latitude
@@ -185,18 +189,18 @@ def get_summary(request):
         for i, coord in enumerate(coords):
             if i == 0:
                 pass
-            
+
             e_lat = coords[i].latitude
             e_lon = coords[i].longitude
 
             total_distance += calculate_distance(s_lat, s_lon, e_lat, e_lon)
             s_lat, s_lon = e_lat, e_lon
-        
+
         route.total_distance = total_distance
         route.save(update_fields=['total_distance'])
     datalist.append(total_distance)
 
-    total_time = route.end_time - route.start_time #datetime.timedelta
+    total_time = route.end_time - route.start_time  # datetime.timedelta
     datalist.append(str(total_time))
 
     total_hours = total_time.total_seconds() / 3600.0
@@ -210,8 +214,9 @@ def get_summary(request):
     datalist.append(poop_stops)
     datalist.append(water_breaks)
 
-    #TODO: serialize into JSON object but idk if this is the right way to do it
-    titles = ['Distance', 'Time', 'Avg Speed (mph)', 'Pee Stops', 'Poop Drops', 'Water Breaks']
+    # TODO: serialize into JSON object but idk if this is the right way to do it
+    titles = ['Distance', 'Time',
+              'Avg Speed (mph)', 'Pee Stops', 'Poop Drops', 'Water Breaks']
     json_list = []
     for i, title in enumerate(titles):
         data = {
@@ -224,18 +229,20 @@ def get_summary(request):
     summary_data = {"response": json_list}
     return Response(summary_data)
 
-from datetime import datetime, timedelta
-from django.utils.timezone import make_aware
+
 @api_view(['GET'])
 def get_summary_statistics(request):
-    #query by time; last week and week before that
+    # query by time; last week and week before that
     userid = request.user.id
     now = datetime.now()
     now = make_aware(now)
     one_wk_ago = now - timedelta(days=7)
     two_wk_ago = one_wk_ago - timedelta(days=7)
-    routes_last_week = Route.objects.filter(user=request.user.id, end_time__range=(one_wk_ago, now))
-    routes_last_last_week = Route.objects.filter(user=request.user.id, end_time__range=(two_wk_ago, one_wk_ago))
-    
-    response = GetSummaryStatisticsSerializer(routes_last_week, routes_last_last_week)
+    routes_last_week = Route.objects.filter(
+        user=request.user.id, end_time__range=(one_wk_ago, now))
+    routes_last_last_week = Route.objects.filter(
+        user=request.user.id, end_time__range=(two_wk_ago, one_wk_ago))
+
+    response = GetSummaryStatisticsSerializer(
+        routes_last_week, routes_last_last_week)
     return Response(response)
