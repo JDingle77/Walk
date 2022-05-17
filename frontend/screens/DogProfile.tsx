@@ -26,9 +26,6 @@ type Props = {
 };
 
 const DogProfile = ({ navigation }: Props) => {
-  const [dogUsername, setDogUsername] = useState("");
-  const [dogName, setDogName] = useState("");
-  const [ownerName, setOwnerName] = useState("");
   const [buttonSelected, setSelect] = useState(false);
 
   //useContext stuff
@@ -38,7 +35,10 @@ const DogProfile = ({ navigation }: Props) => {
       // console.log(name);
       setUserData({
         ...UserData,
-        [name]: text
+        dogProfile: {
+          ...UserData.dogProfile,
+          [name]: text,
+        },
       });
   };
 
@@ -72,25 +72,25 @@ const DogProfile = ({ navigation }: Props) => {
             label="Your dog's username"
             autoCapitalize="none"
             autoComplete="none"
-            value={UserData.dogUsername}
-            onChangeText={text => handleChange(text, "dogUsername")}
+            value={UserData.dogProfile.username}
+            onChangeText={text => handleChange(text, "username")}
           />
           <TextInput
             label="Your dog's name"
             style={styles.textInput}
-            value={UserData.dogName}
+            value={UserData.dogProfile.name}
             autoCapitalize="none"
             autoComplete="none"
-            onChangeText={text => handleChange(text, "dogName")}
+            onChangeText={text => handleChange(text, "name")}
             textContentType="name"
           />
           <TextInput
             label="Owner's username"
             style={styles.textInput}
-            value={UserData.ownerName}
+            value={UserData.dogProfile.owner_name}
             autoCapitalize="none"
             autoComplete="none"
-            onChangeText={text => handleChange(text, "ownerName")}
+            onChangeText={text => handleChange(text, "owner_name")}
             textContentType="name"
           />
         </View>

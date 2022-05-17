@@ -43,10 +43,8 @@ const boxHeight = (48 * phoneHeight) / 844;
 const boxWidth = (312 * phoneWidth) / 407;
 
 const GetInfoScreen = ({ navigation }: Props) => {
-  const [breed, setBreed] = useState("");
 
   const [birthday, setBirthday] = useState("");
-  const [location, setLocation] = useState("");
   const [shift, setShift] = useState(false);
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
@@ -71,7 +69,7 @@ const GetInfoScreen = ({ navigation }: Props) => {
     setShow(false);
     setBirthday(fullDate);
     setDate(selectedDate);
-    handleChange(date, "dogBirthday");
+    handleChange(date, "birthday");
   };
 
   //useContext stuff
@@ -81,47 +79,32 @@ const GetInfoScreen = ({ navigation }: Props) => {
     // console.log(name);
     setUserData({
       ...UserData,
-      [name]: text,
+      dogProfile: {
+        ...UserData.dogProfile,
+        [name]: text,
+      }
     });
   };
 
   useEffect(() => {
-    handleChange(gender, "dogGender");
+    handleChange(gender, "gender");
   }, [gender]);
 
   function uploadInfo() {
-    // console.log(UserData.email);
-    // console.log(UserData.password);
-    // console.log(UserData.ownerName);
-    // console.log(UserData.dogUsername);
-    // console.log(UserData.dogName);
-    // console.log(UserData.dogBreed);
-    // console.log(UserData.dogGender);
-    // console.log(UserData.dogBirthday);
-    // return;
     fetch("http://localhost:8000/auth/register/", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        email: UserData.email,
-        password: UserData.password,
-        ownerName: UserData.ownerName,
-        dogUsername: UserData.dogUsername,
-        dogName: UserData.dogName,
-        dogBreed: UserData.dogBreed,
-        dogGender: UserData.dogGender,
-        dogBirthday: UserData.dogBirthday,
-    }),
+      body: JSON.stringify(UserData),
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response)
+        console.log(response);
+        navigation.navigate("Home");
       })
       .catch((err) => console.error(err));
-    navigation.navigate("Home");
   }
 
   return (
@@ -140,9 +123,9 @@ const GetInfoScreen = ({ navigation }: Props) => {
           autoCapitalize="none"
           autoComplete="email"
           textContentType="emailAddress"
-          value={UserData.dogBreed}
+          value={UserData.dogProfile.breed}
           onFocus={() => setShift(false)}
-          onChangeText={(text) => handleChange(text, "dogBreed")}
+          onChangeText={(text) => handleChange(text, "breed")}
         />
       </View>
 
@@ -230,18 +213,6 @@ const GetInfoScreen = ({ navigation }: Props) => {
           />
         </View>
       </View>
-      {/* <View style={stylesheet._Text_Field_Location}>
-        <TextInput
-          style={stylesheet._Input_Box_Style}
-          label="Location"
-          autoCapitalize="none"
-          autoComplete="email"
-          textContentType="emailAddress"
-          value={UserData.dogLocation}
-          onFocus={() => setShift(true)}
-          onChangeText={text => handleChange(text, "dogLocation")}
-        />
-      </View> */}
       <View style={stylesheet._Rectangle_39}>
         <Button
           style={[styles.button]}

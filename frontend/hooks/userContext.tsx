@@ -3,36 +3,45 @@ import * as React from "react";
 const defaultUserData = {
   email: "",
   password: "",
-  ownerName: "",
-  dogUsername: "",
-  dogName: "",
-  dogBreed: "",
-  dogGender: "",
-  dogBirthday: new Date(),
-  dogLocation: "",
+  is_admin: false,
+  dogProfile: {
+    owner_name: "",
+    username: "",
+    name: "",
+    breed: "",
+    gender: "",
+    birthday: new Date(),
+    location: "",
+  }
 };
 export type UserDataType = {
   UserData: {
     email: string,
     password: string,
-    ownerName: string,
-    dogUsername: string,
-    dogName: string,
-    dogBreed: string,
-    dogGender: string,
-    dogBirthday: Date,
-    dogLocation: string,
+    is_admin: boolean,
+    dogProfile: {
+      owner_name: string,
+      username: string,
+      name: string,
+      breed: string,
+      gender: string,
+      birthday: Date,
+      location: string,
+    }
   };
   setUserData: (value: {
     email: string,
     password: string,
-    ownerName: string,
-    dogUsername: string,
-    dogName: string,
-    dogBreed: string,
-    dogGender: string,
-    dogBirthday: Date,
-    dogLocation: string,
+    is_admin: boolean,
+    dogProfile: {
+      owner_name: string,
+      username: string,
+      name: string,
+      breed: string,
+      gender: string,
+      birthday: Date,
+      location: string,
+    }
   }) => void;
 };
 const UserDataContext = React.createContext<UserDataType | undefined>(
@@ -51,13 +60,16 @@ export const UserDataProvider = ({ children }: Props) => {
     const currentData = {
       email: "",
       password: "",
-      ownerName: "",
-      dogUsername: "",
-      dogName: "",
-      dogBreed: "",
-      dogGender: "",
-      dogBirthday: new Date(),
-      dogLocation: "",
+      is_admin: false,
+      dogProfile: {
+        owner_name: "",
+        username: "",
+        name: "",
+        breed: "",
+        gender: "",
+        birthday: new Date(),
+        location: "",
+      }
     };
     setUserData(currentData);
   }, []);
