@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "../stylesheets/globalStyles";
 import {
   View,
   Text,
@@ -85,7 +86,7 @@ const Create = ({ navigation }: Props) => {
       <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
         {/* <View>
           <TextInput
-            style={stylesheet.email}
+            style={styles.inputField}
             label="Your email"
             autoCapitalize="none"
             autoComplete="email"
@@ -97,9 +98,15 @@ const Create = ({ navigation }: Props) => {
             }}
           />
         </View> */}
-        <View style={stylesheet.container}>
+        <View style={styles.creamContainer}>
+          <View style={stylesheet.titleContainer}>
+            <Text style={styles.title}>
+              Create your account
+            </Text>
+          </View>
+          <View style={styles.separator} />
           <TextInput
-            style={stylesheet.email}
+            style={styles.inputField}
             label="Your email"
             autoCapitalize="none"
             autoComplete="email"
@@ -113,7 +120,7 @@ const Create = ({ navigation }: Props) => {
             // }}
           />
           <TextInput
-            style={stylesheet.password}
+            style={styles.inputField}
             label="Your password"
             autoCapitalize="none"
             autoComplete="none"
@@ -127,7 +134,7 @@ const Create = ({ navigation }: Props) => {
             // }}
           />
           <TextInput
-            style={stylesheet.confirm}
+            style={styles.inputField}
             label="Confirm password"
             autoCapitalize="none"
             autoComplete="none"
@@ -138,25 +145,12 @@ const Create = ({ navigation }: Props) => {
               setConfirm(text);
             }}
           />
-          <View style={[stylesheet.title]}>
-            <Text
-              style={[
-                stylesheet.title,
-                {
-                  left: 0,
-                  top: 0,
-                },
-              ]}
-            >
-              Create your account
-            </Text>
-          </View>
-          <View style={stylesheet.button}>
+          <View style={stylesheet.buttonContainer}>
             <Button
-              style={stylesheet.oval}
+              style={styles.button}
               mode="contained"
               onPress={() => createProfile()}
-              labelStyle={stylesheet.signUp}
+              labelStyle={styles.buttonLabel}
               uppercase={false}
               disabled={
                 UserData.email !== "" &&
@@ -170,12 +164,39 @@ const Create = ({ navigation }: Props) => {
               Sign Up
             </Button>
           </View>
-          <View style={[stylesheet.logIn]}>
-            <Text style={[{ fontFamily: "Montserrat", fontWeight: "400" }]}>
+          <View style={styles.separator} />
+          <View style={stylesheet.logoContainer}>
+              <View style={stylesheet.registerContainer}>
+                <Text style={styles.p}>
+                  Or register with
+                </Text>
+              </View>
+              <View style={stylesheet.logoCircle}>
+                <Image
+                  style={stylesheet.logoImage}
+                  source={{ uri: imageUrl_google__1__1 }}
+                />
+              </View>
+              <View style={stylesheet.logoCircle}>
+                <Image
+                  style={stylesheet.logoImage}
+                  source={{ uri: imageUrl_facebook_app_symbol_1 }}
+                />
+              </View>
+              <View style={stylesheet.logoCircle}>
+                <Image
+                  style={stylesheet.logoImage}
+                  resizeMode="contain"
+                  source={{ uri: imageUrl_Apple_logo_black_3 }}
+                />
+              </View>
+          </View>
+          <View style={[stylesheet.loginContainer]}>
+            <Text style={styles.p}>
               Already have an account?
             </Text>
             <Button
-              labelStyle={[{ fontFamily: "MontserratBold", fontWeight: "900" }]}
+              labelStyle={styles.bold}
               mode="text"
               onPress={() => navigation.navigate("Login")}
               uppercase={false}
@@ -183,40 +204,15 @@ const Create = ({ navigation }: Props) => {
             >
               Log In
             </Button>
-          </View>
-          <View style={[stylesheet.orRegisterWith]}>
-            <Text
-              style={[
-                stylesheet.orRegisterWith,
-                {
-                  left: 0,
-                  top: 0,
-                },
-              ]}
+            <Button
+              labelStyle={styles.bold}
+              mode="text"
+              onPress={() => navigation.navigate("Summary")}
+              uppercase={false}
+              color="black"
             >
-              Or register with
-            </Text>
-          </View>
-          <View style={stylesheet.gContainer}>
-            <View style={stylesheet.gCircle}></View>
-            <Image
-              style={stylesheet.gLogo}
-              source={{ uri: imageUrl_google__1__1 }}
-            ></Image>
-          </View>
-          <View style={stylesheet.fContainer}>
-            <View style={stylesheet.fCircle}></View>
-            <Image
-              style={stylesheet.fLogo}
-              source={{ uri: imageUrl_facebook_app_symbol_1 }}
-            ></Image>
-          </View>
-          <View style={stylesheet.aContainer}>
-            <View style={stylesheet.aCircle}></View>
-            <Image
-              style={stylesheet.aLogo}
-              source={{ uri: imageUrl_Apple_logo_black_3 }}
-            ></Image>
+              Summary
+            </Button>
           </View>
         </View>
       </ScrollView>
@@ -225,156 +221,43 @@ const Create = ({ navigation }: Props) => {
 };
 
 const stylesheet = StyleSheet.create({
-  container: {
-    height: Dimensions.get("window").height,
-    backgroundColor: "rgba(245, 239, 224, 1)",
+  titleContainer: {
+    marginTop: 120,
   },
-  email: {
-    position: "absolute",
-    width: Dimensions.get("window").width - 64,
-    height: 48,
-    borderRadius: 5,
-    borderWidth: 0.5,
-    borderColor: "rgba(90, 67, 62, 1)",
-    left: 32,
-    top: (254 / 812) * Dimensions.get("window").height,
-    backgroundColor: "rgba(255, 255, 255, 1)",
+  buttonContainer: {
+    marginVertical: 12,
   },
-  password: {
-    position: "absolute",
-    width: Dimensions.get("window").width - 64,
-    height: 48,
-    borderRadius: 5,
-    borderWidth: 0.5,
-    borderColor: "rgba(90, 67, 62, 1)",
-    left: 32,
-    top: (303 / 812) * Dimensions.get("window").height,
-    backgroundColor: "rgba(255, 255, 255, 1)",
-  },
-  confirm: {
-    position: "absolute",
-    width: Dimensions.get("window").width - 64,
-    height: 48,
-    borderRadius: 5,
-    borderWidth: 0.5,
-    borderColor: "rgba(90, 67, 62, 1)",
-    left: 32,
-    top: (352 / 812) * Dimensions.get("window").height,
-    backgroundColor: "rgba(255, 255, 255, 1)",
-  },
-  title: {
-    position: "absolute",
-    width: Dimensions.get("window").width - 64,
-    height: 101,
-    left: 32,
-    top: (112 / 812) * Dimensions.get("window").height,
-    fontFamily: "braveold",
-    fontWeight: "500",
-    lineHeight: 50.400001525878906,
-    fontSize: 40,
-    color: "rgba(0, 0, 0, 1)",
-    textAlign: "left",
-    textAlignVertical: "center",
-    letterSpacing: 0.1,
-  },
-  button: {
-    position: "absolute",
-    width: Dimensions.get("window").width - 76,
-    height: 56,
-    top: (490 / 812) * Dimensions.get("window").height,
-    left: 38,
-  },
-  oval: {
-    width: Dimensions.get("window").width - 76,
-    height: 56,
-    borderRadius: 28,
-    backgroundColor: "rgba(233, 185, 94, 1)",
-  },
-  signUp: {
-    left: 0,
-    top: 5,
-    fontFamily: "MontserratBold",
-    fontWeight: "bold",
-    fontSize: 20,
-    textAlign: "center",
-  },
-  logIn: {
-    top: (600 / 812) * Dimensions.get("window").height,
+  loginContainer: {
+    // flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    // borderWidth: 1,
   },
-  orRegisterWith: {
-    position: "absolute",
-    left: (32 / 375) * Dimensions.get("window").width,
-    top: (627 / 812) * Dimensions.get("window").height,
-    fontFamily: "Montserrat",
-    fontWeight: "400",
-    lineHeight: 14,
-    fontSize: 14,
-    color: "rgba(90, 67, 62, 1)",
-    letterSpacing: 0.1,
+  registerContainer: {
+    marginLeft: (32 / 375) * Dimensions.get("window").width,
+    marginRight: "auto",
   },
-  gContainer: {
-    position: "absolute",
+  logoCircle: {
+    height: 49,
     width: 49,
-    height: 49,
-    left: (174 / 375) * Dimensions.get("window").width,
-    top: (610 / 812) * Dimensions.get("window").height,
-  },
-  gCircle: {
-    height: 49,
     borderRadius: 1000,
     borderWidth: 2,
     borderColor: "rgba(90, 67, 62, 0.5)",
+    justifyContent: "center",
+    alignItems: "center",
+
   },
-  gLogo: {
-    position: "absolute",
+  logoImage: {
     width: 31.096155166625977,
     height: 31.096155166625977,
-    left: 8.951904296875,
-    top: 8.95196533203125,
   },
-  fContainer: {
-    position: "absolute",
-    width: 49,
-    height: 49,
-    left: (233 / 375) * Dimensions.get("window").width,
-    top: (610 / 812) * Dimensions.get("window").height,
-  },
-  fCircle: {
-    height: 49,
-    borderRadius: 1000,
-    borderWidth: 2,
-    borderColor: "rgba(90, 67, 62, 0.5)",
-  },
-  fLogo: {
-    position: "absolute",
-    width: 31.100000381469727,
-    height: 31.100000381469727,
-    left: 8,
-    top: 8,
-  },
-  aContainer: {
-    position: "absolute",
-    width: 49,
-    height: 49,
-    left: (292 / 375) * Dimensions.get("window").width,
-    top: (610 / 812) * Dimensions.get("window").height,
-  },
-  aCircle: {
-    height: 49,
-    borderRadius: 1000,
-    borderWidth: 2,
-    borderColor: "rgba(90, 67, 62, 0.5)",
-  },
-  aLogo: {
-    position: "absolute",
-    width: 27,
-    height: 32,
-    left: 11,
-    top: 8,
-  },
+  logoContainer: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    // borderWidth: 1,
+  }
 });
 
 const imageUrl_google__1__1 =

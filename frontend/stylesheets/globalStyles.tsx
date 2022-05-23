@@ -1,40 +1,59 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 
 export default StyleSheet.create({
     container: {
       flex: 1,
       flexDirection: 'column',
-      alignItems: "center",
+      // alignItems: "center",
       justifyContent: "center",
       backgroundColor: 'rgb(252,251,247)',
       // borderWidth: 3,
       // borderColor: 'blue',
     },
+    creamContainer: {
+      height: Dimensions.get("window").height,
+      backgroundColor: "rgba(245, 239, 224, 1)",
+    },
     titleView: {
-      flex: 1,
       width: '90%', 
+      marginTop: 20,
       // borderWidth: 3, 
-      // borderColor: 'green'
+      // borderColor: 'green',
     },
     title: {
-      flex: 1,
+      width: Dimensions.get("window").width - 64,
+      height: 101,
+      left: 32,
+      fontFamily: "braveold",
+      fontWeight: "500",
+      lineHeight: 50.400001525878906,
       fontSize: 40,
+      color: "rgba(0, 0, 0, 1)",
+      textAlign: "left",
+      textAlignVertical: "center",
+      letterSpacing: 0.1,
+    },
+    h3: {
+      fontSize: 28,
       fontWeight: "bold",
       textAlign: "left",
       fontFamily: "braveold",
+      // borderWidth: 3,
+      // borderColor: 'green'
+    },
+    bold: {
+      fontFamily: "MontserratBold", 
+      fontWeight: "900",
     },
     image: {
-      flex: 1,
       // borderWidth: 1,
       // width: '100%',
-      height: '30%',
-      // marginBottom: 20,
+      flex: 0.9,
     },
     separator: { //I've never used this in my life
       marginVertical: 30,
       height: 1,
-      width: "80%",
     },
     header: {
       height: 30,
@@ -76,20 +95,32 @@ export default StyleSheet.create({
       fontFamily: 'Montserrat',
       color: "rgba(90, 67, 62, 1)",
       letterSpacing: 0.1,
+      lineHeight: 14,
     },
     button: {
-      alignSelf: 'center',
-      backgroundColor: 'rgb(226,186,108)',
-      color: 'black',
+      width: Dimensions.get("window").width - 76,
+      height: 56,
       borderRadius: 28,
-      width: 200,
+      backgroundColor: "rgba(233, 185, 94, 1)",
+      alignSelf: "center",
     },
     buttonLabel: {
+      left: 0,
+      top: 5,
       fontFamily: "MontserratBold",
       fontWeight: "bold",
       fontSize: 20,
       textAlign: "center",
-      color: "rgba(90, 67, 62, 1)",
-      letterSpacing: 0.1,
+      color: "#5A433E",
     },
+    inputField: {
+      // position: "absolute",
+      width: Dimensions.get("window").width - 64,
+      height: 48,
+      borderRadius: 5,
+      borderWidth: 0.5,
+      borderColor: "rgba(90, 67, 62, 1)",
+      left: 32,
+      backgroundColor: "rgba(255, 255, 255, 1)",
+    }
 });
