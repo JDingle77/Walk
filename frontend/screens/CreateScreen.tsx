@@ -53,7 +53,7 @@ const Create = ({ navigation }: Props) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: email,
+        email: UserData.email,
       }),
     })
       .then((response) => response.status)
@@ -159,10 +159,10 @@ const Create = ({ navigation }: Props) => {
               labelStyle={stylesheet.signUp}
               uppercase={false}
               disabled={
-                email !== "" &&
-                password !== "" &&
+                UserData.email !== "" &&
+                UserData.password !== "" &&
                 confirm !== "" &&
-                password === confirm
+                UserData.password === confirm
                   ? false
                   : true
               }
@@ -177,7 +177,7 @@ const Create = ({ navigation }: Props) => {
             <Button
               labelStyle={[{ fontFamily: "MontserratBold", fontWeight: "900" }]}
               mode="text"
-              onPress={() => navigation.navigate("WalkPageNavigator")}
+              onPress={() => navigation.navigate("Login")}
               uppercase={false}
               color="black"
             >
