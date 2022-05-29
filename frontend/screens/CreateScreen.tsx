@@ -14,6 +14,7 @@ import {
 import { Button } from "react-native-paper";
 import TextInput from "../components/TextInput";
 import AppLoading from "expo-app-loading";
+import ThirdPartyLogins from "../components/ThirdPartyLogins";
 import {
   useFonts,
   Montserrat_400Regular,
@@ -99,7 +100,7 @@ const Create = ({ navigation }: Props) => {
           />
         </View> */}
         <View style={styles.creamContainer}>
-          <View style={stylesheet.titleContainer}>
+          <View style={styles.titleContainer}>
             <Text style={styles.title}>
               Create your account
             </Text>
@@ -146,52 +147,27 @@ const Create = ({ navigation }: Props) => {
               setConfirm(text);
             }}
           />
-          <View style={stylesheet.buttonContainer}>
-            <Button
-              style={styles.button}
-              mode="contained"
-              onPress={() => createProfile()}
-              labelStyle={styles.buttonLabel}
-              uppercase={false}
-              disabled={
-                UserData.email !== "" &&
-                UserData.password !== "" &&
-                confirm !== "" &&
-                UserData.password === confirm
-                  ? false
-                  : true
-              }
-            >
-              Sign Up
-            </Button>
-          </View>
+          <Button
+            style={styles.button}
+            mode="contained"
+            onPress={() => createProfile()}
+            labelStyle={styles.buttonLabel}
+            uppercase={false}
+            disabled={
+              UserData.email !== "" &&
+              UserData.password !== "" &&
+              confirm !== "" &&
+              UserData.password === confirm
+                ? false
+                : true
+            }
+          >
+            Sign Up
+          </Button>
           <View style={styles.separator} />
-          <View style={stylesheet.logoContainer}>
-              <View style={stylesheet.registerContainer}>
-                <Text style={styles.p}>
-                  Or register with
-                </Text>
-              </View>
-              <View style={stylesheet.logoCircle}>
-                <Image
-                  style={stylesheet.logoImage}
-                  source={{ uri: imageUrl_google__1__1 }}
-                />
-              </View>
-              <View style={stylesheet.logoCircle}>
-                <Image
-                  style={stylesheet.logoImage}
-                  source={{ uri: imageUrl_facebook_app_symbol_1 }}
-                />
-              </View>
-              <View style={stylesheet.logoCircle}>
-                <Image
-                  style={stylesheet.logoImage}
-                  resizeMode="contain"
-                  source={{ uri: imageUrl_Apple_logo_black_3 }}
-                />
-              </View>
-          </View>
+          
+          <ThirdPartyLogins AuthType="register" />
+
           <View style={[stylesheet.loginContainer]}>
             <Text style={styles.p}>
               Already have an account?
@@ -222,9 +198,6 @@ const Create = ({ navigation }: Props) => {
 };
 
 const stylesheet = StyleSheet.create({
-  titleContainer: {
-    marginTop: 120,
-  },
   buttonContainer: {
     marginVertical: 12,
   },
@@ -235,37 +208,6 @@ const stylesheet = StyleSheet.create({
     justifyContent: "center",
     // borderWidth: 1,
   },
-  registerContainer: {
-    marginLeft: (32 / 375) * Dimensions.get("window").width,
-    marginRight: "auto",
-  },
-  logoCircle: {
-    height: 49,
-    width: 49,
-    borderRadius: 1000,
-    borderWidth: 2,
-    borderColor: "rgba(90, 67, 62, 0.5)",
-    justifyContent: "center",
-    alignItems: "center",
-
-  },
-  logoImage: {
-    width: 31.096155166625977,
-    height: 31.096155166625977,
-  },
-  logoContainer: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    alignItems: "center",
-    // borderWidth: 1,
-  }
 });
-
-const imageUrl_google__1__1 =
-  "https://sizze-figma-plugin-images-upload.s3.us-east-2.amazonaws.com/806a62e1d2bb832c559e5b61722125b4";
-const imageUrl_facebook_app_symbol_1 =
-  "https://sizze-figma-plugin-images-upload.s3.us-east-2.amazonaws.com/1be7591b0844bc8f203a34b768fb86f3";
-const imageUrl_Apple_logo_black_3 =
-  "https://sizze-figma-plugin-images-upload.s3.us-east-2.amazonaws.com/5644c57036f36ab6004217c806442a9e";
 
 export default Create;

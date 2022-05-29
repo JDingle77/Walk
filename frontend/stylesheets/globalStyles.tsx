@@ -21,6 +21,9 @@ export default StyleSheet.create({
       // borderWidth: 3, 
       // borderColor: 'green',
     },
+    titleContainer: {
+      marginTop: 120,
+    },
     title: {
       width: Dimensions.get("window").width - 64,
       height: 101,
@@ -103,6 +106,7 @@ export default StyleSheet.create({
       borderRadius: 28,
       backgroundColor: "rgba(233, 185, 94, 1)",
       alignSelf: "center",
+      marginVertical: 12,
     },
     buttonLabel: {
       left: 0,
