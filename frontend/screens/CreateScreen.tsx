@@ -107,6 +107,7 @@ const Create = ({ navigation }: Props) => {
           <View style={styles.separator} />
           <TextInput
             style={styles.inputField}
+            // label={<Text style={{color: "black"}}>Your email</Text>}
             label="Your email"
             autoCapitalize="none"
             autoComplete="email"
@@ -207,7 +208,7 @@ const Create = ({ navigation }: Props) => {
             <Button
               labelStyle={styles.bold}
               mode="text"
-              onPress={() => navigation.navigate("Summary")}
+              onPress={() => navigation.navigate("GetInfo")}
               uppercase={false}
               color="black"
             >

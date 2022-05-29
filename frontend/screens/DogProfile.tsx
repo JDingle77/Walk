@@ -8,9 +8,11 @@ import {
   ScrollView,
   SafeAreaView,
 } from "react-native";
+import { Button } from "react-native-paper";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import TextInput from "../components/TextInput";
 import { Text, View } from "../components/Themed";
+import styles from "../stylesheets/globalStyles";
 import { RootStackParamList } from "../types";
 import { StackNavigationProp } from "@react-navigation/stack";
 
@@ -53,21 +55,20 @@ const DogProfile = ({ navigation }: Props) => {
     >
       <View style={styles.separator}></View>
       <View style={styles.separator}></View>
-      <View style={styles.container}>
-        <View style={styles.image}>
+      <View style={styles.creamContainer}>
+        <View style={localStyles.image}>
           <Image
-            style={styles.imageSize}
+            style={localStyles.imageSize}
             source={require("../assets/images/dogProfile.png")}
           />
         </View>
-        <View style={{ width: "90%" }}>
-          <Text style={styles.title}>Your Dog's</Text>
-          <Text style={styles.title}>Profile</Text>
+        <View style={styles.titleView}>
+          <Text style={styles.title}>Your Dog's Profile</Text>
         </View>
         <View style={styles.separator}></View>
         <View>
           <TextInput
-            style={styles.textInput}
+            style={styles.inputField}
             enablesReturnKeyAutomatically
             label="Your dog's username"
             autoCapitalize="none"
@@ -77,7 +78,7 @@ const DogProfile = ({ navigation }: Props) => {
           />
           <TextInput
             label="Your dog's name"
-            style={styles.textInput}
+            style={styles.inputField}
             value={UserData.dogProfile.name}
             autoCapitalize="none"
             autoComplete="none"
@@ -86,7 +87,7 @@ const DogProfile = ({ navigation }: Props) => {
           />
           <TextInput
             label="Owner's username"
-            style={styles.textInput}
+            style={styles.inputField}
             value={UserData.dogProfile.owner_name}
             autoCapitalize="none"
             autoComplete="none"
@@ -95,27 +96,38 @@ const DogProfile = ({ navigation }: Props) => {
           />
         </View>
         <View style={styles.separator}></View>
-        <Pressable
-          style={[styles.continueButton, { opacity: buttonSelected ? 0.8 : 1 }]}
+        {/* <Pressable
+          style={[styles.button, { opacity: buttonSelected ? 0.8 : 1 }]}
           onPress={() => {
             setSelect(!buttonSelected);
             navigation.navigate("GetInfo")
           }}
         >
-          <Text style={styles.continueTitle}> Continue</Text>
-        </Pressable>
+          <Text style={styles.buttonLabel}> Continue</Text>
+        </Pressable> */}
+        <Button
+          style={styles.button}
+          mode="contained"
+          onPress={() => {
+            setSelect(!buttonSelected);
+            navigation.navigate("GetInfo")
+          }}
+          labelStyle={styles.buttonLabel}
+          uppercase={false}
+          disabled={ //IDK why its not disabling
+            UserData.dogProfile.username === "" ||
+            UserData.dogProfile.name === "" ||
+            UserData.dogProfile.owner_name === ""
+          }
+        >
+          Continue
+        </Button>
       </View>
     </KeyboardAwareScrollView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
-  },
+const localStyles = StyleSheet.create({
   image: {
     alignSelf: "flex-start",
     width: 0.4 * Dimensions.get("window").width,
@@ -127,40 +139,7 @@ const styles = StyleSheet.create({
     height: undefined,
     aspectRatio: 1,
   },
-  title: {
-    fontSize: 40,
-    fontWeight: "bold",
-    textAlign: "left",
-    fontFamily: "braveold",
-  },
-  continueButton: {
-    width: 0.8 * Dimensions.get("window").width,
-    height: 60,
-    justifyContent: "center",
-    alignItems: "center",
-    margin: 10,
-    borderRadius: 100,
-    backgroundColor: "#E9B95E",
-  },
-  continueTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "left",
-    fontFamily: "Montserrat",
-  },
-  separator: {
-    marginBottom: 40,
-  },
-  textInput: {
-    fontFamily: "Montserrat",
-    width: 0.9 * Dimensions.get("window").width,
-    borderRadius: 5,
-    borderWidth: 0.5,
-    borderStyle: "solid",
-    borderColor: "rgba(90, 67, 62, 1)",
-    backgroundColor: "rgba(255, 255, 255, 1)",
-    justifyContent: "center",
-  },
+
 });
 
 export default DogProfile;
