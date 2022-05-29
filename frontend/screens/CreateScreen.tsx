@@ -208,7 +208,7 @@ const Create = ({ navigation }: Props) => {
             <Button
               labelStyle={styles.bold}
               mode="text"
-              onPress={() => navigation.navigate("GetInfo")}
+              onPress={() => navigation.navigate("Summary")}
               uppercase={false}
               color="black"
             >
