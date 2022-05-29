@@ -110,13 +110,12 @@ const GetInfoScreen = ({ navigation }: Props) => {
   }
 
   return (
-    <View style={[styles.creamContainer, {flexDirection: "column", justifyContent: "center"}]}>
     <KeyboardAvoidingView
-      style={stylesheet.backGround}
+      style={styles.creamContainer}
       behavior={"position"}
       enabled={shift}
     >
-      <View style={styles.titleView}>
+      <View style={styles.titleContainer}>
         <Text style={styles.title}>Let's get some Info!</Text>
       </View>
       <View style={styles.separator} />
@@ -135,7 +134,6 @@ const GetInfoScreen = ({ navigation }: Props) => {
             style={[styles.inputField, {marginVertical: 12}]}
             dropDownContainerStyle={stylesheet.dropdown}
             placeholder="Gender"
-            // textStyle={{ color: !gender ? "grey" : "black" }}
             placeholderStyle={{
               color: "grey",
             }}
@@ -185,7 +183,6 @@ const GetInfoScreen = ({ navigation }: Props) => {
           Continue
         </Button>
     </KeyboardAvoidingView>
-    </View>
   );
 };
 
@@ -236,12 +233,6 @@ const stylesheet = StyleSheet.create({
   birthdayText: {
     flex: 4, 
     left: 12,
-  },
-  backGround: {
-    flex: 1,
-    backgroundColor: "rgba(245, 239, 224, 1)",
-    flexDirection: "column", 
-    justifyContent: "center"
   },
 });
 
