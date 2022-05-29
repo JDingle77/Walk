@@ -131,23 +131,14 @@ const GetInfoScreen = ({ navigation }: Props) => {
           onFocus={() => setShift(false)}
           onChangeText={(text) => handleChange(text, "breed")}
         />
-        {/* <View style={[{borderWidth: 1,}, styles.inputField]}>
-          <TextInput
-            // style={styles.inputField}
-            style={stylesheet.gender}
-            label="Gender"
-            autoCapitalize="none"
-            autoComplete="email" //??
-            textContentType="emailAddress"
-            value={gender}
-            onFocus={() => setShift(false)}
-          /> */}
           <DropDownPicker
             style={[styles.inputField, {marginVertical: 12}]}
-            // style={[stylesheet.gender, {opacity: 0}]}
             dropDownContainerStyle={stylesheet.dropdown}
             placeholder="Gender"
-            textStyle={{ color: !gender ? "grey" : "black" }}
+            // textStyle={{ color: !gender ? "grey" : "black" }}
+            placeholderStyle={{
+              color: "grey",
+            }}
             open={open}
             value={gender}
             items={items}
@@ -158,25 +149,6 @@ const GetInfoScreen = ({ navigation }: Props) => {
               activeOpacity: 1,
             }}
           />
-        {/* </View> */}
-          {/* <View style={[styles.inputField, {flex: 0}]}> */}
-            {/* <TextInput
-              style={styles.inputField}
-              label="Birthday"
-              autoCapitalize="none"
-              autoComplete="email"
-              textContentType="emailAddress"
-              value={birthday}
-              onFocus={() => {
-                setShift(true);
-                setShow(true);
-              }}
-              onChangeText={(text) => {
-                setBirthday(text);
-              }}
-            /> */}
-            {/* <Icon style={{padding: 10}} name="calendar-today" size={20} color="#000"/> */}
-          {/* </View> */}
         <View style={stylesheet.birthdayContainer}>
           <View style={stylesheet.dateTimeContainer}>
             <DateTimePicker
@@ -189,22 +161,9 @@ const GetInfoScreen = ({ navigation }: Props) => {
               onChange={onChange}
             />
           </View>
-          <View style={stylesheet.searchSection}>
-              {/* <Image
-                source={{
-                  uri: "https://img.icons8.com/ios/50/000000/calendar--v1.png",
-                }}
-                style={{
-                  zIndex: 9,
-                  height: 30,
-                  width: 30,
-                  bottom: phoneHeight * 0.008,
-                }}
-              /> */}
-              <Text style={{flex: 4, left: 12,}}>{birthday ? birthday : "Birthday"}</Text>
-              {/* <View style={{flex: 1, height: "100%",}}> */}
-              <Icon style={{padding: 10, zIndex: 0,}} name="calendar-today" size={20} color="#000"/>
-              {/* </View> */}
+          <View style={stylesheet.birthdayDisplayContainer}>
+              <Text style={[stylesheet.birthdayText, { color: birthday ? "black" : "grey" }]}>{birthday ? birthday : "Birthday"}</Text>
+              <Icon style={stylesheet.icon} name="calendar-today" size={20} color="#000"/>
           </View>
         </View>
       </View>
@@ -240,34 +199,11 @@ const stylesheet = StyleSheet.create({
     left: 32,
     backgroundColor: "rgba(255, 255, 255, 1)",
   },
-  // gender: {
-  //   position: "absolute",
-  //   width: "100%",
-  //   height: 48,
-  // },
-  // input: {
-  //   flex: 1,
-  //   paddingTop: 10,
-  //   paddingRight: 10,
-  //   paddingBottom: 10,
-  //   paddingLeft: 0,
-  //   backgroundColor: '#fff',
-  //   color: '#424242',
-  // },
-  searchSection: {
-    // flex: 1,
+  birthdayDisplayContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
     height: 48,
-    // width: Dimensions.get("window").width - 64,
-    // height: 48,
-    // borderRadius: 5,
-    // borderWidth: 0.5,
-    // borderColor: "rgba(90, 67, 62, 1)",
-    // left: 32,
-    // backgroundColor: "rgba(255, 255, 255, 1)",
-
   },
   birthdayContainer: {
     width: Dimensions.get("window").width - 64,
@@ -293,108 +229,20 @@ const stylesheet = StyleSheet.create({
     width: "100%",
     zIndex: 1,
   },
-  // bdayText_container: {
-  //   top: phoneHeight * 0.018,
-  //   left: phoneWidth * 0.66,
-  //   height: phoneHeight * 0.035,
-  //   width: phoneWidth * 0.25,
-  //   alignItems: "center",
-  // },
-  // bdayText: {
-  //   fontFamily: "Montserrat",
-  //   fontSize: 15,
-  // },
-  // picker: {
-  //   height: 500,
-  //   flex: 1,
-  // },
-  // pickerStyle: {
-  //   opacity: 1,
-  //   borderRadius: 5,
-  //   borderWidth: 0.5,
-  //   width: boxWidth,
-  //   height: boxHeight,
-  // },
-
+  icon: {
+    padding: 10, 
+    zIndex: 0,
+  },
+  birthdayText: {
+    flex: 4, 
+    left: 12,
+  },
   backGround: {
     flex: 1,
     backgroundColor: "rgba(245, 239, 224, 1)",
     flexDirection: "column", 
     justifyContent: "center"
   },
-  // textView: {
-  //   marginTop: phoneHeight * 0.07,
-  // },
-  // titleText: {
-  //   fontFamily: "braveold",
-  //   fontSize: 50,
-  //   left: phoneWidth * 0.115,
-  // },
-  //_Text_Field_##### position the input box relative to the screen
-  // _Text_Field_Breed: {
-  //   position: "absolute",
-  //   alignSelf: "center",
-  //   top: phoneHeight * 0.306,
-  // },
-  // _Text_Field_Gender: {
-  //   position: "absolute",
-  //   alignSelf: "center",
-  //   top: phoneHeight * 0.406,
-  //   //borderWidth: 5,
-  //   zIndex: 3,
-  // },
-  // drop_down_picker_view: {
-  //   position: "absolute",
-  //   alignSelf: "center",
-  //   top: phoneHeight * 0.416,
-  //   //borderWidth: 5,
-  //   zIndex: 4,
-  // },
-  // drop_down_picker_view_hide: {
-  //   position: "absolute",
-  //   alignSelf: "center",
-  //   top: phoneHeight * 0.416,
-  //   //borderWidth: 5,
-  //   zIndex: 4,
-  //   opacity: 0,
-  // },
-  // _Text_Field_Birthday: {
-  //   position: "absolute",
-  //   alignSelf: "center",
-  //   top: phoneHeight * 0.506,
-  //   zIndex: -1,
-  // },
-  // _Text_Field_Location: {
-  //   position: "absolute",
-  //   alignSelf: "center",
-  //   top: phoneHeight * 0.606,
-  // },
-  //Inputbox style
-  // _Input_Box_Style: {
-  //   fontFamily: "Montserrat",
-  //   borderRadius: 5,
-  //   borderWidth: 0.5,
-  //   borderStyle: "solid",
-  //   borderColor: "rgba(90, 67, 62, 1)",
-  //   width: boxWidth,
-  //   height: boxHeight,
-  //   transform: [{ translateX: 0 }, { translateY: 0 }, { rotate: "0deg" }],
-  //   backgroundColor: "rgba(255, 255, 255, 1)",
-  // },
-  //button style
-  // _Rectangle_39: {
-  //   position: "absolute",
-  //   width: 299,
-  //   height: 56,
-  //   right: "auto",
-  //   top: phoneHeight * 0.756,
-  //   alignContent: "center",
-  //   justifyContent: "center",
-  //   alignSelf: "center",
-  // },
-  // buttonContainer: {
-  //   borderWidth: 10,
-  // },
 });
 
 export default GetInfoScreen;
