@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
 import { Button } from "react-native-paper";
 import {getValueFor} from "../functions/SecureStore";
-import { refreshHandler } from "../functions/RefreshHandler";
+import { refreshAccess } from "../functions/RefreshHandler";
 import { RootStackParamList } from "../types";
 import { StackNavigationProp } from "@react-navigation/stack";
 
@@ -23,16 +23,37 @@ const Home = ({ navigation }: Props) => {
           Hello World
       </Button>
       <Button onPress={async () => {
-          let isExpired = await refreshHandler();
-          if(isExpired) {
-            navigation.navigate("Login")
+          refreshAccess().then(() =>
+          {
+            getSummaryStats();
+          }).catch((err) =>
+          {
+            navigation.navigate("Login");
+          })
       }}
-      }>
+      >
           Test Refresh
       </Button>
     </View>
   );
 };
+
+async function getSummaryStats() {
+  let access_token = await getValueFor("access_token");
+  fetch("http://localhost:8000/maps/get_summary_statistics/", {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + access_token,
+    },
+  })
+    .then((response) => response.json())
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((err) => console.error(err));
+}
 
 const styles = StyleSheet.create({
   container: {
