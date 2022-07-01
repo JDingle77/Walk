@@ -13,8 +13,17 @@ import ThirdPartyLogins from "../components/ThirdPartyLogins";
 import AppLoading from "expo-app-loading";
 import { useFonts, Montserrat_400Regular } from "@expo-google-fonts/dev";
 import { Button } from "react-native-paper";
+import { save } from "../functions/SecureStore";
+import { RootStackParamList } from "../types";
+import { StackNavigationProp } from "@react-navigation/stack";
 
-export default function App() {
+type NavigationProp = StackNavigationProp<RootStackParamList, "Login">;
+
+type Props = {
+  navigation: NavigationProp;
+};
+
+export default function Login({ navigation }: Props) {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   let [fontsLoaded] = useFonts({
@@ -37,6 +46,9 @@ export default function App() {
       .then((response) => response.json())
       .then((response) => {
         console.log(response);
+        save("access_token",response.access);
+        save("refresh_token",response.refresh);
+        navigation.navigate("Home");
       })
       .catch((err) => console.error(err));
   }
