@@ -56,7 +56,7 @@ const GetInfoScreen = ({ navigation }: Props) => {
   const [items, setItems] = useState([
     { label: "Male", value: "Male" },
     { label: "Female", value: "Female" },
-    { label: "Unspecified", value: "Unspecified" },
+    { label: "Other", value: "Not specified" },
   ]);
 
   const onChange = (event, selectedDate: Date) => {
