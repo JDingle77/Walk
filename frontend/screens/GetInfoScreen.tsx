@@ -174,10 +174,8 @@ const GetInfoScreen = ({ navigation }: Props) => {
           }}
           labelStyle={styles.buttonLabel}
           uppercase={false}
-          disabled={ //IDK why its not disabling
-            UserData.dogProfile.breed === "" ||
-            UserData.dogProfile.gender === "" ||
-            UserData.dogProfile.birthday === null
+          disabled={
+            UserData.dogProfile.gender === "" 
           }
         >
           Continue
