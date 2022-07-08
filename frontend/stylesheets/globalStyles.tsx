@@ -115,7 +115,6 @@ export default StyleSheet.create({
       fontWeight: "bold",
       fontSize: 20,
       textAlign: "center",
-      color: "#5A433E",
     },
     inputField: {
       // position: "absolute",
