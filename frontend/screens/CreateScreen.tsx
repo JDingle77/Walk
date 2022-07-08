@@ -208,4 +208,11 @@ const stylesheet = StyleSheet.create({
   },
 });
 
+const imageUrl_google__1__1 =
+  "https://sizze-figma-plugin-images-upload.s3.us-east-2.amazonaws.com/806a62e1d2bb832c559e5b61722125b4";
+const imageUrl_facebook_app_symbol_1 =
+  "https://sizze-figma-plugin-images-upload.s3.us-east-2.amazonaws.com/1be7591b0844bc8f203a34b768fb86f3";
+const imageUrl_Apple_logo_black_3 =
+  "https://sizze-figma-plugin-images-upload.s3.us-east-2.amazonaws.com/5644c57036f36ab6004217c806442a9e";
+
 export default Create;
