@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   error: {
     fontSize: 14,
     color: theme.colors.error,
-    paddingHorizontal: 4,
+    paddingHorizontal: 40,
     paddingTop: 4,
   },
 });

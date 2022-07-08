@@ -39,6 +39,7 @@ const Create = ({ navigation }: Props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+  const [error, setError] = useState("");
 
   const { UserData, setUserData } = useUserData()!;
 
@@ -63,9 +64,9 @@ const Create = ({ navigation }: Props) => {
         if (status == 200) {
           navigation.navigate("DogProfile");
         } else if (status == 409) {
-          Alert.alert("Specified email already in use.");
+          setError("Specified email already in use.");
         } else {
-          Alert.alert("Specified email invalid");
+          setError("Specified email invalid");
         }
       })
       .catch((err) => console.error(err));
@@ -116,10 +117,7 @@ const Create = ({ navigation }: Props) => {
             enablesReturnKeyAutomatically
             value={UserData.email}
             onChangeText={text => handleChange(text, "email")} 
-            // value={email}
-            // onChangeText={(text) => {
-            //   setEmail(text);
-            // }}
+            errorText={error}
           />
           <TextInput
             style={styles.inputField}
