@@ -21,6 +21,26 @@ type LatLng = {
     longitude: Number,
   }
 
+  type PeeLatLng = {
+    pee_latitude: Number,
+    pee_longitude: Number,
+  }
+
+  type PoopLatLng = {
+    poop_latitude: Number,
+    poop_longitude: Number,
+  }
+
+  type DrinkLatLng = {
+    drink_latitude: Number,
+    drink_longitude: Number,
+  }
+
+  type InteractionLatLng = {
+    interaction_latitude: Number,
+    interaction_longitude: Number,
+  }
+
 export default function WalkTracking({ navigation }) {
     const [errorMsg, setErrorMsg] = useState(null);
     const [currLocation, setCurrLocation] = useState({latitude: 0.0, longitude: 0.0});
@@ -36,14 +56,35 @@ export default function WalkTracking({ navigation }) {
     const [distance, setDistance] = useState(0.0);
     const [actionListVisible, setActionListVisible] = useState(false);
     const mountedRef = useRef(true);
-    const [peeCoords, setPeeCoords] = useState<Array<LatLng>>([]);
-    const [poopCoords, setPoopCoords] = useState<Array<LatLng>>([]);
-    const [drinkCoords, setDrinkCoords] = useState<Array<LatLng>>([]);
-    const [interactionCoords, setInteractionCoords] = useState<Array<LatLng>>([]);
+    const [peeCoords, setPeeCoords] = useState<Array<PeeLatLng>>([]);
+    const [poopCoords, setPoopCoords] = useState<Array<PoopLatLng>>([]);
+    const [drinkCoords, setDrinkCoords] = useState<Array<DrinkLatLng>>([]);
+    const [interactionCoords, setInteractionCoords] = useState<Array<InteractionLatLng>>([]);
+
+    //
+    const [begin, setBegin] = useState(false);
+    const [startTime, setStartTime] = useState(new Date());
+    const [endTime, setEndTime] = useState(new Date());
+
+    // const [userRoute, setUserRoute] = useState({
+    //     route_name: "",
+    //     coordinates:[{}],
+    //     peeIcon: [{}],
+    //     poopIcon:[{}],
+    //     drinkIcon:[{}],
+    //     interactionIcon:[{}],
+    //     start_time: new Date(),
+    //     end_time: new Date(),
+
+    // });
 
     let [fontsLoaded] = useFonts({
         Montserrat: Montserrat_400Regular,
     });
+
+    // useEffect(()=>{
+    //     console.log(userRoute);
+    // }, [userRoute])
 
     useEffect(() => {
         const getLocation = async () => {
@@ -88,6 +129,14 @@ export default function WalkTracking({ navigation }) {
     }, [currLocation])
 
     useEffect(() => {
+
+        //temp solution to get the start time
+        if (begin === false){
+            let startDay = new Date();
+            setStartTime(startDay)
+            setBegin(true);
+        }
+
         const interval = setInterval(() => {
             const old_duration = duration;
             setDuration(duration + 1);
@@ -157,10 +206,10 @@ export default function WalkTracking({ navigation }) {
                 latitudeDelta: 0.005,
                 longitudeDelta: 0.005,
             })
-            console.log({
-                latitude: loc.coords.latitude,
-                longitude: loc.coords.longitude,
-            });
+            // console.log({
+            //     latitude: loc.coords.latitude,
+            //     longitude: loc.coords.longitude,
+            // });
 
             setCurrLocation({
                 latitude: loc.coords.latitude,
@@ -178,34 +227,73 @@ export default function WalkTracking({ navigation }) {
     }
 
     const endWalkHandler = () => {
+
+        let endDay = new Date();
+        setEndTime(endDay);
+        setBegin(false);
         navigation.pop();
+
+        //  console.log(peeCoords);
+        //  console.log(poopCoords);
+        //  console.log(drinkCoords);
+        //  console.log(interactionCoords)
+
+        const userRoute = {
+            route_name: "test",
+            coordinates: coordinatesList,
+            peeIcon: peeCoords,
+            poopIcon: poopCoords,
+            drinkIcon: drinkCoords,
+            interactionIcon: interactionCoords,
+            start_time: startTime,
+            end_time: endTime,
+        }
+
+        fetch("http://localhost:8000/maps/route/", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userRoute),
+          })
+            .then((response) => response.json())
+            .then((response) => {
+              console.log(response);
+              navigation.navigate("WalkPageNavigator");
+            })
+            .catch((err) => console.error(err));
+
+
     }
 
     const addPee = () => {
         setPeeCoords(prevList => [...prevList, {
-            latitude: currLocation.latitude,
-            longitude: currLocation.longitude,
+            pee_latitude: currLocation.latitude,
+            pee_longitude: currLocation.longitude,
         }]);
     }
 
     const addPoop = () => {
+        console.log(poopCoords);
         setPoopCoords(prevList => [...prevList, {
-            latitude: currLocation.latitude,
-            longitude: currLocation.longitude,
+            poop_latitude: currLocation.latitude,
+            poop_longitude: currLocation.longitude,
         }]);
+        console.log(poopCoords)
     }
 
     const addDrink = () => {
         setDrinkCoords(prevList => [...prevList, {
-            latitude: currLocation.latitude,
-            longitude: currLocation.longitude,
+            drink_latitude: currLocation.latitude,
+            drink_longitude: currLocation.longitude,
         }]);
     }
 
     const addInteraction = () => {
         setInteractionCoords(prevList => [...prevList, {
-            latitude: currLocation.latitude,
-            longitude: currLocation.longitude,
+            interaction_latitude: currLocation.latitude,
+            interaction_longitude: currLocation.longitude,
         }]);
     }
 
@@ -224,8 +312,12 @@ export default function WalkTracking({ navigation }) {
                 />
                 {
                     poopCoords.map((coord, i) => {
+                        let newCoord = {
+                            latitude: coord.poop_latitude,
+                            longitude: coord.poop_longitude
+                        }
                         return(
-                            <MapView.Marker coordinate={coord}>
+                            <MapView.Marker coordinate={newCoord}>
                                 <Image
                                     source={require('../assets/images/poop-icon.png')}
                                     style={{width: 26, height: 28}}
@@ -237,8 +329,13 @@ export default function WalkTracking({ navigation }) {
                 }
                 {
                     peeCoords.map((coord, i) => {
+                        //console.log(coord)
+                        let newCoord = {
+                            latitude: coord.pee_latitude,
+                            longitude: coord.pee_longitude
+                        }
                         return(
-                            <MapView.Marker coordinate={coord}>
+                            <MapView.Marker coordinate={newCoord}>
                                 <Image
                                     source={require('../assets/images/pee-icon.png')}
                                     style={{width: 26, height: 28}}
@@ -250,8 +347,12 @@ export default function WalkTracking({ navigation }) {
                 }
                 {
                     drinkCoords.map((coord, i) => {
+                        let newCoord = {
+                            latitude: coord.drink_latitude,
+                            longitude: coord.drink_longitude
+                        }
                         return(
-                            <MapView.Marker coordinate={coord}>
+                            <MapView.Marker coordinate={newCoord}>
                                 <Image
                                     source={require('../assets/images/drink-icon.png')}
                                     style={{width: 26, height: 28}}
@@ -263,8 +364,12 @@ export default function WalkTracking({ navigation }) {
                 }
                 {
                     interactionCoords.map((coord, i) => {
+                        let newCoord = {
+                            latitude: coord.interaction_latitude,
+                            longitude: coord.interaction_longitude
+                        }
                         return(
-                            <MapView.Marker coordinate={coord}>
+                            <MapView.Marker coordinate={newCoord}>
                                 <Image
                                     source={require('../assets/images/interaction-icon.png')}
                                     style={{width: 26, height: 28}}
