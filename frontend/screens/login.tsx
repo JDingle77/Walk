@@ -46,7 +46,7 @@ export default function Login({ navigation }: Props) {
         console.log(response);
         save("access_token",response.access);
         save("refresh_token",response.refresh);
-        navigation.navigate("Home");
+        navigation.navigate("WalkPageNavigator");
       })
       .catch((err) => console.error(err));
   }
