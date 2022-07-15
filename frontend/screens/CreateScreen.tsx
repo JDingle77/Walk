@@ -39,7 +39,9 @@ const Create = ({ navigation }: Props) => {
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState("");
   const [confirmError, setConfirmError] = useState("");
-
+  const [emailLabel, setEmailLabel] = useState("")
+  const [passwordLabel, setPasswordLabel] = useState("")
+  const [confirmLabel, setConfirmLabel] = useState("")
   const { UserData, setUserData } = useUserData()!;
 
   let [fontsLoaded] = useFonts({
@@ -48,6 +50,9 @@ const Create = ({ navigation }: Props) => {
   });
 
   let errorMessage: string
+  let emailLabelMessage: string
+  let passwordLabelMessage: string
+  let confirmLabelMessage: string
 
   useEffect(
     () => {
@@ -55,6 +60,18 @@ const Create = ({ navigation }: Props) => {
       setConfirmError(errorMessage)
     },
     [confirm],
+  )
+
+  useEffect(
+    () => {
+      emailLabelMessage = UserData.email === "" ? "Your email" : ""
+      passwordLabelMessage = UserData.password === "" ? "Your password" : ""
+      confirmLabelMessage = confirm === "" ? "Confirm password" : ""
+      setEmailLabel(emailLabelMessage)
+      setPasswordLabel(passwordLabelMessage)
+      setConfirmLabel(confirmLabelMessage)
+    },
+    [UserData.email, UserData.password, confirm],
   )
 
   function createProfile() {
@@ -118,8 +135,7 @@ const Create = ({ navigation }: Props) => {
           <View style={styles.separator} />
           <TextInput
             style={styles.inputField}
-            // label={<Text style={{color: "black"}}>Your email</Text>}
-            label="Your email"
+            label={emailLabel}
             autoCapitalize="none"
             autoComplete="email"
             textContentType="emailAddress"
@@ -130,7 +146,7 @@ const Create = ({ navigation }: Props) => {
           />
           <TextInput
             style={styles.inputField}
-            label="Your password"
+            label={passwordLabel}
             autoCapitalize="none"
             autoComplete="none"
             textContentType="password"
@@ -140,7 +156,7 @@ const Create = ({ navigation }: Props) => {
           />
           <TextInput
             style={styles.inputField}
-            label="Confirm password"
+            label={confirmLabel}
             autoCapitalize="none"
             autoComplete="none"
             textContentType="password"
