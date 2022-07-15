@@ -32,6 +32,9 @@ const DogProfile = ({ navigation }: Props) => {
   const [usernameError, setUsernameError] = useState("");
   const [nameError, setNameError] = useState("");
   const [ownerNameError, setOwnerNameError] = useState("");
+  const [usernameLabel, setUsernameLabel] = useState("")
+  const [dogLabel, setDogLabel] = useState("")
+  const [ownerLabel, setOwnerLabel] = useState("")
 
   //useContext stuff
   const { UserData, setUserData } = useUserData()!;
@@ -50,15 +53,42 @@ const DogProfile = ({ navigation }: Props) => {
   let usernameErrorMessage: string
   let nameErrorMessage: string
   let ownerNameErrorMessage: string
+  let usernameLabelMessage: string
+  let dogLabelMessage: string
+  let ownerLabelMessage: string
 
   useEffect(
     () => {
-      usernameErrorMessage = UserData.dogProfile.username === "" ? "This field cannot be left empty" : ""
-      nameErrorMessage = UserData.dogProfile.name === "" ? "This field cannot be left empty" : ""
-      ownerNameErrorMessage = UserData.dogProfile.owner_name === "" ? "This field cannot be left empty" : ""
+      if (UserData.dogProfile.username === "") {
+        usernameErrorMessage = "This field cannot be left empty"
+        usernameLabelMessage = "Your dog's username"
+      } else {
+        usernameErrorMessage = ""
+        usernameLabelMessage = ""
+      }
+
+      if (UserData.dogProfile.name === "") {
+        nameErrorMessage = "This field cannot be left empty"
+        dogLabelMessage = "Your dog's name"
+      } else {
+        nameErrorMessage = ""
+        dogLabelMessage = ""
+      }
+
+      if (UserData.dogProfile.owner_name === "") {
+        ownerNameErrorMessage = "This field cannot be left empty"
+        ownerLabelMessage = "Owner's username"
+      } else {
+        ownerNameErrorMessage = ""
+        ownerLabelMessage = ""
+      }
+
       setUsernameError(usernameErrorMessage)
       setNameError(nameErrorMessage)
       setOwnerNameError(ownerNameErrorMessage)
+      setUsernameLabel(usernameLabelMessage)
+      setDogLabel(dogLabelMessage)
+      setOwnerLabel(ownerLabelMessage)
     },
     [UserData],
   )
@@ -89,7 +119,7 @@ const DogProfile = ({ navigation }: Props) => {
           <TextInput
             style={styles.inputField}
             enablesReturnKeyAutomatically
-            label="Your dog's username"
+            label={usernameLabel}
             autoCapitalize="none"
             autoComplete="none"
             value={UserData.dogProfile.username}
@@ -97,7 +127,7 @@ const DogProfile = ({ navigation }: Props) => {
             errorText={usernameError}
           />
           <TextInput
-            label="Your dog's name"
+            label={dogLabel}
             style={styles.inputField}
             value={UserData.dogProfile.name}
             autoCapitalize="none"
@@ -107,7 +137,7 @@ const DogProfile = ({ navigation }: Props) => {
             errorText={nameError}
           />
           <TextInput
-            label="Owner's username"
+            label={ownerLabel}
             style={styles.inputField}
             value={UserData.dogProfile.owner_name}
             autoCapitalize="none"
