@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   StyleSheet,
   Dimensions,
@@ -29,6 +29,9 @@ type Props = {
 
 const DogProfile = ({ navigation }: Props) => {
   const [buttonSelected, setSelect] = useState(false);
+  const [usernameError, setUsernameError] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [ownerNameError, setOwnerNameError] = useState("");
 
   //useContext stuff
   const { UserData, setUserData } = useUserData()!;
@@ -43,6 +46,22 @@ const DogProfile = ({ navigation }: Props) => {
         },
       });
   };
+
+  let usernameErrorMessage: string
+  let nameErrorMessage: string
+  let ownerNameErrorMessage: string
+
+  useEffect(
+    () => {
+      usernameErrorMessage = UserData.dogProfile.username === "" ? "This field cannot be left empty" : ""
+      nameErrorMessage = UserData.dogProfile.name === "" ? "This field cannot be left empty" : ""
+      ownerNameErrorMessage = UserData.dogProfile.owner_name === "" ? "This field cannot be left empty" : ""
+      setUsernameError(usernameErrorMessage)
+      setNameError(nameErrorMessage)
+      setOwnerNameError(ownerNameErrorMessage)
+    },
+    [UserData],
+  )
 
   return (
     <KeyboardAwareScrollView
@@ -75,6 +94,7 @@ const DogProfile = ({ navigation }: Props) => {
             autoComplete="none"
             value={UserData.dogProfile.username}
             onChangeText={text => handleChange(text, "username")}
+            errorText={usernameError}
           />
           <TextInput
             label="Your dog's name"
@@ -84,6 +104,7 @@ const DogProfile = ({ navigation }: Props) => {
             autoComplete="none"
             onChangeText={text => handleChange(text, "name")}
             textContentType="name"
+            errorText={nameError}
           />
           <TextInput
             label="Owner's username"
@@ -93,6 +114,7 @@ const DogProfile = ({ navigation }: Props) => {
             autoComplete="none"
             onChangeText={text => handleChange(text, "owner_name")}
             textContentType="name"
+            errorText={ownerNameError}
           />
         </View>
         <View style={styles.separator}></View>

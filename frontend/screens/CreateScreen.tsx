@@ -38,7 +38,6 @@ type Props = {
 const Create = ({ navigation }: Props) => {
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
   const [confirmError, setConfirmError] = useState("");
 
   const { UserData, setUserData } = useUserData()!;
@@ -138,7 +137,6 @@ const Create = ({ navigation }: Props) => {
             enablesReturnKeyAutomatically
             value={UserData.password}
             onChangeText={text => handleChange(text, "password")}
-            errorText={passwordError}
           />
           <TextInput
             style={styles.inputField}
