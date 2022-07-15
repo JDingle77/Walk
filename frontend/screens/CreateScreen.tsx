@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../stylesheets/globalStyles";
 import {
   View,
@@ -36,10 +36,10 @@ type Props = {
 };
 
 const Create = ({ navigation }: Props) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmError, setConfirmError] = useState("");
 
   const { UserData, setUserData } = useUserData()!;
 
@@ -47,6 +47,16 @@ const Create = ({ navigation }: Props) => {
     Montserrat: Montserrat_400Regular,
     MontserratBold: Montserrat_700Bold,
   });
+
+  let errorMessage: string
+
+  useEffect(
+    () => {
+      errorMessage = UserData.password === confirm && confirm !== "" ? "" : "Passwords must match"
+      setConfirmError(errorMessage)
+    },
+    [confirm],
+  )
 
   function createProfile() {
     fetch("http://localhost:8000/auth/validEmail/", {
@@ -128,10 +138,7 @@ const Create = ({ navigation }: Props) => {
             enablesReturnKeyAutomatically
             value={UserData.password}
             onChangeText={text => handleChange(text, "password")}
-            // value={password}
-            // onChangeText={(text) => {
-            //   setPassword(text);
-            // }}
+            errorText={passwordError}
           />
           <TextInput
             style={styles.inputField}
@@ -144,6 +151,7 @@ const Create = ({ navigation }: Props) => {
             onChangeText={(text) => {
               setConfirm(text);
             }}
+            errorText={confirmError}
           />
           <Button
             style={styles.button}
