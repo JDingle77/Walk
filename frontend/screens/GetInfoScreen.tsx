@@ -74,6 +74,8 @@ const GetInfoScreen = ({ navigation }: Props) => {
     handleChange(date, "birthday");
   };
 
+  const [breedError, setBreedError] = useState("");
+
   //useContext stuff
   const { UserData, setUserData } = useUserData()!;
 
@@ -88,9 +90,16 @@ const GetInfoScreen = ({ navigation }: Props) => {
     });
   };
 
+  let breedErrorMessage: string
+
   useEffect(() => {
     handleChange(gender, "gender");
   }, [gender]);
+
+  useEffect(() => {
+    breedErrorMessage = UserData.dogProfile.breed === "" ? "This field cannot be left empty" : ""
+    setBreedError(breedErrorMessage)
+  }, [UserData]);
 
   function uploadInfo() {
     fetch("http://localhost:8000/auth/register/", {
@@ -129,6 +138,7 @@ const GetInfoScreen = ({ navigation }: Props) => {
           value={UserData.dogProfile.breed}
           onFocus={() => setShift(false)}
           onChangeText={(text) => handleChange(text, "breed")}
+          errorText={breedError}
         />
           <DropDownPicker
             style={[styles.inputField, {marginVertical: 12}]}
