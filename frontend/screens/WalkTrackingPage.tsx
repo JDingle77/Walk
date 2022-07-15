@@ -107,7 +107,7 @@ export default function WalkTracking({ navigation }) {
       .then(([data, status]) => {
         if (status >= 200 && status < 300) {
           // request successful
-          navigation.navigate("WalkPageNavigator");
+          navigation.navigate("Summary");
           console.log(data);
         } else if (status == 400) {
           // bad request
@@ -277,8 +277,8 @@ export default function WalkTracking({ navigation }) {
     let endDay = new Date();
     setEndTime(endDay);
     setBegin(false);
-    navigation.pop();
-
+    // navigation.pop();
+    
     const userRoute = {
       route_name: "test",
       coordinates: coordinatesList,
@@ -289,7 +289,7 @@ export default function WalkTracking({ navigation }) {
       start_time: startTime,
       end_time: endTime,
     };
-
+    
     postRoutes(userRoute);
   };
 

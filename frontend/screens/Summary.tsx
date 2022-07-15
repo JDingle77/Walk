@@ -1,28 +1,54 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, Image, SafeAreaView, FlatList, View } from "react-native";
+import { StyleSheet, Text, Image, SafeAreaView, FlatList, View, ListRenderItem } from "react-native";
 import { Button } from "react-native-paper";
 import styles from "../stylesheets/globalStyles";
 
-export default function SummaryPage() {
-  const [summaryData, setSummaryData] = useState([]);
+import { getValueFor } from "../functions/SecureStore";
+import { refreshAccess } from "../functions/RefreshHandler";
 
-  function getSummary() {
-    fetch("http://localhost:8000/maps/get_summary/", {
+export default function SummaryPage({ navigation }) {
+  const [summaryData, setSummaryData] = useState<any[]>([]);
+
+  async function getSummary() {
+    var access_token = "";
+    await getValueFor("access_token").then(
+      (response) => (access_token = response!)
+    );
+    await fetch("http://localhost:8000/maps/get_summary/", {
       method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUyNjcxMDczLCJpYXQiOjE2NTI1ODQ2NzMsImp0aSI6Ijc2ZmFlNDE4MDU1ZTQxMzNiMzU2OWYwNzI5YTljYWFiIiwidXNlcl9pZCI6ImUzZmQ2MjdmLTU4NmMtNGIxNS1iYjUzLWExNWI0OTdkMTIxZiJ9.4yfFGpMBt_r2N2xfc_8_Qch2yC4WExByzf_SlW1G5A0"
+        Authorization: "Bearer " + access_token,
       },
     })
-      .then((response) => response.json())
       .then((response) => {
-        // console.log(response);
-        setSummaryData(response.response)
+        return Promise.all([response.json(), response.status]);
+      })
+      .then(([data, status]) => {
+        if (status >= 200 && status < 300) {
+          // request successful
+          setSummaryData(data.response)
+          // console.log(data);
+        } else if (status == 400) {
+          // bad request
+          console.log("Bad Request");
+        } else if (status == 401) {
+          // access token expired, get new access token and retry
+          refreshAccess()
+            .then(() => {
+              console.log("Retry request");
+            })
+            .catch(() => {
+              // refresh token expired, force user to login again
+              navigation.navigate("Login");
+            });
+        }
       })
       .catch((err) => console.error(err));
   }
+  
 
   function getSummaryStats() {
     fetch("http://localhost:8000/maps/get_summary_statistics/", {
@@ -41,11 +67,15 @@ export default function SummaryPage() {
   }
 
   useEffect(() => {
-    // getSummary();
+    getSummary();
     // getSummaryStats();
     return () => {
-      setSummaryData([]); // This worked for me
+      setSummaryData([]); // for memory leaks or smt
     };
+  }, []);
+
+  useEffect(() => {
+    console.log(summaryData);
   }, [summaryData]);
 
   return (
@@ -63,15 +93,6 @@ export default function SummaryPage() {
             resizeMode="contain"
           />
         </View>
-        <View style={localStyles.speedBarContainer}>
-          <Text style={styles.p}>Slow</Text>
-          <Image
-            style={styles.image}
-            source={require('../assets/images/speed-bar.png')}
-            resizeMode="contain"
-          />
-          <Text style={styles.p}>Fast</Text>
-        </View>
       </View>
       <View style={localStyles.bottomContainer}>
         <View style={styles.header}>
@@ -81,19 +102,17 @@ export default function SummaryPage() {
         <FlatList
           style={styles.list}
           data={summaryData}
-          renderItem={(obj) => {
-              return (
-                  <View style={styles.row}>
-                    <View style={styles.cell}>
-                      <Text style={styles.p}>{obj.item.title}</Text>
-                    </View>
-                    <View style={styles.cell}>
-                      <Text style={[styles.p,  {textAlign: 'right'}]}>{obj.item.data}</Text>
-                    </View>
-                  </View>
-              );
-          }}
-          />
+          renderItem={({ item }) => (
+            <View style={styles.row}>
+              <View style={styles.cell}>
+                <Text style={styles.p}>{item.title}</Text>
+              </View>
+              <View style={styles.cell}>
+                <Text style={[styles.p,  {textAlign: 'right'}]}>{item.data}</Text>
+              </View>
+            </View>
+          )}
+        />
 
       <Button style={styles.button} labelStyle={styles.buttonLabel} onPress={() => getSummaryStats}>
         Continue
