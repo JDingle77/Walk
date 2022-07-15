@@ -56,7 +56,7 @@ const GetInfoScreen = ({ navigation }: Props) => {
   const [items, setItems] = useState([
     { label: "Male", value: "Male" },
     { label: "Female", value: "Female" },
-    { label: "Unspecified", value: "Unspecified" },
+    { label: "Other", value: "Not specified" },
   ]);
 
   const onChange = (event, selectedDate: Date) => {
@@ -174,10 +174,8 @@ const GetInfoScreen = ({ navigation }: Props) => {
           }}
           labelStyle={styles.buttonLabel}
           uppercase={false}
-          disabled={ //IDK why its not disabling
-            UserData.dogProfile.breed === "" ||
-            UserData.dogProfile.gender === "" ||
-            UserData.dogProfile.birthday === null
+          disabled={
+            UserData.dogProfile.gender === "" 
           }
         >
           Continue
