@@ -109,7 +109,7 @@ const GetInfoScreen = ({ navigation }: Props) => {
           console.log(data);
           save("access_token",data.access);
           save("refresh_token",data.refresh);
-          navigation.navigate("WalkPageNavigator");
+          navigation.navigate("Home");
         }
         else
         {
