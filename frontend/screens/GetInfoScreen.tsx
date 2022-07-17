@@ -17,6 +17,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import DropDownPicker from "react-native-dropdown-picker";
 
 import { useUserData, UserDataType } from "../hooks/userContext";
+import { save } from "../functions/SecureStore";
 
 import { RootStackParamList } from "../types";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -101,10 +102,19 @@ const GetInfoScreen = ({ navigation }: Props) => {
       },
       body: JSON.stringify(UserData),
     })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        navigation.navigate("Home");
+      .then((response) => {return Promise.all([response.json(), response.status])})
+      .then(([data,status]) => {
+        if (status >= 200 && status < 300)
+        {
+          console.log(data);
+          save("access_token",data.access);
+          save("refresh_token",data.refresh);
+          navigation.navigate("WalkPageNavigator");
+        }
+        else
+        {
+          console.log(data);
+        }
       })
       .catch((err) => console.error(err));
   }
