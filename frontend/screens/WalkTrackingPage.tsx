@@ -88,6 +88,8 @@ export default function WalkTracking({ navigation }) {
     start_time: Date;
     end_time: Date;
   }) {
+    // console.log("------------------");
+    // console.log(userRoute);
     var access_token = "";
     await getValueFor("access_token").then(
       (response) => (access_token = response!)
@@ -287,7 +289,7 @@ export default function WalkTracking({ navigation }) {
       drinkIcon: drinkCoords,
       interactionIcon: interactionCoords,
       start_time: startTime,
-      end_time: endTime,
+      end_time: endDay,
     };
 
     postRoutes(userRoute);
@@ -304,7 +306,6 @@ export default function WalkTracking({ navigation }) {
   };
 
   const addPoop = () => {
-    console.log(poopCoords);
     setPoopCoords((prevList) => [
       ...prevList,
       {
@@ -312,7 +313,6 @@ export default function WalkTracking({ navigation }) {
         poop_longitude: currLocation.longitude,
       },
     ]);
-    console.log(poopCoords);
   };
 
   const addDrink = () => {
