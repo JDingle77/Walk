@@ -92,7 +92,7 @@ export default function WalkTracking({ navigation }) {
     await getValueFor("access_token").then(
       (response) => (access_token = response!)
     );
-    await fetch("http://localhost:8000/maps/route/", {
+    await fetch("http://10.0.0.187:8000/maps/route/", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -171,8 +171,8 @@ export default function WalkTracking({ navigation }) {
     setCoordinatesList((prevList) => [
       ...prevList,
       {
-        latitude: currLocation.latitude,
-        longitude: currLocation.longitude,
+        latitude: parseFloat(currLocation.latitude.toFixed(5)),
+        longitude: parseFloat(currLocation.longitude.toFixed(5)),
       },
     ]);
   }, [currLocation]);
