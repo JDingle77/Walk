@@ -75,7 +75,8 @@ const GetInfoScreen = ({ navigation }: Props) => {
   };
 
   const [breedError, setBreedError] = useState("");
-
+  const [breedLabel, setBreedLabel] = useState("");
+  
   //useContext stuff
   const { UserData, setUserData } = useUserData()!;
 
@@ -91,14 +92,24 @@ const GetInfoScreen = ({ navigation }: Props) => {
   };
 
   let breedErrorMessage: string
+  let breedLabelMessage: string
+  let genderLabelMessage: string
 
   useEffect(() => {
     handleChange(gender, "gender");
   }, [gender]);
 
   useEffect(() => {
-    breedErrorMessage = UserData.dogProfile.breed === "" ? "This field cannot be left empty" : ""
+    if (UserData.dogProfile.breed === "") {
+      breedErrorMessage = "This field cannot be left empty"
+      breedLabelMessage = "Breed"
+    } else {
+      breedErrorMessage = ""
+      breedLabelMessage = ""
+    }
+
     setBreedError(breedErrorMessage)
+    setBreedLabel(breedLabelMessage)
   }, [UserData]);
 
   function uploadInfo() {
@@ -131,7 +142,7 @@ const GetInfoScreen = ({ navigation }: Props) => {
       <View>
         <TextInput
           style={styles.inputField}
-          label="Breed"
+          label={breedLabel}
           autoCapitalize="none"
           autoComplete="email"
           textContentType="emailAddress"
