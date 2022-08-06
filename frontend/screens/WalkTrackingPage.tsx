@@ -148,8 +148,8 @@ export default function WalkTracking({ navigation }) {
       });
 
       setCurrLocation({
-        latitude: location.latitude,
-        longitude: location.longitude,
+        latitude: parseFloat(location.latitude.toFixed(6)),
+        longitude: parseFloat(location.longitude.toFixed(6)),
       });
     };
 
@@ -173,8 +173,8 @@ export default function WalkTracking({ navigation }) {
     setCoordinatesList((prevList) => [
       ...prevList,
       {
-        latitude: currLocation.latitude,
-        longitude: currLocation.longitude,
+        latitude: parseFloat(currLocation.latitude.toFixed(6)),
+        longitude: parseFloat(currLocation.longitude.toFixed(6)),
       },
     ]);
   }, [currLocation]);
@@ -292,6 +292,7 @@ export default function WalkTracking({ navigation }) {
       end_time: endDay,
     };
 
+    console.log(userRoute);
     postRoutes(userRoute);
   };
 
@@ -299,8 +300,8 @@ export default function WalkTracking({ navigation }) {
     setPeeCoords((prevList) => [
       ...prevList,
       {
-        pee_latitude: currLocation.latitude,
-        pee_longitude: currLocation.longitude,
+        pee_latitude: parseFloat(currLocation.latitude.toFixed(6)),
+        pee_longitude: parseFloat(currLocation.longitude.toFixed(6)),
       },
     ]);
   };
@@ -309,8 +310,8 @@ export default function WalkTracking({ navigation }) {
     setPoopCoords((prevList) => [
       ...prevList,
       {
-        poop_latitude: currLocation.latitude,
-        poop_longitude: currLocation.longitude,
+        poop_latitude: parseFloat(currLocation.latitude.toFixed(6)),
+        poop_longitude: parseFloat(currLocation.longitude.toFixed(6)),
       },
     ]);
   };
@@ -319,8 +320,8 @@ export default function WalkTracking({ navigation }) {
     setDrinkCoords((prevList) => [
       ...prevList,
       {
-        drink_latitude: currLocation.latitude,
-        drink_longitude: currLocation.longitude,
+        drink_latitude: parseFloat(currLocation.latitude.toFixed(6)),
+        drink_longitude: parseFloat(currLocation.longitude.toFixed(6)),
       },
     ]);
   };
@@ -329,8 +330,8 @@ export default function WalkTracking({ navigation }) {
     setInteractionCoords((prevList) => [
       ...prevList,
       {
-        interaction_latitude: currLocation.latitude,
-        interaction_longitude: currLocation.longitude,
+        interaction_latitude: parseFloat(currLocation.latitude.toFixed(6)),
+        interaction_longitude: parseFloat(currLocation.longitude.toFixed(6)),
       },
     ]);
   };
