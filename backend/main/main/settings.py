@@ -31,7 +31,10 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['10.0.0.187', 'localhost']
+runserver.default_port = os.getenv('PORT_NUM')
+runserver.default_addr = os.getenv('IP_ADDRESS')
+
 AUTH_USER_MODEL = 'user.User'
 
 

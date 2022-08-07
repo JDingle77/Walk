@@ -94,7 +94,7 @@ export default function WalkTracking({ navigation }) {
     await getValueFor("access_token").then(
       (response) => (access_token = response!)
     );
-    await fetch("http://localhost:8000/maps/route/", {
+    await fetch("http://10.0.0.187:8000/maps/route/", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -109,7 +109,7 @@ export default function WalkTracking({ navigation }) {
       .then(([data, status]) => {
         if (status >= 200 && status < 300) {
           // request successful
-          navigation.navigate("WalkPageNavigator");
+          navigation.navigate("Summary");
           console.log(data);
         } else if (status == 400) {
           // bad request
@@ -279,8 +279,8 @@ export default function WalkTracking({ navigation }) {
     let endDay = new Date();
     setEndTime(endDay);
     setBegin(false);
-    navigation.pop();
-
+    // navigation.pop();
+    
     const userRoute = {
       route_name: "test",
       coordinates: coordinatesList,
