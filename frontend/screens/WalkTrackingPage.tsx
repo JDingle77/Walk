@@ -94,7 +94,7 @@ export default function WalkTracking({ navigation }) {
     await getValueFor("access_token").then(
       (response) => (access_token = response!)
     );
-    await fetch("http://10.0.0.187:8000/maps/route/", {
+    await fetch("http://localhost:8000/maps/route/", {
       method: "POST",
       headers: {
         Accept: "application/json",

@@ -15,7 +15,7 @@ export default function SummaryPage({ navigation }) {
     await getValueFor("access_token").then(
       (response) => (access_token = response!)
     );
-    await fetch("http://10.0.0.187:8000/maps/get_summary/", {
+    await fetch("http://localhost:8000/maps/get_summary/", {
       method: "GET",
       headers: {
         Accept: "application/json",
