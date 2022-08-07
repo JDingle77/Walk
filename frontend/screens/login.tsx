@@ -43,12 +43,19 @@ export default function Login({ navigation }: Props) {
         password: password,
       }),
     })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        save("access_token",response.access);
-        save("refresh_token",response.refresh);
-        navigation.navigate("Home");
+      .then((response) => {return Promise.all([response.json(), response.status])})
+      .then(([data, status]) => {
+        if (status >= 200 && status < 300)
+        {
+          console.log(data);
+          save("access_token",data.access);
+          save("refresh_token",data.refresh);
+          navigation.navigate("Home");
+        }
+        else
+        {
+          console.log(data.detail);
+        }
       })
       .catch((err) => console.error(err));
   }
