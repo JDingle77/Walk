@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from django.core.management.commands.runserver import Command as runserver
 from pathlib import Path
 from dotenv import load_dotenv
 from datetime import timedelta
