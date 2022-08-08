@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../stylesheets/globalStyles";
 import {
   View,
@@ -26,6 +26,9 @@ type Props = {
 export default function Login({ navigation }: Props) {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [emailLabel, setEmailLabel] = useState("")
+  const [passwordLabel, setPasswordLabel] = useState("")
+
   let [fontsLoaded] = useFonts({
     Montserrat: Montserrat_400Regular,
   });
@@ -53,6 +56,20 @@ export default function Login({ navigation }: Props) {
       .catch((err) => console.error(err));
   }
 
+  let emailLabelMessage: string
+  let passwordLabelMessage: string
+  let confirmLabelMessage: string
+
+  useEffect(
+    () => {
+      emailLabelMessage = email === "" ? "Your email" : ""
+      passwordLabelMessage = password === "" ? "Your password" : ""
+      setEmailLabel(emailLabelMessage)
+      setPasswordLabel(passwordLabelMessage)
+    },
+    [email, password],
+  )
+
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
@@ -68,7 +85,7 @@ export default function Login({ navigation }: Props) {
 
           <TextInput
             style={styles.inputField}
-            label="Your email"
+            label={emailLabel}
             autoCapitalize="none"
             autoComplete="email"
             textContentType="emailAddress"
@@ -80,7 +97,7 @@ export default function Login({ navigation }: Props) {
           />
           <TextInput
             style={styles.inputField}
-            label="Your password"
+            label={passwordLabel}
             autoCapitalize="none"
             autoComplete="none"
             textContentType="password"
