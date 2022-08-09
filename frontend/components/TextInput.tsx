@@ -1,8 +1,6 @@
 import React, { memo } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView, Platform} from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import { HelperText, TextInput as Input } from 'react-native-paper';
-import { paperTheme as theme } from '../core/theme';
+import { View, StyleSheet } from 'react-native';
+import { TextInput as Input } from 'react-native-paper';
 import ErrorText from './ErrorText';
 
 type Props = React.ComponentProps<typeof Input> & {

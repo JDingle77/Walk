@@ -56,7 +56,7 @@ export default function SummaryPage({ navigation }) {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUyNjcxMDczLCJpYXQiOjE2NTI1ODQ2NzMsImp0aSI6Ijc2ZmFlNDE4MDU1ZTQxMzNiMzU2OWYwNzI5YTljYWFiIiwidXNlcl9pZCI6ImUzZmQ2MjdmLTU4NmMtNGIxNS1iYjUzLWExNWI0OTdkMTIxZiJ9.4yfFGpMBt_r2N2xfc_8_Qch2yC4WExByzf_SlW1G5A0"
+        Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUzNDAyNDA1LCJpYXQiOjE2NTMzMTYwMDUsImp0aSI6IjMxNWVmYTRmYTY5YjRlOGU5ZDQwMzdkODFjZjMzNThmIiwidXNlcl9pZCI6IjYzNDc1N2RhLTMxMTQtNGM2OS1hN2M2LTJiZjVjZmRhMGZjZiJ9.A-MdB1ZeWHIuLzd_YJTjvMJoziF_OzXQwPD3CWesQlo"
       },
     })
       .then((response) => response.json())
@@ -82,11 +82,11 @@ export default function SummaryPage({ navigation }) {
     <SafeAreaView style={styles.container} >
       <View style={localStyles.topContainer}>
         <View style={styles.titleView}>
-          <Text style={styles.title} >
+          <Text style={styles.h3} >
             Summary
           </Text>
         </View>
-        <View style={{height: '65%'}}>
+        <View style={localStyles.summaryImage}>
           <Image
             style={styles.image}
             source={require('../assets/images/summary-image.png')}
@@ -114,7 +114,11 @@ export default function SummaryPage({ navigation }) {
           )}
         />
 
-      <Button style={styles.button} labelStyle={styles.buttonLabel} onPress={() => getSummaryStats}>
+      <Button 
+        style={styles.button} 
+        labelStyle={styles.buttonLabel} 
+        uppercase={false}
+        onPress={() => getSummaryStats}>
         Continue
       </Button>
       </View>
@@ -140,12 +144,12 @@ const localStyles = StyleSheet.create({
     // borderWidth: 3,
     // borderColor: "pink",
   },
-  speedBarContainer: {
-    flex: 1,
-    flexDirection: "row",
-    width: "80%",
-    justifyContent: "center",
+  summaryImage: {
+    flex: 3,
+    width: "100%",
     alignItems: "center",
-    // borderWidth: 1
+    justifyContent: "center",
+    // borderWidth: 3,
+    // borderColor: "pink",
   },
 });
