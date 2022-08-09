@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   StyleSheet,
   Dimensions,
@@ -29,6 +29,12 @@ type Props = {
 
 const DogProfile = ({ navigation }: Props) => {
   const [buttonSelected, setSelect] = useState(false);
+  const [usernameError, setUsernameError] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [ownerNameError, setOwnerNameError] = useState("");
+  const [usernameLabel, setUsernameLabel] = useState("")
+  const [dogLabel, setDogLabel] = useState("")
+  const [ownerLabel, setOwnerLabel] = useState("")
 
   //useContext stuff
   const { UserData, setUserData } = useUserData()!;
@@ -43,6 +49,49 @@ const DogProfile = ({ navigation }: Props) => {
         },
       });
   };
+
+  let usernameErrorMessage: string
+  let nameErrorMessage: string
+  let ownerNameErrorMessage: string
+  let usernameLabelMessage: string
+  let dogLabelMessage: string
+  let ownerLabelMessage: string
+
+  useEffect(
+    () => {
+      if (UserData.dogProfile.username === "") {
+        usernameErrorMessage = "This field cannot be left empty"
+        usernameLabelMessage = "Your dog's username"
+      } else {
+        usernameErrorMessage = ""
+        usernameLabelMessage = ""
+      }
+
+      if (UserData.dogProfile.name === "") {
+        nameErrorMessage = "This field cannot be left empty"
+        dogLabelMessage = "Your dog's name"
+      } else {
+        nameErrorMessage = ""
+        dogLabelMessage = ""
+      }
+
+      if (UserData.dogProfile.owner_name === "") {
+        ownerNameErrorMessage = "This field cannot be left empty"
+        ownerLabelMessage = "Owner's username"
+      } else {
+        ownerNameErrorMessage = ""
+        ownerLabelMessage = ""
+      }
+
+      setUsernameError(usernameErrorMessage)
+      setNameError(nameErrorMessage)
+      setOwnerNameError(ownerNameErrorMessage)
+      setUsernameLabel(usernameLabelMessage)
+      setDogLabel(dogLabelMessage)
+      setOwnerLabel(ownerLabelMessage)
+    },
+    [UserData],
+  )
 
   return (
     <KeyboardAwareScrollView
@@ -70,29 +119,32 @@ const DogProfile = ({ navigation }: Props) => {
           <TextInput
             style={styles.inputField}
             enablesReturnKeyAutomatically
-            label="Your dog's username"
+            label={usernameLabel}
             autoCapitalize="none"
             autoComplete="none"
             value={UserData.dogProfile.username}
             onChangeText={text => handleChange(text, "username")}
+            errorText={usernameError}
           />
           <TextInput
-            label="Your dog's name"
+            label={dogLabel}
             style={styles.inputField}
             value={UserData.dogProfile.name}
             autoCapitalize="none"
             autoComplete="none"
             onChangeText={text => handleChange(text, "name")}
             textContentType="name"
+            errorText={nameError}
           />
           <TextInput
-            label="Owner's username"
+            label={ownerLabel}
             style={styles.inputField}
             value={UserData.dogProfile.owner_name}
             autoCapitalize="none"
             autoComplete="none"
             onChangeText={text => handleChange(text, "owner_name")}
             textContentType="name"
+            errorText={ownerNameError}
           />
         </View>
         <View style={styles.separator}></View>

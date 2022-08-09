@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../stylesheets/globalStyles";
 import {
   View,
@@ -36,17 +36,43 @@ type Props = {
 };
 
 const Create = ({ navigation }: Props) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState("");
-
+  const [confirmError, setConfirmError] = useState("");
+  const [emailLabel, setEmailLabel] = useState("")
+  const [passwordLabel, setPasswordLabel] = useState("")
+  const [confirmLabel, setConfirmLabel] = useState("")
   const { UserData, setUserData } = useUserData()!;
 
   let [fontsLoaded] = useFonts({
     Montserrat: Montserrat_400Regular,
     MontserratBold: Montserrat_700Bold,
   });
+
+  let errorMessage: string
+  let emailLabelMessage: string
+  let passwordLabelMessage: string
+  let confirmLabelMessage: string
+
+  useEffect(
+    () => {
+      errorMessage = UserData.password === confirm && confirm !== "" ? "" : "Passwords must match"
+      setConfirmError(errorMessage)
+    },
+    [confirm],
+  )
+
+  useEffect(
+    () => {
+      emailLabelMessage = UserData.email === "" ? "Your email" : ""
+      passwordLabelMessage = UserData.password === "" ? "Your password" : ""
+      confirmLabelMessage = confirm === "" ? "Confirm password" : ""
+      setEmailLabel(emailLabelMessage)
+      setPasswordLabel(passwordLabelMessage)
+      setConfirmLabel(confirmLabelMessage)
+    },
+    [UserData.email, UserData.password, confirm],
+  )
 
   function createProfile() {
     fetch("http://localhost:8000/auth/validEmail/", {
@@ -109,8 +135,7 @@ const Create = ({ navigation }: Props) => {
           <View style={styles.separator} />
           <TextInput
             style={styles.inputField}
-            // label={<Text style={{color: "black"}}>Your email</Text>}
-            label="Your email"
+            label={emailLabel}
             autoCapitalize="none"
             autoComplete="email"
             textContentType="emailAddress"
@@ -121,21 +146,17 @@ const Create = ({ navigation }: Props) => {
           />
           <TextInput
             style={styles.inputField}
-            label="Your password"
+            label={passwordLabel}
             autoCapitalize="none"
             autoComplete="none"
             textContentType="password"
             enablesReturnKeyAutomatically
             value={UserData.password}
             onChangeText={text => handleChange(text, "password")}
-            // value={password}
-            // onChangeText={(text) => {
-            //   setPassword(text);
-            // }}
           />
           <TextInput
             style={styles.inputField}
-            label="Confirm password"
+            label={confirmLabel}
             autoCapitalize="none"
             autoComplete="none"
             textContentType="password"
@@ -144,6 +165,7 @@ const Create = ({ navigation }: Props) => {
             onChangeText={(text) => {
               setConfirm(text);
             }}
+            errorText={confirmError}
           />
           <Button
             style={styles.button}
@@ -178,15 +200,6 @@ const Create = ({ navigation }: Props) => {
               color="black"
             >
               Log In
-            </Button>
-            <Button
-              labelStyle={styles.bold}
-              mode="text"
-              onPress={() => navigation.navigate("GetInfo")}
-              uppercase={false}
-              color="black"
-            >
-              Summary
             </Button>
           </View>
         </View>
