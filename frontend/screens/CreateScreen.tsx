@@ -201,15 +201,6 @@ const Create = ({ navigation }: Props) => {
             >
               Log In
             </Button>
-            <Button
-              labelStyle={styles.bold}
-              mode="text"
-              onPress={() => navigation.navigate("GetInfo")}
-              uppercase={false}
-              color="black"
-            >
-              Summary
-            </Button>
           </View>
         </View>
       </ScrollView>
