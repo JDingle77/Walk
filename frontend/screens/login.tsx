@@ -53,7 +53,7 @@ export default function Login({ navigation }: Props) {
           console.log(data);
           save("access_token",data.access);
           save("refresh_token",data.refresh);
-          navigation.navigate("Home");
+          navigation.navigate("WalkPageNavigator");
         }
         else
         {

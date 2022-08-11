@@ -167,11 +167,13 @@ def calculate_distance(sx, sy, ex, ey):
     return sqrt((sx - ex)**2 + (sy - ey)**2)
 
 
+# import sys
+
 @api_view(['GET'])
 def get_summary(request):
     userid = request.user.id
-    route = Route.objects.filter(user=request.user.id).last()
-    # print(route.route_name)
+    route = Route.objects.filter(user=request.user.id).order_by('end_time').last() #this is O(logn) so it might become a speed problem in the future
+    # print(route.id, file=sys.stderr)
     datalist = []
 
     # TODO: calculate total distance for the first time

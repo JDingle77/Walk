@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from django.core.management.commands.runserver import Command as runserver
 from pathlib import Path
 from dotenv import load_dotenv
 from datetime import timedelta
@@ -30,7 +31,10 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['10.0.0.187', 'localhost']
+runserver.default_port = os.getenv('PORT_NUM')
+runserver.default_addr = os.getenv('IP_ADDRESS')
+
 AUTH_USER_MODEL = 'user.User'
 
 
