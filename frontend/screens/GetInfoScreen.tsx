@@ -114,7 +114,7 @@ const GetInfoScreen = ({ navigation }: Props) => {
   }, [UserData]);
 
   function uploadInfo() {
-    fetch("http://localhost:8000/auth/register/", {
+    fetch("http://10.0.0.187:8000/auth/register/", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -129,7 +129,7 @@ const GetInfoScreen = ({ navigation }: Props) => {
           console.log(data);
           save("access_token",data.access);
           save("refresh_token",data.refresh);
-          navigation.navigate("Home");
+          navigation.navigate("WalkPageNavigator");
         }
         else
         {

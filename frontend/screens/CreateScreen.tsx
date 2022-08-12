@@ -75,7 +75,7 @@ const Create = ({ navigation }: Props) => {
   )
 
   function createProfile() {
-    fetch("http://localhost:8000/auth/validEmail/", {
+    fetch("http://10.0.0.187:8000/auth/validEmail/", {
       method: "POST",
       headers: {
         Accept: "application/json",

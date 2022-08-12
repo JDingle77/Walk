@@ -15,7 +15,7 @@ export default function SummaryPage({ navigation }) {
     await getValueFor("access_token").then(
       (response) => (access_token = response!)
     );
-    await fetch("http://localhost:8000/maps/get_summary/", {
+    await fetch("http://10.0.0.187:8000/maps/get_summary/", {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -50,21 +50,6 @@ export default function SummaryPage({ navigation }) {
   }
   
 
-  function getSummaryStats() {
-    fetch("http://localhost:8000/maps/get_summary_statistics/", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUzNDAyNDA1LCJpYXQiOjE2NTMzMTYwMDUsImp0aSI6IjMxNWVmYTRmYTY5YjRlOGU5ZDQwMzdkODFjZjMzNThmIiwidXNlcl9pZCI6IjYzNDc1N2RhLTMxMTQtNGM2OS1hN2M2LTJiZjVjZmRhMGZjZiJ9.A-MdB1ZeWHIuLzd_YJTjvMJoziF_OzXQwPD3CWesQlo"
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => console.error(err));
-  }
 
   useEffect(() => {
     getSummary();
@@ -114,13 +99,13 @@ export default function SummaryPage({ navigation }) {
           )}
         />
 
-      <Button 
+      {/* <Button 
         style={styles.button} 
         labelStyle={styles.buttonLabel} 
         uppercase={false}
-        onPress={() => getSummaryStats}>
+        onPress={() => navigation.navigate("WalkPageNavigator")}>
         Continue
-      </Button>
+      </Button> */}
       </View>
 
     </SafeAreaView>

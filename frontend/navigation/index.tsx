@@ -26,6 +26,7 @@
  import LinkingConfiguration from "./LinkingConfiguration";
  import { paperTheme, paperDarkTheme } from "../../core/theme";
  import WalkPageNavigator from "./WalkPageStack";
+ import WalkPage from "../screens/WalkPage";
  import GetInfoScreen from "../screens/GetInfoScreen"
  import { Appbar, Button } from "react-native-paper";
  import { UserDataProvider, useUserData } from "../hooks/userContext";
@@ -98,7 +99,7 @@
              headerRight: () => (
                <Button
                  labelStyle={{ color: "black" }}
-                 onPress={() => navigation.navigate("Create")}
+                 onPress={() => navigation.navigate("WalkPage")}
                >
                  close
                </Button>
@@ -106,14 +107,38 @@
            })}
          />
          <Stack.Screen
+           name="WalkPage"
+           component={WalkPage}
+           options={({ navigation }) => ({
+            headerTransparent: true,
+            headerTitle: "",
+            headerRight: "",
+            headerLeft: () => (
+              <Button
+                labelStyle={{ color: "black" }}
+                onPress={() => navigation.navigate("Login")}
+              >
+                back
+              </Button>
+            ),
+          })}
+         />
+         <Stack.Screen
            name="WalkPageNavigator"
            component={WalkPageNavigator}
-           options={{
-             headerBackTitleStyle: { color: "white" },
-             headerBackTitle: "Back",
-             headerTintColor: "white",
-             headerTitle: "WalkPage",
-           }}
+           options={({ navigation }) => ({
+            headerTransparent: true,
+            headerTitle: "",
+            headerRight: "",
+            headerLeft: () => (
+              <Button
+                labelStyle={{ color: "black" }}
+                onPress={() => navigation.navigate("WalkPage")}
+              >
+                back
+              </Button>
+            ),
+          })}
          />
          <Stack.Screen
            name="Home"

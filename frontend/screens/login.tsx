@@ -34,7 +34,7 @@ export default function Login({ navigation }: Props) {
   });
 
   function login() {
-    fetch("http://localhost:8000/auth/login/", {
+    fetch("http://10.0.0.187:8000/auth/login/", {
       method: "POST",
       headers: {
         Accept: "application/json",
