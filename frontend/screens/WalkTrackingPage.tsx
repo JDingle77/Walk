@@ -50,6 +50,7 @@ export default function WalkTracking({ navigation }) {
     longitude: 0.0,
   });
   const [mapRegion, setMapRegion] = useState(null);
+  const mapRef = useRef(null);
   const [coordinatesList, setCoordinatesList] = useState<Array<LatLng>>([]);
   const [duration, setDuration] = useState(0);
   const [durationFields, setDurationFields] = useState({
@@ -336,6 +337,22 @@ export default function WalkTracking({ navigation }) {
     ]);
   };
 
+  const takeSnapshot = () => {
+    // 'takeSnapshot' takes a config object with the
+    // following options
+    const snapshot = mapRef.takeSnapshot({
+      width: 300,      // optional, when omitted the view-width is used
+      height: 300,     // optional, when omitted the view-height is used
+      region: mapRegion,    // iOS only, optional region to render
+      format: 'png',   // image formats: 'png', 'jpg' (default: 'png')
+      quality: 0.8,    // image quality: 0..1 (only relevant for jpg, default: 1)
+      result: 'file'   // result types: 'file', 'base64' (default: 'file')
+    });
+    snapshot.then((uri) => {
+      return uri;
+    });
+  }
+
   return (
     <View style={styles.container}>
       <MapView
@@ -343,6 +360,7 @@ export default function WalkTracking({ navigation }) {
         provider={PROVIDER_GOOGLE}
         showsUserLocation={true}
         region={mapRegion}
+        ref={mapRef}
       >
         <Polyline
           coordinates={coordinatesList}
