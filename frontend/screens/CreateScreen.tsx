@@ -7,9 +7,9 @@ import {
   ScrollView,
   StyleSheet,
   Dimensions,
-  NativeSyntheticEvent, 
+  NativeSyntheticEvent,
   TextInputChangeEventData,
-  Alert
+  Alert,
 } from "react-native";
 import { Button } from "react-native-paper";
 import TextInput from "../components/TextInput";
@@ -39,9 +39,9 @@ const Create = ({ navigation }: Props) => {
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState("");
   const [confirmError, setConfirmError] = useState("");
-  const [emailLabel, setEmailLabel] = useState("")
-  const [passwordLabel, setPasswordLabel] = useState("")
-  const [confirmLabel, setConfirmLabel] = useState("")
+  const [emailLabel, setEmailLabel] = useState("");
+  const [passwordLabel, setPasswordLabel] = useState("");
+  const [confirmLabel, setConfirmLabel] = useState("");
   const { UserData, setUserData } = useUserData()!;
 
   let [fontsLoaded] = useFonts({
@@ -49,30 +49,27 @@ const Create = ({ navigation }: Props) => {
     MontserratBold: Montserrat_700Bold,
   });
 
-  let errorMessage: string
-  let emailLabelMessage: string
-  let passwordLabelMessage: string
-  let confirmLabelMessage: string
+  let errorMessage: string;
+  let emailLabelMessage: string;
+  let passwordLabelMessage: string;
+  let confirmLabelMessage: string;
 
-  useEffect(
-    () => {
-      errorMessage = UserData.password === confirm && confirm !== "" ? "" : "Passwords must match"
-      setConfirmError(errorMessage)
-    },
-    [confirm],
-  )
+  useEffect(() => {
+    errorMessage =
+      UserData.password === confirm && confirm !== ""
+        ? ""
+        : "Passwords must match";
+    setConfirmError(errorMessage);
+  }, [confirm]);
 
-  useEffect(
-    () => {
-      emailLabelMessage = UserData.email === "" ? "Your email" : ""
-      passwordLabelMessage = UserData.password === "" ? "Your password" : ""
-      confirmLabelMessage = confirm === "" ? "Confirm password" : ""
-      setEmailLabel(emailLabelMessage)
-      setPasswordLabel(passwordLabelMessage)
-      setConfirmLabel(confirmLabelMessage)
-    },
-    [UserData.email, UserData.password, confirm],
-  )
+  useEffect(() => {
+    emailLabelMessage = UserData.email === "" ? "Your email" : "";
+    passwordLabelMessage = UserData.password === "" ? "Your password" : "";
+    confirmLabelMessage = confirm === "" ? "Confirm password" : "";
+    setEmailLabel(emailLabelMessage);
+    setPasswordLabel(passwordLabelMessage);
+    setConfirmLabel(confirmLabelMessage);
+  }, [UserData.email, UserData.password, confirm]);
 
   function createProfile() {
     fetch("http://localhost:8000/auth/validEmail/", {
@@ -102,7 +99,7 @@ const Create = ({ navigation }: Props) => {
     // console.log(name);
     setUserData({
       ...UserData,
-      [name]: text
+      [name]: text,
     });
   };
 
@@ -126,88 +123,92 @@ const Create = ({ navigation }: Props) => {
             }}
           />
         </View> */}
-        <View style={styles.creamContainer}>
+        <View style={[styles.creamContainer, stylesheet.spaceBetween]}>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>
-              Create your account
-            </Text>
+            <Text style={styles.title}>Create your account</Text>
           </View>
-          <View style={styles.separator} />
-          <TextInput
-            style={styles.inputField}
-            label={emailLabel}
-            autoCapitalize="none"
-            autoComplete="email"
-            textContentType="emailAddress"
-            enablesReturnKeyAutomatically
-            value={UserData.email}
-            onChangeText={text => handleChange(text, "email")} 
-            errorText={error}
-          />
-          <TextInput
-            style={styles.inputField}
-            label={passwordLabel}
-            autoCapitalize="none"
-            autoComplete="none"
-            textContentType="password"
-            enablesReturnKeyAutomatically
-            value={UserData.password}
-            onChangeText={text => handleChange(text, "password")}
-          />
-          <TextInput
-            style={styles.inputField}
-            label={confirmLabel}
-            autoCapitalize="none"
-            autoComplete="none"
-            textContentType="password"
-            enablesReturnKeyAutomatically
-            value={confirm}
-            onChangeText={(text) => {
-              setConfirm(text);
-            }}
-            errorText={confirmError}
-          />
-          <Button
-            style={styles.button}
-            mode="contained"
-            onPress={() => createProfile()}
-            labelStyle={styles.buttonLabel}
-            uppercase={false}
-            disabled={
-              UserData.email !== "" &&
-              UserData.password !== "" &&
-              confirm !== "" &&
-              UserData.password === confirm
-                ? false
-                : true
-            }
-          >
-            Sign Up
-          </Button>
-          <View style={styles.separator} />
-          
-          <ThirdPartyLogins AuthType="register" />
 
-          <View style={[stylesheet.loginContainer]}>
-            <Text style={styles.p}>
-              Already have an account?
-            </Text>
+          <View>
+            <TextInput
+              style={styles.inputField}
+              label={emailLabel}
+              autoCapitalize="none"
+              autoComplete="email"
+              textContentType="emailAddress"
+              enablesReturnKeyAutomatically
+              value={UserData.email}
+              onChangeText={(text) => handleChange(text, "email")}
+              errorText={error}
+            />
+
+            <TextInput
+              style={styles.inputField}
+              label={passwordLabel}
+              autoCapitalize="none"
+              autoComplete="none"
+              textContentType="password"
+              enablesReturnKeyAutomatically
+              value={UserData.password}
+              onChangeText={(text) => handleChange(text, "password")}
+            />
+            <TextInput
+              style={styles.inputField}
+              label={confirmLabel}
+              autoCapitalize="none"
+              autoComplete="none"
+              textContentType="password"
+              enablesReturnKeyAutomatically
+              value={confirm}
+              onChangeText={(text) => {
+                setConfirm(text);
+              }}
+              errorText={confirmError}
+            />
+
             <Button
-              labelStyle={styles.bold}
-              mode="text"
-              onPress={() => navigation.navigate("Login")}
+              style={styles.button}
+              mode="contained"
+              onPress={() => createProfile()}
+              labelStyle={styles.buttonLabel}
               uppercase={false}
-              color="black"
+              disabled={
+                UserData.email !== "" &&
+                UserData.password !== "" &&
+                confirm !== "" &&
+                UserData.password === confirm
+                  ? false
+                  : true
+              }
             >
-              Log In
+              Sign Up
             </Button>
           </View>
+
+          <View>
+            <ThirdPartyLogins AuthType="register" />
+
+            <View style={[stylesheet.loginContainer]}>
+              <Text style={styles.p}>Already have an account?</Text>
+              <Button
+                labelStyle={styles.bold}
+                mode="text"
+                onPress={() => navigation.navigate("Login")}
+                uppercase={false}
+                color="black"
+              >
+                Log In
+              </Button>
+            </View>
+          </View>
+
+          <View />
         </View>
       </ScrollView>
     );
   }
 };
 
+//try space between
 const stylesheet = StyleSheet.create({
   buttonContainer: {
     marginVertical: 12,
@@ -218,6 +219,9 @@ const stylesheet = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     // borderWidth: 1,
+  },
+  spaceBetween: {
+    justifyContent: "space-between",
   },
 });
 
