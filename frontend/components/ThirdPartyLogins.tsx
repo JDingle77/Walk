@@ -1,25 +1,18 @@
 import React, { useState } from "react";
 import styles from "../stylesheets/globalStyles";
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  Dimensions,
-} from "react-native";
+import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
 
 interface ThirdPartyLoginsProps {
-  AuthType: string,
-};
+  AuthType: string;
+}
 
-const ThirdPartyLogins = (props:ThirdPartyLoginsProps) => {
+const ThirdPartyLogins = (props: ThirdPartyLoginsProps) => {
   return (
     <View style={stylesheet.logoContainer}>
-        <View style={stylesheet.registerContainer}>
-          <Text style={styles.p}>
-            Or {props.AuthType} with
-          </Text>
-        </View>
+      <View style={stylesheet.registerContainer}>
+        <Text style={styles.p}>Or {props.AuthType} with</Text>
+      </View>
+      <View style={stylesheet.innerlogoBox}>
         <View style={stylesheet.logoCircle}>
           <Image
             style={stylesheet.logoImage}
@@ -39,10 +32,10 @@ const ThirdPartyLogins = (props:ThirdPartyLoginsProps) => {
             source={{ uri: imageUrl_Apple_logo_black_3 }}
           />
         </View>
+      </View>
     </View>
   );
 };
-
 
 const stylesheet = StyleSheet.create({
   registerContainer: {
@@ -57,7 +50,7 @@ const stylesheet = StyleSheet.create({
     borderColor: "rgba(90, 67, 62, 0.5)",
     justifyContent: "center",
     alignItems: "center",
-
+    marginHorizontal: 7,
   },
   logoImage: {
     width: 31.096155166625977,
@@ -67,8 +60,13 @@ const stylesheet = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-end",
     alignItems: "center",
-    // borderWidth: 1,
-  }
+    //borderWidth: 1,
+  },
+  innerlogoBox: {
+    flexDirection: "row",
+    marginRight: 30,
+    //borderWidth: 1,
+  },
 });
 
 const imageUrl_google__1__1 =
