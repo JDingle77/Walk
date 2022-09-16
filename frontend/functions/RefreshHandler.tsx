@@ -1,4 +1,5 @@
 import { getValueFor, save } from "../functions/SecureStore";
+import { backend_URL } from "../components/ApiUrl"
 
 // attempt to refresh access token
 async function refreshHandler() {
@@ -6,7 +7,7 @@ async function refreshHandler() {
   var refresh_token = "";
   await getValueFor("access_token").then((response) => access_token = response!);
   await getValueFor("refresh_token").then((response) => refresh_token = response!);
-  let response = await fetch("http://localhost:8000/auth/refresh/", {
+  let response = await fetch(backend_URL+"/auth/refresh/", {
       method: "POST",
       headers: {
         Accept: "application/json",

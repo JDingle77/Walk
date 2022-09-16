@@ -6,6 +6,7 @@ import styles from "../stylesheets/globalStyles";
 
 import { getValueFor } from "../functions/SecureStore";
 import { refreshAccess } from "../functions/RefreshHandler";
+import { backend_URL } from "../components/ApiUrl"
 
 export default function SummaryPage({ navigation }) {
   const [summaryData, setSummaryData] = useState<any[]>([]);
@@ -15,7 +16,7 @@ export default function SummaryPage({ navigation }) {
     await getValueFor("access_token").then(
       (response) => (access_token = response!)
     );
-    await fetch("http://localhost:8000/maps/get_summary/", {
+    await fetch(backend_URL+"/maps/get_summary/", {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -51,7 +52,7 @@ export default function SummaryPage({ navigation }) {
   
 
   function getSummaryStats() {
-    fetch("http://localhost:8000/maps/get_summary_statistics/", {
+    fetch(backend_URL+"/maps/get_summary_statistics/", {
       method: "GET",
       headers: {
         Accept: "application/json",

@@ -16,6 +16,7 @@ import { Button } from "react-native-paper";
 import { save } from "../functions/SecureStore";
 import { RootStackParamList } from "../types";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { backend_URL } from "../components/ApiUrl"
 
 type NavigationProp = StackNavigationProp<RootStackParamList, "Login">;
 
@@ -34,7 +35,7 @@ export default function Login({ navigation }: Props) {
   });
 
   function login() {
-    fetch("http://localhost:8000/auth/login/", {
+    fetch(backend_URL+"/auth/login/", {
       method: "POST",
       headers: {
         Accept: "application/json",

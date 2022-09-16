@@ -17,6 +17,7 @@ import { useFonts, Montserrat_400Regular } from "@expo-google-fonts/dev";
 import { Marker } from "react-native-svg";
 import { getValueFor } from "../functions/SecureStore";
 import { refreshAccess } from "../functions/RefreshHandler";
+import { backend_URL } from "../components/ApiUrl"
 
 type LatLng = {
   latitude: Number;
@@ -94,7 +95,7 @@ export default function WalkTracking({ navigation }) {
     await getValueFor("access_token").then(
       (response) => (access_token = response!)
     );
-    await fetch("http://localhost:8000/maps/route/", {
+    await fetch(backend_URL+"/maps/route/", {
       method: "POST",
       headers: {
         Accept: "application/json",
