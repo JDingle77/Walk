@@ -25,6 +25,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 
 import { useContext } from "react";
 import { useUserData, UserDataType } from "../hooks/userContext";
+import { backend_URL } from "../components/ApiUrl"
 
 type LoginScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -72,7 +73,7 @@ const Create = ({ navigation }: Props) => {
   }, [UserData.email, UserData.password, confirm]);
 
   function createProfile() {
-    fetch("http://localhost:8000/auth/validEmail/", {
+    fetch(backend_URL+"/auth/validEmail/", {
       method: "POST",
       headers: {
         Accept: "application/json",

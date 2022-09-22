@@ -21,6 +21,7 @@ import { save } from "../functions/SecureStore";
 
 import { RootStackParamList } from "../types";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { backend_URL } from "../components/ApiUrl"
 
 type NavigationProp = StackNavigationProp<RootStackParamList, "GetInfo">;
 
@@ -114,7 +115,7 @@ const GetInfoScreen = ({ navigation }: Props) => {
   }, [UserData]);
 
   function uploadInfo() {
-    fetch("http://localhost:8000/auth/register/", {
+    fetch(backend_URL+"/auth/register/", {
       method: "POST",
       headers: {
         Accept: "application/json",
