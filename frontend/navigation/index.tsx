@@ -98,7 +98,9 @@
              headerRight: () => (
                <Button
                  labelStyle={{ color: "black" }}
-                 onPress={() => navigation.navigate("Create")}
+                 onPress={() => {
+                  navigation.navigate("WalkPage")
+                 }}
                >
                  close
                </Button>
@@ -109,11 +111,8 @@
            name="WalkPageNavigator"
            component={WalkPageNavigator}
            options={{
-             headerBackTitleStyle: { color: "white" },
-             headerBackTitle: "Back",
-             headerTintColor: "white",
-             headerTitle: "WalkPage",
-           }}
+            headerShown: false,
+          }}
          />
          <Stack.Screen
            name="Home"
