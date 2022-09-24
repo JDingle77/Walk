@@ -43,7 +43,7 @@ export default function SummaryPage({ navigation }) {
             })
             .catch(() => {
               // refresh token expired, force user to login again
-              navigation.navigate("Login");
+              // navigation.navigate("Login");
             });
         }
       })

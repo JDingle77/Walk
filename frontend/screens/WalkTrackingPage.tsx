@@ -124,7 +124,8 @@ export default function WalkTracking({ navigation }) {
             })
             .catch(() => {
               // refresh token expired, force user to login again
-              navigation.navigate("Login");
+              // navigation.navigate("Login");
+              navigation.navigate("Summary");
             });
         }
       })
@@ -292,7 +293,6 @@ export default function WalkTracking({ navigation }) {
       start_time: startTime,
       end_time: endDay,
     };
-
     console.log(userRoute);
     postRoutes(userRoute);
   };

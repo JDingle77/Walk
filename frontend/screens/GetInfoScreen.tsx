@@ -135,6 +135,7 @@ const GetInfoScreen = ({ navigation }: Props) => {
         else
         {
           console.log(data);
+          navigation.navigate("WalkPageNavigator");
         }
       })
       .catch((err) => console.error(err));
