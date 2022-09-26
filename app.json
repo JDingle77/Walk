@@ -10,8 +10,12 @@
       "web"
     ],
     "ios": {
-      "bundleIdentifier": "com.jdingle.walk"
+      "bundleIdentifier": "com.jdingle.walk",
+      "usesAppleSignIn": true
     },
-    "userInterfaceStyle": "light"
+    "userInterfaceStyle": "light",
+    "android": {
+      "package": "com.jdingle.walk"
+    }
   }
 }
