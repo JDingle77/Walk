@@ -16,7 +16,8 @@ import { Button } from "react-native-paper";
 import { save } from "../functions/SecureStore";
 import { RootStackParamList } from "../types";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { backend_URL } from "../components/ApiUrl"
+import { backend_URL } from "../components/ApiUrl";
+import * as AppleAuthentication from "expo-apple-authentication";
 
 type NavigationProp = StackNavigationProp<RootStackParamList, "Login">;
 
@@ -27,15 +28,15 @@ type Props = {
 export default function Login({ navigation }: Props) {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [emailLabel, setEmailLabel] = useState("")
-  const [passwordLabel, setPasswordLabel] = useState("")
+  const [emailLabel, setEmailLabel] = useState("");
+  const [passwordLabel, setPasswordLabel] = useState("");
 
   let [fontsLoaded] = useFonts({
     Montserrat: Montserrat_400Regular,
   });
 
   function login() {
-    fetch(backend_URL+"/auth/login/", {
+    fetch(backend_URL + "/auth/login/", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -47,36 +48,32 @@ export default function Login({ navigation }: Props) {
         password: password,
       }),
     })
-      .then((response) => {return Promise.all([response.json(), response.status])})
+      .then((response) => {
+        return Promise.all([response.json(), response.status]);
+      })
       .then(([data, status]) => {
-        if (status >= 200 && status < 300)
-        {
+        if (status >= 200 && status < 300) {
           console.log(data);
-          save("access_token",data.access);
-          save("refresh_token",data.refresh);
+          save("access_token", data.access);
+          save("refresh_token", data.refresh);
           navigation.navigate("WalkPageNavigator");
-        }
-        else
-        {
+        } else {
           console.log(data.detail);
         }
       })
       .catch((err) => console.error(err));
   }
 
-  let emailLabelMessage: string
-  let passwordLabelMessage: string
-  let confirmLabelMessage: string
+  let emailLabelMessage: string;
+  let passwordLabelMessage: string;
+  let confirmLabelMessage: string;
 
-  useEffect(
-    () => {
-      emailLabelMessage = email === "" ? "Your email" : ""
-      passwordLabelMessage = password === "" ? "Your password" : ""
-      setEmailLabel(emailLabelMessage)
-      setPasswordLabel(passwordLabelMessage)
-    },
-    [email, password],
-  )
+  useEffect(() => {
+    emailLabelMessage = email === "" ? "Your email" : "";
+    passwordLabelMessage = password === "" ? "Your password" : "";
+    setEmailLabel(emailLabelMessage);
+    setPasswordLabel(passwordLabelMessage);
+  }, [email, password]);
 
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -85,9 +82,7 @@ export default function Login({ navigation }: Props) {
       <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
         <View style={styles.creamContainer}>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>
-              Sign in to your account
-            </Text>
+            <Text style={styles.title}>Sign in to your account</Text>
           </View>
           <View style={styles.separator} />
 
@@ -116,19 +111,47 @@ export default function Login({ navigation }: Props) {
             }}
           />
           <Button
-          style={styles.button}
-          mode="contained"
-          onPress={() => login()}
-          labelStyle={styles.buttonLabel}
-          uppercase={false}
-          disabled={ //IDK why its not disabling
-            email === "" || password === ""
-          }
-        >
-          Sign In
-        </Button>
-        <View style={styles.separator} />
-        <ThirdPartyLogins AuthType="sign in" />
+            style={styles.button}
+            mode="contained"
+            onPress={() => login()}
+            labelStyle={styles.buttonLabel}
+            uppercase={false}
+            disabled={
+              //IDK why its not disabling
+              email === "" || password === ""
+            }
+          >
+            Sign In
+          </Button>
+          <AppleAuthentication.AppleAuthenticationButton
+            buttonType={
+              AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN
+            }
+            buttonStyle={
+              AppleAuthentication.AppleAuthenticationButtonStyle.BLACK
+            }
+            cornerRadius={5}
+            style={{ width: 200, height: 44 }}
+            onPress={async () => {
+              try {
+                const credential = await AppleAuthentication.signInAsync({
+                  requestedScopes: [
+                    AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+                    AppleAuthentication.AppleAuthenticationScope.EMAIL,
+                  ],
+                });
+                // signed in
+              } catch (e) {
+                if (e.code === "ERR_CANCELED") {
+                  // handle that the user canceled the sign-in flow
+                } else {
+                  // handle other errors
+                }
+              }
+            }}
+          />
+          <View style={styles.separator} />
+          <ThirdPartyLogins AuthType="sign in" />
         </View>
       </ScrollView>
     );
