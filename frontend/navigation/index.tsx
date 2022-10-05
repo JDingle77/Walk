@@ -22,6 +22,7 @@
  import DogProfile from "../screens/DogProfile";
  import Summary from "../screens/Summary";
  import CreateScreen from "../screens/CreateScreen";
+ import MapViewer from "../screens/WalkMapViewer";
  import { RootStackParamList } from "../types";
  import LinkingConfiguration from "./LinkingConfiguration";
  import { paperTheme, paperDarkTheme } from "../../core/theme";
@@ -114,6 +115,15 @@
             headerShown: false,
           }}
          />
+
+         <Stack.Screen
+           name="MapViewer"
+           component={MapViewer}
+           options={{
+            headerShown: false,
+          }}
+         />
+
          <Stack.Screen
            name="Home"
            component={HomeScreen}
@@ -124,6 +134,7 @@
              headerTitle: "Home",
            }}
          />
+         
          <Stack.Screen
            name="GetInfo"
            component={GetInfoScreen}

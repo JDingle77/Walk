@@ -121,7 +121,7 @@ export default function Login({ navigation }: Props) {
           onPress={() => login()}
           labelStyle={styles.buttonLabel}
           uppercase={false}
-          disabled={ //IDK why its not disabling
+          disabled={
             email === "" || password === ""
           }
         >

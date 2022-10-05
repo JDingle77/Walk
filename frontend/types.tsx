@@ -6,6 +6,7 @@ export type RootStackParamList = {
   WalkPageNavigator: undefined;
   GetInfo: undefined;
   Summary: undefined;
+  MapViewer: undefined;
 };
 
 

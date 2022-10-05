@@ -6,9 +6,15 @@ import styles from "../stylesheets/globalStyles";
 
 import { getValueFor } from "../functions/SecureStore";
 import { refreshAccess } from "../functions/RefreshHandler";
-import { backend_URL } from "../components/ApiUrl"
+import { backend_URL } from "../components/ApiUrl";
 
-export default function SummaryPage({ navigation }) {
+import MapViewer from "./WalkMapViewer";
+
+export default function SummaryPage({ route, navigation }) {
+
+  const { mapData, mapRegion } = route.params
+  //console.log(mapData)
+
   const [summaryData, setSummaryData] = useState<any[]>([]);
 
   async function getSummary() {
@@ -49,23 +55,6 @@ export default function SummaryPage({ navigation }) {
       })
       .catch((err) => console.error(err));
   }
-  
-
-  function getSummaryStats() {
-    fetch(backend_URL+"/maps/get_summary_statistics/", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUzNDAyNDA1LCJpYXQiOjE2NTMzMTYwMDUsImp0aSI6IjMxNWVmYTRmYTY5YjRlOGU5ZDQwMzdkODFjZjMzNThmIiwidXNlcl9pZCI6IjYzNDc1N2RhLTMxMTQtNGM2OS1hN2M2LTJiZjVjZmRhMGZjZiJ9.A-MdB1ZeWHIuLzd_YJTjvMJoziF_OzXQwPD3CWesQlo"
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => console.error(err));
-  }
 
   useEffect(() => {
     getSummary();
@@ -75,9 +64,9 @@ export default function SummaryPage({ navigation }) {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(summaryData);
-  }, [summaryData]);
+  //useEffect(() => {
+  //  console.log(summaryData);
+  //}, [summaryData]);
 
   return (
     <SafeAreaView style={styles.container} >
@@ -88,11 +77,16 @@ export default function SummaryPage({ navigation }) {
           </Text>
         </View>
         <View style={localStyles.summaryImage}>
-          <Image
-            style={styles.image}
-            source={require('../assets/images/summary-image.png')}
-            resizeMode="contain"
-          />
+
+          {/* <Button 
+            style={styles.button} 
+            labelStyle={styles.buttonLabel}
+            onPress={() => navigation.navigate("MapViewer", {mapData: mapData, mapRegion: mapRegion})}> 
+            View Map
+          </Button> */}
+          <MapViewer route={route} navigation={navigation} />
+
+
         </View>
       </View>
       <View style={localStyles.bottomContainer}>
@@ -117,9 +111,10 @@ export default function SummaryPage({ navigation }) {
 
       <Button 
         style={styles.button} 
+        mode="contained"
         labelStyle={styles.buttonLabel} 
         uppercase={false}
-        onPress={() => getSummaryStats}>
+        onPress={() => navigation.navigate("WalkPage")}>
         Continue
       </Button>
       </View>
