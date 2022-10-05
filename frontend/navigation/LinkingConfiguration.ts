@@ -48,6 +48,13 @@ const linking: LinkingOptions<RootStackParamList> = {
           SummaryScreen: "Summary",
         },
       },
+
+      MapViewer: {
+        screens: {
+          MapViewerScreen: "MapViewer",
+        },
+      },
+
     },
   },
 };

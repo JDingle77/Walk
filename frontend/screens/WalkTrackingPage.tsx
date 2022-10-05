@@ -110,8 +110,10 @@ export default function WalkTracking({ navigation }) {
       .then(([data, status]) => {
         if (status >= 200 && status < 300) {
           // request successful
-          navigation.navigate("Summary");
-          console.log(data);
+
+          navigation.navigate("Summary", {mapData: data, mapRegion: mapRegion});
+          //console.log("DATA: -------------------------------------------------")
+          //console.log(data);
         } else if (status == 400) {
           // bad request
           console.log("Bad Request");

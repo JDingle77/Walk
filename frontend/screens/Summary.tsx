@@ -8,7 +8,11 @@ import { getValueFor } from "../functions/SecureStore";
 import { refreshAccess } from "../functions/RefreshHandler";
 import { backend_URL } from "../components/ApiUrl"
 
-export default function SummaryPage({ navigation }) {
+export default function SummaryPage({ route, navigation }) {
+
+  const { mapData, mapRegion } = route.params
+  //console.log(mapData)
+
   const [summaryData, setSummaryData] = useState<any[]>([]);
 
   async function getSummary() {
@@ -50,7 +54,6 @@ export default function SummaryPage({ navigation }) {
       .catch((err) => console.error(err));
   }
   
-
   function getSummaryStats() {
     fetch(backend_URL+"/maps/get_summary_statistics/", {
       method: "GET",
@@ -75,9 +78,9 @@ export default function SummaryPage({ navigation }) {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(summaryData);
-  }, [summaryData]);
+  //useEffect(() => {
+  //  console.log(summaryData);
+  //}, [summaryData]);
 
   return (
     <SafeAreaView style={styles.container} >
@@ -93,6 +96,15 @@ export default function SummaryPage({ navigation }) {
             source={require('../assets/images/summary-image.png')}
             resizeMode="contain"
           />
+
+          <Button 
+            style={styles.button} 
+            labelStyle={styles.buttonLabel}
+            onPress={() => navigation.navigate("MapViewer", {mapData: mapData, mapRegion: mapRegion})}> 
+            View Map
+          </Button>
+
+
         </View>
       </View>
       <View style={localStyles.bottomContainer}>
