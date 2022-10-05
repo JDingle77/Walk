@@ -93,16 +93,6 @@ export default function MapViewer({ route, navigation }) {
             </MapView.Marker>
           );
         })}
-
-
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Summary", {mapData: mapData})}
-          style={styles.endWalkButton}>
-          <Text style={styles.endWalkText}>
-            Back
-          </Text>
-
-        </TouchableOpacity>
       </MapView>
     </View>
   );
@@ -120,7 +110,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
+    height: "100%",
     padding: 20,
     flexDirection: "column",
     justifyContent: "flex-end",

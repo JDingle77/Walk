@@ -8,7 +8,7 @@ import { getValueFor } from "../functions/SecureStore";
 import { refreshAccess } from "../functions/RefreshHandler";
 import { backend_URL } from "../components/ApiUrl";
 
-// import MapViewer from "./WalkMapViewer";
+import MapViewer from "./WalkMapViewer";
 
 export default function SummaryPage({ route, navigation }) {
 
@@ -78,12 +78,13 @@ export default function SummaryPage({ route, navigation }) {
         </View>
         <View style={localStyles.summaryImage}>
 
-          <Button 
+          {/* <Button 
             style={styles.button} 
             labelStyle={styles.buttonLabel}
             onPress={() => navigation.navigate("MapViewer", {mapData: mapData, mapRegion: mapRegion})}> 
             View Map
-          </Button>
+          </Button> */}
+          <MapViewer route={route} navigation={navigation} />
 
 
         </View>
