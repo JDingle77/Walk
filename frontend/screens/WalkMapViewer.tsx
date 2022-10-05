@@ -98,7 +98,7 @@ export default function MapViewer({ route, navigation }) {
         <TouchableOpacity
           onPress={() => navigation.navigate("Summary", {mapData: mapData})}
           style={styles.endWalkButton}>
-          <Text>
+          <Text style={styles.endWalkText}>
             Back
           </Text>
 
@@ -154,6 +154,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#E9B95E",
     borderRadius: 7,
     marginLeft: Dimensions.get("window").width - 145,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   },
   endWalkTextContainer: {
     position: "absolute",

@@ -6,7 +6,9 @@ import styles from "../stylesheets/globalStyles";
 
 import { getValueFor } from "../functions/SecureStore";
 import { refreshAccess } from "../functions/RefreshHandler";
-import { backend_URL } from "../components/ApiUrl"
+import { backend_URL } from "../components/ApiUrl";
+
+// import MapViewer from "./WalkMapViewer";
 
 export default function SummaryPage({ route, navigation }) {
 
@@ -53,22 +55,6 @@ export default function SummaryPage({ route, navigation }) {
       })
       .catch((err) => console.error(err));
   }
-  
-  function getSummaryStats() {
-    fetch(backend_URL+"/maps/get_summary_statistics/", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUzNDAyNDA1LCJpYXQiOjE2NTMzMTYwMDUsImp0aSI6IjMxNWVmYTRmYTY5YjRlOGU5ZDQwMzdkODFjZjMzNThmIiwidXNlcl9pZCI6IjYzNDc1N2RhLTMxMTQtNGM2OS1hN2M2LTJiZjVjZmRhMGZjZiJ9.A-MdB1ZeWHIuLzd_YJTjvMJoziF_OzXQwPD3CWesQlo"
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => console.error(err));
-  }
 
   useEffect(() => {
     getSummary();
@@ -91,11 +77,6 @@ export default function SummaryPage({ route, navigation }) {
           </Text>
         </View>
         <View style={localStyles.summaryImage}>
-          <Image
-            style={styles.image}
-            source={require('../assets/images/summary-image.png')}
-            resizeMode="contain"
-          />
 
           <Button 
             style={styles.button} 
@@ -129,9 +110,10 @@ export default function SummaryPage({ route, navigation }) {
 
       <Button 
         style={styles.button} 
+        mode="contained"
         labelStyle={styles.buttonLabel} 
         uppercase={false}
-        onPress={() => getSummaryStats}>
+        onPress={() => navigation.navigate("WalkPage")}>
         Continue
       </Button>
       </View>
